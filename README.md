@@ -3,7 +3,7 @@
 A set of simple [Surface](https://github.com/msaraiva/surface/) components
 based on [Bulma](https://bulma.io/).
 
-Documentation and live examples can be found at http://surface-demo.msaraiva.io/uicomponents.
+**Documentation** and **live examples** can be found at http://surface-demo.msaraiva.io/uicomponents.
 
 > **Note**: This is not a full-featured suite of components yet. Most of
   the functionality we have so far is based on the requirements we had
@@ -13,7 +13,7 @@ Documentation and live examples can be found at http://surface-demo.msaraiva.io/
 
   * [Button](http://surface-demo.msaraiva.io/uicomponents/Button) -
     The classic button, in different colors, sizes, and states.
-    Thanks [Tiago Morais](https://github.com/tiagoefmoraes).
+    (Thanks [Tiago Morais](https://github.com/tiagoefmoraes)).
   * [Table](http://surface-demo.msaraiva.io/uicomponents/Table) -
     The inevitable HTML table.
   * [Tabs](http://surface-demo.msaraiva.io/uicomponents/Tabs) -
@@ -23,11 +23,27 @@ Documentation and live examples can be found at http://surface-demo.msaraiva.io/
 
 More components will be added soon. Contributions are welcome!
 
+## Example
+
+```jsx
+<Table data={{ album <- @albums }} rowClass={{ &rowClass/2 }} bordered>
+  <Column label="Album">
+    {{ album.name }}
+  </Column>
+  <Column label="Released">
+    {{ album.released }}
+  </Column>
+  <Column label="Artist">
+    <a href="#">{{ album.artist }}</a>
+  </Column>
+</Table>
+```
+
 ## Usage
 
 Add `surface_bulma` to the list of dependencies in `mix.exs`:
 
-```
+```elixir
 def deps do
   [
     ...
