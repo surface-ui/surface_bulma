@@ -6,44 +6,44 @@ defmodule SurfaceBulma.Button do
   use Surface.Component
 
   @doc "The label of the button, when no content (default slot) is provided"
-  property label, :string
+  prop label, :string
 
   @doc "The color of the button"
-  property color, :string,
+  prop color, :string,
     values: ~w(white black light dark primary link info success warning danger)
 
   @doc "The vertical size of button"
-  property size, :string, values: ~w(small normal medium large)
+  prop size, :string, values: ~w(small normal medium large)
 
   @doc "Button is expanded (full-width)"
-  property expand, :boolean
+  prop expand, :boolean
 
   @doc "Set the button as disabled preventing the user from interacting with the control"
-  property disabled, :boolean
+  prop disabled, :boolean
 
   @doc "Outlined style"
-  property outlined, :boolean
+  prop outlined, :boolean
 
   @doc "Rounded style"
-  property rounded, :boolean
+  prop rounded, :boolean
 
   @doc "Hovered style"
-  property hovered, :boolean
+  prop hovered, :boolean
 
   @doc "Focused style"
-  property focused, :boolean
+  prop focused, :boolean
 
   @doc "Active style"
-  property active, :boolean
+  prop active, :boolean
 
   @doc "Selected style"
-  property selected, :boolean
+  prop selected, :boolean
 
   @doc "Loading state"
-  property loading, :boolean
+  prop loading, :boolean
 
   @doc "Triggered on click"
-  property click, :event
+  prop click, :event
 
   @doc """
   The content of the generated `<button>` element. If no content is provided,
@@ -55,7 +55,7 @@ defmodule SurfaceBulma.Button do
     ~H"""
     <button
       type="button"
-      :on-phx-click={{@click}}
+      :on-click={{@click}}
       disabled={{@disabled}}
       class={{
         "button",
@@ -68,7 +68,7 @@ defmodule SurfaceBulma.Button do
         "is-focused": @focused,
         "is-active": @active,
         "is-loading": @loading,
-        "is-selected": @selected,
+        "is-selected": @selected
       }}>
       <slot>{{ @label }}</slot>
     </button>

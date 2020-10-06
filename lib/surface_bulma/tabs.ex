@@ -6,10 +6,10 @@ defmodule SurfaceBulma.Tabs do
   use Surface.LiveComponent
 
   @doc "Make tab full width"
-  property expanded, :boolean, default: false
+  prop expanded, :boolean, default: false
 
   @doc "Classic style with borders"
-  property boxed, :boolean, default: false
+  prop boxed, :boolean, default: false
 
   @doc "The tabs to display"
   slot tabs, required: true
@@ -38,7 +38,7 @@ defmodule SurfaceBulma.Tabs do
             :for={{ {tab, index} <- Enum.with_index(@tabs), tab.visible }}
             class={{ "is-active": @active_tab == index, isDisabled: tab.disabled }}
           >
-            <a :on-phx-click="tab_click" phx-value-index={{ index }}>
+            <a :on-click="tab_click" phx-value-index={{ index }}>
               <span :if={{ tab.icon }} class="icon is-small">
                 <i class={{ tab.icon }} aria-hidden="true"></i>
               </span>
@@ -53,7 +53,7 @@ defmodule SurfaceBulma.Tabs do
           :show={{ tab.visible && @active_tab == index }}
           class="tab-item animated {{ @animation }} faster"
         >
-          {{ tab.inner_content.([]) }}
+          <slot name="tabs" index={{ index }}/>
         </div>
       </section>
     </div>

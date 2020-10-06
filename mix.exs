@@ -22,7 +22,7 @@ defmodule SurfaceBulma.MixProject do
     [
       {:jason, "~> 1.0"},
       {:floki, "~> 0.25.0", only: :test},
-      {:surface, "~> 0.1.0-alpha.2"}
+      {:surface, git: "https://github.com/msaraiva/surface.git", tag: "v0.1.0-rc.0"}
     ]
   end
 end

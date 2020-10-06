@@ -9,26 +9,26 @@ defmodule SurfaceBulma.Table do
   use Surface.Component
 
   @doc "The data that populates the table"
-  property data, :list, required: true
+  prop data, :list, required: true
 
   @doc "The table is expanded (full-width)"
-  property expanded, :boolean, default: true
+  prop expanded, :boolean, default: true
 
   @doc "Add borders to all the cells"
-  property bordered, :boolean, default: false
+  prop bordered, :boolean, default: false
 
   @doc "Add stripes to the table"
-  property striped, :boolean, default: false
+  prop striped, :boolean, default: false
 
   @doc "The CSS class for the wrapping `<div>` element"
-  property class, :css_class
+  prop class, :css_class
 
   @doc """
   A function that returns a class for the item's underlying `<tr>`
   element. The function receives the item and index related to
   the row.
   """
-  property rowClass, :fun
+  prop rowClass, :fun
 
   @doc "The columns of the table"
   slot cols, props: [item: ^data], required: true
@@ -53,8 +53,8 @@ defmodule SurfaceBulma.Table do
           <tr
             :for={{ {item, index} <- Enum.with_index(@data) }}
             class={{ row_class_fun(@rowClass).(item, index) }}>
-            <td :for={{ col <- @cols }}>
-              <span>{{ col.inner_content.(item: item) }}</span>
+            <td :for.index={{ index <- @cols }}>
+              <span><slot name="cols" index={{ index }} :props={{ item: item }}/></span>
             </td>
           </tr>
         </tbody>

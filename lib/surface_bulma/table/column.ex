@@ -9,5 +9,5 @@ defmodule SurfaceBulma.Table.Column do
   use Surface.Component, slot: "cols"
 
   @doc "Column header text"
-  property label, :string, required: true
+  prop label, :string, required: true
 end

@@ -9,14 +9,14 @@ defmodule SurfaceBulma.Tabs.TabItem do
   use Surface.Component, slot: "tabs"
 
   @doc "Item label"
-  property label, :string, default: ""
+  prop label, :string, default: ""
 
   @doc "Item icon"
-  property icon, :string
+  prop icon, :string
 
   @doc "Item is disabled"
-  property disabled, :boolean, default: false
+  prop disabled, :boolean, default: false
 
   @doc "Item is visible"
-  property visible, :boolean, default: true
+  prop visible, :boolean, default: true
 end
