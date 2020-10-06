@@ -18,7 +18,7 @@ defmodule Surface.Components.ButtonTest do
            """
   end
 
-  test "property label" do
+  test "prop label" do
     code = ~S(<Button label="Ok"/>)
 
     assert render_live(code) =~ """
@@ -28,12 +28,12 @@ defmodule Surface.Components.ButtonTest do
            """
   end
 
-  test "property color" do
+  test "prop color" do
     code = ~S(<Button color="primary">Ok</Button>)
     assert render_live(code) =~ ~r/class="(.*)is-primary(.*)"/
   end
 
-  test "property size" do
+  test "prop size" do
     code = ~S(<Button size="small">Ok</Button>)
     assert render_live(code) =~ ~r/class="(.*)is-small(.*)"/
   end

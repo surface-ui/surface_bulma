@@ -7,10 +7,10 @@ defmodule SurfaceBulma.Delete do
   use Surface.Component
 
   @doc "The size of the delete"
-  property size, :string, values: ~w(small medium large)
+  prop size, :string, values: ~w(small medium large)
 
   @doc "Triggered on click"
-  property click, :event
+  prop click, :event
 
   def render(assigns) do
     ~H"""

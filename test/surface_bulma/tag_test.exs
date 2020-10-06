@@ -11,7 +11,7 @@ defmodule Surface.Components.TagTest do
 
     assert render_live(code) =~ """
            <span class="tag">
-           tag
+             tag
            </span>
            """
   end
@@ -28,7 +28,7 @@ defmodule Surface.Components.TagTest do
            """
   end
 
-  test "property color" do
+  test "prop color" do
     code = """
     <Tag label="tag" color="primary" />
     """
@@ -40,7 +40,7 @@ defmodule Surface.Components.TagTest do
            """
   end
 
-  test "property size" do
+  test "prop size" do
     code = """
     <Tag label="tag" size="normal" />
     """
@@ -52,7 +52,7 @@ defmodule Surface.Components.TagTest do
            """
   end
 
-  test "property light" do
+  test "prop light" do
     code = """
     <Tag label="tag" color="primary" light />
     """
@@ -64,7 +64,7 @@ defmodule Surface.Components.TagTest do
            """
   end
 
-  test "property rounded" do
+  test "prop rounded" do
     code = """
     <Tag label="tag" color="primary" rounded />
     """

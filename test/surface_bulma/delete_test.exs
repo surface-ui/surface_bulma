@@ -11,7 +11,7 @@ defmodule Surface.Components.DeleteTest do
     assert render_live(code) =~ ~s(<a class="delete"></a>)
   end
 
-  test "property size" do
+  test "prop size" do
     code = """
     <Delete size="small"/>
     """

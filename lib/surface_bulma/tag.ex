@@ -7,20 +7,20 @@ defmodule SurfaceBulma.Tag do
   use Surface.Component
 
   @doc "The label of the tag, when no content (default slot) is provided"
-  property label, :string
+  prop label, :string
 
   @doc "The color of the tag"
-  property color, :string,
+  prop color, :string,
     values: ~w(black dark light white primary link info success warning danger)
 
   @doc "The size of the delete"
-  property size, :string, values: ~w(normal medium large)
+  prop size, :string, values: ~w(normal medium large)
 
   @doc "Light style"
-  property light, :boolean
+  prop light, :boolean
 
   @doc "Rounded style"
-  property rounded, :boolean
+  prop rounded, :boolean
 
   @doc """
   The content of the generated `<span>` element. If no content is provided,
