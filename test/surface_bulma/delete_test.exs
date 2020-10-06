@@ -8,6 +8,7 @@ defmodule Surface.Components.DeleteTest do
     code = """
     <Delete />
     """
+
     assert render_live(code) =~ ~s(<a class="delete"></a>)
   end
 
@@ -15,6 +16,7 @@ defmodule Surface.Components.DeleteTest do
     code = """
     <Delete size="small"/>
     """
+
     assert render_live(code) =~ ~s(<a class="delete is-small"></a>)
   end
 end

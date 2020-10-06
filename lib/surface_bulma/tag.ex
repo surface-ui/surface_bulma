@@ -10,8 +10,7 @@ defmodule SurfaceBulma.Tag do
   prop label, :string
 
   @doc "The color of the tag"
-  prop color, :string,
-    values: ~w(black dark light white primary link info success warning danger)
+  prop color, :string, values: ~w(black dark light white primary link info success warning danger)
 
   @doc "The size of the delete"
   prop size, :string, values: ~w(normal medium large)
