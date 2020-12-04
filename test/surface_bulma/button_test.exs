@@ -38,6 +38,11 @@ defmodule Surface.Components.ButtonTest do
     assert render_live(code) =~ ~r/class="(.*)is-small(.*)"/
   end
 
+  test "propety value" do
+    code = ~S(<Button value="123">Ok</Button>)
+    assert render_live(code) =~ ~r/value="123"/
+  end
+
   test "propety expand" do
     code = ~S(<Button expand>Ok</Button>)
     assert render_live(code) =~ ~r/class="(.*)is-fullwidth(.*)"/

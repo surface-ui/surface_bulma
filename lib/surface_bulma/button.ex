@@ -14,6 +14,9 @@ defmodule SurfaceBulma.Button do
   @doc "The vertical size of button"
   prop size, :string, values: ~w(small normal medium large)
 
+  @doc "The value for the button"
+  prop value, :string
+
   @doc "Button is expanded (full-width)"
   prop expand, :boolean
 
@@ -56,6 +59,7 @@ defmodule SurfaceBulma.Button do
       type="button"
       :on-click={{@click}}
       disabled={{@disabled}}
+      value={{@value}}
       class={{
         "button",
         "is-#{@color}": @color,
