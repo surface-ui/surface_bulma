@@ -70,4 +70,14 @@ defmodule Surface.Components.IconTest do
            <span class="icon"><i class="fas fa-camera" style="--fa-primary-color: blue"></i></span>
            """
   end
+
+  test "setting the primary opacity and secondary color" do
+    code = """
+    <FA icon="camera" secondary_color="blue" primary_opacity={{0.6}} />
+    """
+
+    assert render_live(code) =~ """
+           <span class="icon"><i class="fas fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i></span>
+           """
+  end
 end

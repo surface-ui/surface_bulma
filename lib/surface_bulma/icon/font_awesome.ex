@@ -33,15 +33,27 @@ defmodule SurfaceBulma.Icon.FontAwesome do
   @doc "set the secondary color of the icon"
   prop secondary_color, :string
 
+  @doc "Set the primary opacity of the icon"
+  prop primary_opacity, :decimal
+
+  @doc "Set the secondary opacity of the icon"
+  prop secondary_opacity, :decimal
+
   slot default
 
+  @style_attrs ~w/primary_color secondary_color primary_opacity secondary_opacity/a
   def render(assigns) do
     stacking = slot_assigned?(:default)
-    [primary_color, secondary_color] = [assigns.primary_color, assigns.secondary_color]
 
     style =
-      "#{primary_color && "--fa-primary-color: #{primary_color};"};" <>
-        "#{secondary_color && "--fa-secondary-color: #{secondary_color};"}"
+      Enum.reduce(@style_attrs, "", fn attr, acc ->
+        if value = Map.get(assigns, attr) do
+          key = String.replace(to_string(attr), "_", "-")
+          acc <> "--fa-#{key}: #{value};"
+        else
+          acc
+        end
+      end)
 
     transforms = (assigns.transform && %{"data-fa-transform": assigns.transform || ""}) || %{}
 
