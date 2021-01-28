@@ -12,9 +12,12 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~ """
-           <span class="icon"><i class="fas fa-500px"></i></span>
-           """
+    assert html =~
+             """
+               <span class="icon">
+                 <i class="fas fa-500px"></i>
+               </span>
+             """
   end
 
   test "set container size" do
@@ -25,9 +28,12 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~ """
-           <span class="icon is-small"><i class="fas fa-500px"></i></span>
-           """
+    assert html =~
+             """
+               <span class="icon is-small">
+                 <i class="fas fa-500px"></i>
+               </span>
+             """
   end
 
   test "set icon size" do
@@ -38,8 +44,12 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~
-             ~s[<span class="icon is-small"><i class="fas fa-500px fa-4x"></i></span>]
+    assert html =~
+             """
+               <span class="icon is-small">
+                 <i class="fas fa-500px fa-4x"></i>
+               </span>
+             """
   end
 
   test "Layered icons" do
@@ -53,16 +63,65 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~
+    assert html =~
              """
              <span class="icon is-large">
-             <span class="fa-layers fa-fw">
-             <span class="icon"><i class="fas fa-camera fa-1x"></i></span>
-             <span class="icon"><i class="fas fa-ban fa-2x"></i></span>
+               <span class="fa-layers fa-fw">
+                 <span class="icon">
+                 <i class="fas fa-camera fa-1x"></i>
+               </span>
+                 <span class="icon">
+                 <i class="fas fa-ban fa-2x"></i>
+               </span>
              </span>
              </span>
              """
-             |> String.replace("\n", "")
+  end
+
+  test "TextLayered icons" do
+    html =
+      render_surface do
+        ~H"""
+        <Layers container_size="large" >
+          <FA icon="camera" size="1x"/>
+          <TextLayer>Something</TextLayer>
+        </Layers>
+        """
+      end
+
+    assert html =~
+             """
+             <span class="icon is-large">
+               <span class="fa-layers fa-fw">
+                 <span class="icon">
+                 <i class="fas fa-camera fa-1x"></i>
+               </span>
+               <span class="fa-layers-text">Something</span>
+             </span>
+             """
+  end
+
+  test "CounterLayered icons" do
+    html =
+      render_surface do
+        ~H"""
+        <Layers container_size="large" >
+          <FA icon="camera" size="1x"/>
+          <CounterLayer>10</CounterLayer>
+        </Layers>
+        """
+      end
+
+    assert html =~
+             """
+             <span class="icon is-large">
+               <span class="fa-layers fa-fw">
+                 <span class="icon">
+                 <i class="fas fa-camera fa-1x"></i>
+               </span>
+               <span class="fa-layers-counter">10</span>
+             </span>
+             """
   end
 
   test "transformations of the icon" do
@@ -73,9 +132,12 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~ """
-           <span class="icon"><i data-fa-transform="grow-10 left-20" class="fas fa-500px"></i></span>
-           """
+    assert html =~
+             """
+               <span class="icon">
+                 <i data-fa-transform="grow-10 left-20" class="fas fa-500px"></i>
+               </span>
+             """
   end
 
   test "setting the primary color" do
@@ -86,9 +148,12 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~ """
-           <span class="icon"><i class="fad fa-camera" style="--fa-primary-color: blue"></i></span>
-           """
+    assert html =~
+             """
+               <span class="icon">
+                 <i class="fad fa-camera" style="--fa-primary-color: blue"></i>
+               </span>
+             """
   end
 
   test "setting the primary opacity and secondary color" do
@@ -99,8 +164,11 @@ defmodule Surface.Components.IconTest do
         """
       end
 
-    assert code =~ """
-           <span class="icon"><i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i></span>
-           """
+    assert html =~
+             """
+               <span class="icon">
+                 <i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i>
+               </span>
+             """
   end
 end

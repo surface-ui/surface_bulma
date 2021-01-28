@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Icon.FontAwesome do
     ~H"""
       <span class={{"icon", "is-#{@container_size}": @container_size}}>
         {{ Icon.render(assigns) }}
-          <slot name="default" />
+        <slot name="default" />
       </span>
     """
   end
@@ -23,7 +23,7 @@ end
 
 defmodule SurfaceBulma.Icon.FontAwesome.Layers do
   alias SurfaceFontAwesome.Layers
-  use SurfaceFontAwesome
+  use SurfaceFontAwesome, :layers
 
   @doc "Specifies the size of the span that wraps the icon."
   prop container_size, :string, values: ["small", "medium", "large"]
@@ -31,7 +31,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.Layers do
   def render(assigns) do
     ~H"""
     <span class={{"icon", "is-#{@container_size}": @container_size}}>
-    {{ Layers.render(assigns) }}
+      {{ Layers.render(assigns) }}
     </span>
     """
   end
@@ -39,14 +39,14 @@ end
 
 defmodule SurfaceBulma.Icon.FontAwesome.CounterLayer do
   alias SurfaceFontAwesome.CounterLayer
-  use SurfaceFontAwesome
+  use SurfaceFontAwesome, :counter_layer
 
   def render(assigns), do: CounterLayer.render(assigns)
 end
 
 defmodule SurfaceBulma.Icon.FontAwesome.TextLayer do
   alias SurfaceFontAwesome.TextLayer
-  use SurfaceFontAwesome
+  use SurfaceFontAwesome, :text_layer
 
   def render(assigns), do: TextLayer.render(assigns)
 end
