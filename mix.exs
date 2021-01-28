@@ -31,8 +31,8 @@ defmodule SurfaceBulma.MixProject do
     [
       {:jason, "~> 1.0"},
       {:floki, "~> 0.25.0", only: :test},
-      {:surface, "~> 0.2.0"}
-      {:surface_font_awesome, "~> 0.1.0"}
+      {:surface, "~> 0.2.0"},
+      {:surface_font_awesome, "~> 0.1.1"}
     ]
   end
 end
