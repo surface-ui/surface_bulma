@@ -2,6 +2,7 @@ defmodule Surface.Components.IconTest do
   use ExUnit.Case, async: true
 
   alias SurfaceBulma.Icon.FontAwesome, as: FA, warn: false
+  alias SurfaceBulma.Icon.FontAwesome.{Layers, TextLayer, CounterLayer}, warn: false
   import ComponentTestHelper
 
   test "basic icon usage" do
@@ -33,18 +34,20 @@ defmodule Surface.Components.IconTest do
              ~s[<span class="icon is-small"><i class="fas fa-500px fa-4x"></i></span>]
   end
 
-  test "stacked icons" do
+  test "Layered icons" do
     code = """
-    <FA icon="camera" container_size="large" stack_size="lg" size="1x">
+    <Layers container_size="large" >
+      <FA icon="camera" size="1x"/>
       <FA icon="ban" size="2x"/>
-    </FA>
+    </Layers>
     """
 
     assert render_live(code) =~
              """
              <span class="icon is-large">
-             <span class="fa-stack fa-lg"><i class="fas fa-camera fa-stack-1x"></i>
-             <i class="fas fa-ban fa-stack-2x"></i>
+             <span class="fa-layers fa-fw">
+             <span class="icon"><i class="fas fa-camera fa-1x"></i></span>
+             <span class="icon"><i class="fas fa-ban fa-2x"></i></span>
              </span>
              </span>
              """
@@ -63,21 +66,21 @@ defmodule Surface.Components.IconTest do
 
   test "setting the primary color" do
     code = """
-    <FA icon="camera" primary_color="blue" />
+    <FA icon="camera" icon_style="duotone" primary_color="blue" />
     """
 
     assert render_live(code) =~ """
-           <span class="icon"><i class="fas fa-camera" style="--fa-primary-color: blue"></i></span>
+           <span class="icon"><i class="fad fa-camera" style="--fa-primary-color: blue"></i></span>
            """
   end
 
   test "setting the primary opacity and secondary color" do
     code = """
-    <FA icon="camera" secondary_color="blue" primary_opacity={{0.6}} />
+    <FA icon="camera" icon_style="duotone" secondary_color="blue" primary_opacity={{0.6}} />
     """
 
     assert render_live(code) =~ """
-           <span class="icon"><i class="fas fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i></span>
+           <span class="icon"><i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i></span>
            """
   end
 end
