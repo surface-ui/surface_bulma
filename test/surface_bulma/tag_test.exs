@@ -1,15 +1,17 @@
 defmodule Surface.Components.TagTest do
-  use ExUnit.Case, async: true
+  use SurfaceBulma.ConnCase, async: true
 
-  alias SurfaceBulma.Tag, warn: false
-  import ComponentTestHelper
+  alias SurfaceBulma.Tag
 
   test "create a tag" do
-    code = """
-    <Tag>tag</Tag>
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag>tag</Tag>
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag">
              tag
            </span>
@@ -17,11 +19,14 @@ defmodule Surface.Components.TagTest do
   end
 
   test "create a tag according to the given label" do
-    code = """
-    <Tag label="tag" />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag label="tag" />
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag">
              tag
            </span>
@@ -29,11 +34,14 @@ defmodule Surface.Components.TagTest do
   end
 
   test "prop color" do
-    code = """
-    <Tag label="tag" color="primary" />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag label="tag" color="primary" />
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag is-primary">
              tag
            </span>
@@ -41,11 +49,14 @@ defmodule Surface.Components.TagTest do
   end
 
   test "prop size" do
-    code = """
-    <Tag label="tag" size="normal" />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag label="tag" size="normal" />
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag is-normal">
              tag
            </span>
@@ -53,11 +64,14 @@ defmodule Surface.Components.TagTest do
   end
 
   test "prop light" do
-    code = """
-    <Tag label="tag" color="primary" light />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag label="tag" color="primary" light />
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag is-primary is-light">
              tag
            </span>
@@ -65,11 +79,14 @@ defmodule Surface.Components.TagTest do
   end
 
   test "prop rounded" do
-    code = """
-    <Tag label="tag" color="primary" rounded />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Tag label="tag" color="primary" rounded />
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <span class="tag is-primary is-rounded">
              tag
            </span>

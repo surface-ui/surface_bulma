@@ -1,22 +1,33 @@
 defmodule Surface.Components.DeleteTest do
-  use ExUnit.Case, async: true
+  use SurfaceBulma.ConnCase, async: true
 
-  alias SurfaceBulma.Delete, warn: false
-  import ComponentTestHelper
+  alias SurfaceBulma.Delete
 
   test "creates a link element with class delete" do
-    code = """
-    <Delete />
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Delete />
+        """
+      end
 
-    assert render_live(code) =~ ~s(<a class="delete"></a>)
+    assert html =~ """
+           <a class="delete">
+           </a>
+           """
   end
 
   test "prop size" do
-    code = """
-    <Delete size="small"/>
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Delete size="small"/>
+        """
+      end
 
-    assert render_live(code) =~ ~s(<a class="delete is-small"></a>)
+    assert html =~ """
+           <a class="delete is-small">
+           </a>
+           """
   end
 end
