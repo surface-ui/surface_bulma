@@ -6,6 +6,7 @@ defmodule SurfaceBulma.MixProject do
       app: :surface_bulma,
       version: "0.1.0",
       elixir: "~> 1.9",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       compilers: [:phoenix] ++ Mix.compilers(),
       deps: deps()
@@ -18,11 +19,19 @@ defmodule SurfaceBulma.MixProject do
     ]
   end
 
+  def catalogues do
+    ["priv/catalogue"]
+  end
+
+  defp elixirc_paths(:dev), do: ["lib"] ++ catalogues()
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
   defp deps do
     [
       {:jason, "~> 1.0"},
       {:floki, "~> 0.25.0", only: :test},
-      {:surface, "~> 0.1.0"}
+      {:surface, "~> 0.2.0"}
     ]
   end
 end

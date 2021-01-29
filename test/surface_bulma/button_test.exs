@@ -1,17 +1,19 @@
 defmodule Surface.Components.ButtonTest do
-  use ExUnit.Case, async: true
+  use SurfaceBulma.ConnCase, async: true
 
-  alias SurfaceBulma.Button, warn: false
-  import ComponentTestHelper
+  alias SurfaceBulma.Button
 
   test "creates a <button> with type and class button" do
-    code = """
-    <Button>
-      Ok
-    </Button>
-    """
+    html =
+      render_surface do
+        ~H"""
+        <Button>
+          Ok
+        </Button>
+        """
+      end
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <button type="button" class="button">
              Ok
            </button>
@@ -19,9 +21,9 @@ defmodule Surface.Components.ButtonTest do
   end
 
   test "prop label" do
-    code = ~S(<Button label="Ok"/>)
+    html = render_surface(do: ~H(<Button label="Ok"/>))
 
-    assert render_live(code) =~ """
+    assert html =~ """
            <button type="button" class="button">
              Ok
            </button>
@@ -29,57 +31,57 @@ defmodule Surface.Components.ButtonTest do
   end
 
   test "prop color" do
-    code = ~S(<Button color="primary">Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-primary(.*)"/
+    html = render_surface(do: ~H(<Button color="primary">Ok</Button>))
+    assert html =~ ~r/class="(.*)is-primary(.*)"/
   end
 
   test "prop size" do
-    code = ~S(<Button size="small">Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-small(.*)"/
+    html = render_surface(do: ~H(<Button size="small">Ok</Button>))
+    assert html =~ ~r/class="(.*)is-small(.*)"/
   end
 
   test "propety value" do
-    code = ~S(<Button value="123">Ok</Button>)
-    assert render_live(code) =~ ~r/value="123"/
+    html = render_surface(do: ~H(<Button value="123">Ok</Button>))
+    assert html =~ ~r/value="123"/
   end
 
   test "propety expand" do
-    code = ~S(<Button expand>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-fullwidth(.*)"/
+    html = render_surface(do: ~H(<Button expand>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-fullwidth(.*)"/
   end
 
   test "propety outlined" do
-    code = ~S(<Button outlined>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-outlined(.*)"/
+    html = render_surface(do: ~H(<Button outlined>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-outlined(.*)"/
   end
 
   test "propety rounded" do
-    code = ~S(<Button rounded>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-rounded(.*)"/
+    html = render_surface(do: ~H(<Button rounded>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-rounded(.*)"/
   end
 
   test "propety hovered" do
-    code = ~S(<Button hovered>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-hovered(.*)"/
+    html = render_surface(do: ~H(<Button hovered>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-hovered(.*)"/
   end
 
   test "propety focused" do
-    code = ~S(<Button focused>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-focused(.*)"/
+    html = render_surface(do: ~H(<Button focused>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-focused(.*)"/
   end
 
   test "propety active" do
-    code = ~S(<Button active>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-active(.*)"/
+    html = render_surface(do: ~H(<Button active>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-active(.*)"/
   end
 
   test "propety loading" do
-    code = ~S(<Button loading>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-loading(.*)"/
+    html = render_surface(do: ~H(<Button loading>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-loading(.*)"/
   end
 
   test "propety selected" do
-    code = ~S(<Button selected>Ok</Button>)
-    assert render_live(code) =~ ~r/class="(.*)is-selected(.*)"/
+    html = render_surface(do: ~H(<Button selected>Ok</Button>))
+    assert html =~ ~r/class="(.*)is-selected(.*)"/
   end
 end
