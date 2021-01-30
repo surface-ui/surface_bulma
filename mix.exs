@@ -9,7 +9,8 @@ defmodule SurfaceBulma.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       compilers: [:phoenix] ++ Mix.compilers(),
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -20,7 +21,10 @@ defmodule SurfaceBulma.MixProject do
   end
 
   def catalogues do
-    ["priv/catalogue"]
+    [
+      "priv/catalogue",
+      "deps/surface/priv/catalogue"
+    ]
   end
 
   defp elixirc_paths(:dev), do: ["lib"] ++ catalogues()
@@ -31,8 +35,15 @@ defmodule SurfaceBulma.MixProject do
     [
       {:jason, "~> 1.0"},
       {:floki, "~> 0.25.0", only: :test},
-      {:surface, "~> 0.2.0"},
-      {:surface_font_awesome, "~> 0.1.1"}
+      {:surface, "~> 0.2.1"},
+      {:surface_font_awesome, "~> 0.1.1"},
+      {:surface_catalogue, "~> 0.0.1", only: :dev}
+    ]
+  end
+
+  defp aliases do
+    [
+      dev: "run --no-halt dev.exs"
     ]
   end
 end

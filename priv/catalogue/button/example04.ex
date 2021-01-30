@@ -2,7 +2,8 @@ defmodule SurfaceBulma.Catalogue.Button.Example04 do
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,
-    title: "Groups of Buttons"
+    title: "Groups of Buttons",
+    height: "200px"
 
   def render(assigns) do
     ~H"""

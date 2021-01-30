@@ -2,7 +2,8 @@ defmodule SurfaceBulma.Catalogue.Button.Playground do
   use Surface.Catalogue.Playground,
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,
-    container: {:div, style: "height: 60px;"}
+    height: "110px",
+    container: {:div, class: "buttons is-centered"}
 
   data props, :map,
     default: %{

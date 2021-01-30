@@ -3,6 +3,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example01 do
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,
     title: "Label",
+    height: "90px",
     container: {:div, class: "buttons"}
 
   def render(assigns) do

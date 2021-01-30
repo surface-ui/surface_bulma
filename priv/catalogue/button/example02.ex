@@ -4,6 +4,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example02 do
     catalogue: SurfaceBulma.Catalogue,
     title: "Colors & Sizes",
     direction: "vertical",
+    height: "110px",
     container: {:div, class: "buttons"}
 
   def render(assigns) do
