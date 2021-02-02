@@ -15,7 +15,13 @@ defmodule SurfaceBulma.Catalogue do
     [
       head_css: """
       <style>#{@bulma_css}</style>
-      """
+      """,
+      playground: [
+        body: [
+          style: "padding: 1.5rem; height: 100%;",
+          class: "has-background-light"
+        ]
+      ]
     ]
   end
 end

@@ -3,6 +3,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example03 do
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,
     title: "Outlined, Rounded and Loading",
+    height: "90px",
     code_perc: 65,
     container: {:div, class: "buttons"}
 
