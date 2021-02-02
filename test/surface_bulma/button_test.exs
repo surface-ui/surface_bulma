@@ -20,6 +20,48 @@ defmodule Surface.Components.ButtonTest do
            """
   end
 
+  test "classes propagate to button" do
+    html =
+      render_surface do
+        ~H"""
+        <Button class={{"custom","custom2"}}>
+          Ok
+        </Button>
+        """
+      end
+
+    assert html =~ """
+           <button type="button" class="custom custom2">
+             Ok
+           </button>
+           """
+
+    html =
+      render_surface do
+        ~H"""
+        <Button class="custom custom2">
+          Ok
+        </Button>
+        """
+      end
+
+    assert html =~ """
+           <button type="button" class="custom custom2">
+             Ok
+           </button>
+           """
+  end
+
+  test "aria label" do
+    html = render_surface(do: ~H(<Button aria_label="Ok">Ok</Button>))
+
+    assert html =~ """
+           <button type="button" aria-label="Ok" class="button">
+             Ok
+           </button>
+           """
+  end
+
   test "prop label" do
     html = render_surface(do: ~H(<Button label="Ok"/>))
 

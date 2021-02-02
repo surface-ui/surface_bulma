@@ -8,6 +8,9 @@ defmodule SurfaceBulma.Button do
   @doc "The label of the button, when no content (default slot) is provided"
   prop label, :string
 
+  @doc "The aria label for the button"
+  prop aria_label, :string
+
   @doc "The color of the button"
   prop color, :string, values: ~w(white black light dark primary link info success warning danger)
 
@@ -47,6 +50,9 @@ defmodule SurfaceBulma.Button do
   @doc "Triggered on click"
   prop click, :event
 
+  @doc "Css classes to propagate down to button. Default class if no class supplied is simply _button_"
+  prop class, :css_class, default: []
+
   @doc """
   The content of the generated `<button>` element. If no content is provided,
   the value of property `label` is used instead.
@@ -57,11 +63,12 @@ defmodule SurfaceBulma.Button do
     ~H"""
     <button
       type="button"
+      aria-label={{@aria_label}}
       :on-click={{@click}}
       disabled={{@disabled}}
       value={{@value}}
       class={{
-        "button",
+        [button: @class == [],
         "is-#{@color}": @color,
         "is-#{@size}": @size,
         "is-fullwidth": @expand,
@@ -72,6 +79,7 @@ defmodule SurfaceBulma.Button do
         "is-active": @active,
         "is-loading": @loading,
         "is-selected": @selected
+      ] ++ @class
       }}>
       <slot>{{ @label }}</slot>
     </button>
