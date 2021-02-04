@@ -99,11 +99,6 @@ defmodule Surface.Components.TableTest do
     |> element("table thead tr th:nth-child(2) a")
     |> render_click()
 
-    #  |> Floki.parse_fragment!()
-    #  |> IO.inspect()
-    #  |> Floki.find("#{row1} td:nth-child(2)")
-    #  |> Floki.text() =~ "Albert"
-
     assert view
            |> element("#{row1} td:nth-child(2) span")
            |> render() =~ "Albert"
