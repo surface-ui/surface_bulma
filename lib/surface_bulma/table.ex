@@ -137,6 +137,9 @@ defmodule SurfaceBulma.Table do
 
             sorter when is_function(sorter) ->
               Enum.sort_by(assigns.data, sorter)
+
+            {sorter, comparer} when is_function(sorter) and is_function(comparer) ->
+              Enum.sort_by(assigns.data, sorter, comparer)
           end
 
         sorted_data =
