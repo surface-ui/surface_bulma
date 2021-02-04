@@ -9,11 +9,14 @@ defmodule SurfaceBulma.Icon.FontAwesome do
   @doc "Specifies the size of the span that wraps the icon."
   prop container_size, :string, values: ["small", "medium", "large"]
 
+  @doc "Optional classes to add to containing span"
+  prop container_class, :list, default: []
+
   slot default
 
   def render(assigns) do
     ~H"""
-      <span class={{"icon", "is-#{@container_size}": @container_size}}>
+      <span class={{["icon", "is-#{@container_size}": @container_size] ++ @container_class}}>
         {{ Icon.render(assigns) }}
         <slot name="default" />
       </span>
