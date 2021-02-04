@@ -2,7 +2,7 @@ defmodule Surface.Components.IconTest do
   use SurfaceBulma.ConnCase, async: true
 
   alias SurfaceBulma.Icon.FontAwesome, as: FA
-  alias SurfaceBulma.Icon.FontAwesome.{Layers, TextLayer, CounterLayer}
+  alias SurfaceBulma.Icon.FontAwesome.{Layers, TextLayer, CounterLayer, TextIcon, TextIconText}
 
   test "basic icon usage" do
     html =
@@ -170,5 +170,25 @@ defmodule Surface.Components.IconTest do
                  <i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i>
                </span>
              """
+  end
+
+  test "text icon text" do
+    html =
+      render_surface do
+        ~H"""
+        <TextIcon>
+        <FA icon="camera"/>
+        <TextIconText>Hello</TextIconText>
+        </TextIcon>
+        """
+      end
+
+    parsed = Floki.parse_fragment!(html)
+
+    assert Floki.find(parsed, "span.icon-text > span.icon > i") == [
+             {"i", [{"class", "fas fa-camera"}], []}
+           ]
+
+    assert Floki.find(parsed, "span.icon-text > :not(span.icon)") == [{"span", [], ["\nHello\n"]}]
   end
 end

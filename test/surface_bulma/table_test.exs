@@ -12,19 +12,25 @@ defmodule Surface.Components.TableTest do
     alias SurfaceBulma.Table
     alias SurfaceBulma.Table.Column
 
-    def render(assigns) do
-      data = [
-        %{id: 1, name: "John"},
-        %{id: 2, name: "Jane"}
-      ]
+    data props, :map,
+      default: %{
+        data: [
+          %{id: 1, name: "John"},
+          %{id: 2, name: "Jane"},
+          %{id: 3, name: "Albert"},
+          %{id: 4, name: "Diana"},
+          %{id: 5, name: "Elizabeth"}
+        ]
+      }
 
+    def render(assigns) do
       ~H"""
-      <Table data={{ person <- data }}>
-        <Column label="Id">
+      <Table id="foo" data={{ person <- @props.data }} :props={{ @props }}>
+        <Column label="Id" sort_by="id">
           {{ person.id }}
         </Column>
-        <Column label="Name">
-          {{ person.name }}
+        <Column label="Name"sort_by="name">
+        {{person.name}}
         </Column>
       </Table>
       """
@@ -74,5 +80,75 @@ defmodule Surface.Components.TableTest do
     assert view
            |> element("#{row2} td:nth-child(2)")
            |> render() =~ "Jane"
+  end
+
+  test "sorting should work in all directions", %{view: view} do
+    row1 = "table tbody tr:nth-child(1)"
+    row5 = "table tbody tr:nth-child(5)"
+
+    assert view
+           |> element("#{row1} td:nth-child(2)")
+           |> render() =~ "John"
+
+    assert view
+           |> element("#{row5} td:nth-child(2)")
+           |> render() =~ "Elizabeth"
+
+    # Ensure albert goes to the top
+    view
+    |> element("table thead tr th:nth-child(2) a")
+    |> render_click()
+
+    #  |> Floki.parse_fragment!()
+    #  |> IO.inspect()
+    #  |> Floki.find("#{row1} td:nth-child(2)")
+    #  |> Floki.text() =~ "Albert"
+
+    assert view
+           |> element("#{row1} td:nth-child(2) span")
+           |> render() =~ "Albert"
+
+    # then to the bottom
+    view
+    |> element("table thead tr th:nth-child(2) a")
+    |> render_click()
+
+    assert view
+           |> element("#{row5} td:nth-child(2) span")
+           |> render() =~ "Albert"
+
+    # then to the top again
+    view
+    |> element("table thead tr th:nth-child(2) a")
+    |> render_click()
+
+    assert view
+           |> element("#{row1} td:nth-child(2) span")
+           |> render() =~ "Albert"
+
+    # check that id sorting works as well
+    view
+    |> element("table thead tr th:nth-child(1) a")
+    |> render_click()
+
+    assert view
+           |> element("#{row1} td:nth-child(1) span")
+           |> render() =~ "1"
+
+    assert view
+           |> element("#{row5} td:nth-child(1) span")
+           |> render() =~ "5"
+
+    view
+    |> element("table thead tr th:nth-child(1) a")
+    |> render_click()
+
+    assert view
+           |> element("#{row1} td:nth-child(1) span")
+           |> render() =~ "5"
+
+    assert view
+           |> element("#{row5} td:nth-child(1) span")
+           |> render() =~ "1"
   end
 end
