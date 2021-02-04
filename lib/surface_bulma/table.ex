@@ -11,8 +11,6 @@ defmodule SurfaceBulma.Table do
   use Surface.LiveComponent
   alias SurfaceBulma.Icon.FontAwesome, as: FA
   alias SurfaceBulma.Icon.FontAwesome.{TextIcon, TextIconText}
-  # alias SurfaceBulma.Button
-  alias Surface.Components.Link
 
   @doc "The data that populates the table internal"
   prop data, :list, required: true
@@ -83,7 +81,7 @@ defmodule SurfaceBulma.Table do
               {{ col.label }}
               </a>
               </If>
-              <If condition={{is_nil(col.sort_by)}} to="">
+              <If condition={{is_nil(col.sort_by)}}>
               {{ col.label }}
               </If>
               </th>

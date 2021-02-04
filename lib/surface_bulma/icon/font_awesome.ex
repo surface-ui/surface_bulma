@@ -59,8 +59,6 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIcon do
   """
   slot default
 
-  slot text, required: true
-
   def render(assigns) do
     ~H"""
     <span class="icon-text">
