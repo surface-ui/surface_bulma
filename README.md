@@ -47,7 +47,7 @@ Add `surface_bulma` to the list of dependencies in `mix.exs`:
 def deps do
   [
     ...
-    {:surface_bulma, github: "msaraiva/surface_bulma"}
+    {:surface_bulma, "~> 0.1.0"}
   ]
 end
 ```
