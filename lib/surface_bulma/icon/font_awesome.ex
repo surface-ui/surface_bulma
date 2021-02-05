@@ -50,3 +50,37 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextLayer do
 
   def render(assigns), do: TextLayer.render(assigns)
 end
+
+defmodule SurfaceBulma.Icon.FontAwesome.TextIcon do
+  use Surface.Component
+
+  @moduledoc """
+  Renders a icon text
+  """
+  slot default
+
+  def render(assigns) do
+    ~H"""
+    <span class="icon-text">
+      <slot/>
+    </span>
+    """
+  end
+end
+
+defmodule SurfaceBulma.Icon.FontAwesome.TextIconText do
+  use Surface.Component
+
+  @moduledoc """
+  The text that goes in a TextIcon component
+  """
+  slot default
+
+  def render(assigns) do
+    ~H"""
+    <span>
+    <slot/>
+    </span>
+    """
+  end
+end

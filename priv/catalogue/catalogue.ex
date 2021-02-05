@@ -15,6 +15,7 @@ defmodule SurfaceBulma.Catalogue do
     [
       head_css: """
       <style>#{@bulma_css}</style>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
       """,
       playground: [
         body: [

@@ -5,6 +5,12 @@ defmodule SurfaceBulma.Button do
 
   use Surface.Component
 
+  @doc """
+  The button type, defaults to "button", mainly used for instances like modal X to close style buttons
+  where you don't want to set a type at all. Setting to nil makes button have no type.
+  """
+  prop type, :string, default: "button"
+
   @doc "The label of the button, when no content (default slot) is provided"
   prop label, :string
 
@@ -62,7 +68,7 @@ defmodule SurfaceBulma.Button do
   def render(assigns) do
     ~H"""
     <button
-      type="button"
+      type={{@type}}
       aria-label={{@aria_label}}
       :on-click={{@click}}
       disabled={{@disabled}}
