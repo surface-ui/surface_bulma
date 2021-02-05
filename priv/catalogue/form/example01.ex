@@ -3,10 +3,10 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
     title: "Sample form",
-    height: "300px",
+    height: "1000px",
     direction: "vertical"
 
-  alias SurfaceBulma.Form.{Checkbox, TextField}
+  alias SurfaceBulma.Form.{Checkbox, TextArea, TextField}
   alias Surface.Components.Form
   alias SurfaceBulma.Catalogue.Form.SampleModel
 
@@ -17,9 +17,14 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
   def render(assigns) do
     ~H"""
     <Form for={{ @changeset }} change={{"change"}} submit={{"submit"}} opts={{ autocomplete: "off" }}>
-        <TextField field="name" label="Name"/>
+        <TextField field="name" label="Name" placeholder="John Doe"/>
+        <TextArea
+          field="life_history"
+          label="Life history"
+          placeholder="Lorem ipsum..."
+          size="normal"
+          rows="5"/>
         <Checkbox field="checkbox" label="Long checkbox-text"/>
-
     </Form>
     """
   end

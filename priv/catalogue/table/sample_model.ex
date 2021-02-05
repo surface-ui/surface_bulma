@@ -4,7 +4,7 @@ defmodule SurfaceBulma.Catalogue.Form.SampleModel do
 
   schema "" do
     field(:name, :string)
-    field(:checbox, :boolean)
+    field(:checkbox, :boolean)
   end
 
   @doc """

@@ -19,6 +19,9 @@ defmodule SurfaceBulma.Form.Checkbox do
   @doc "Any opts you want to pass on to internal `Surface.Checkbox` and `Phoenix.HTML.Form.checkbox/3`"
   prop opts, :keyword, default: []
 
+  @doc "Class to apply to input"
+  prop class, :css_class, default: []
+
   def render(assigns) do
     ~H"""
       <Field class="field" name={{@field}}>
@@ -27,6 +30,7 @@ defmodule SurfaceBulma.Form.Checkbox do
           <Checkbox
             field={{@field}}
             opts={{ [disabled: @disabled] ++ @opts  }}
+            class={{@class}}
             />
           {{ @label}}
         </label>

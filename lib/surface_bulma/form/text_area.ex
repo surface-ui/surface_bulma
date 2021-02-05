@@ -1,4 +1,4 @@
-defmodule SurfaceBulma.Form.TextField do
+defmodule SurfaceBulma.Form.TextArea do
   @moduledoc """
   The text field component
   """
@@ -6,7 +6,7 @@ defmodule SurfaceBulma.Form.TextField do
   use Surface.Component
   import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
 
-  alias Surface.Components.Form.{Field, TextInput, ErrorTag, Label}
+  alias Surface.Components.Form.{Field, TextArea, ErrorTag, Label}
   alias SurfaceBulma.Icon.FontAwesome, as: FA
 
   @doc "The the field on the changeset"
@@ -24,6 +24,12 @@ defmodule SurfaceBulma.Form.TextField do
   @doc "Placeholder value"
   prop placeholder, :string, default: nil
 
+  @doc "Size of textarea in css sense"
+  prop size, :string, values: ["small", "normal", "medium", "large"], default: "normal"
+
+  @doc "How many rows should textarea be, defaults to 10"
+  prop rows, :integer, default: 10
+
   def render(assigns) do
     %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
 
@@ -34,10 +40,18 @@ defmodule SurfaceBulma.Form.TextField do
       <Field class="field" name={{@field}}>
         <Label class="label">{{@label}}</Label>
         <div class={{"control", "has-icons-right": !@disable_icons && (has_error || has_change)}}>
-          <TextInput
-          class={{["input", "is-danger": has_error, "is-success": has_change && !has_error] ++ @class}}
+          <TextArea
+          class={{[
+            "textarea",
+            "is-#{@size}",
+            "is-danger": has_error,
+            "is-success": has_change && !has_error,
+            ] ++ @class}}
           field={{@field}}
-          opts={{placeholder: @placeholder}}/>
+          opts={{
+            placeholder: @placeholder,
+            rows: @rows
+            }}/>
           <ErrorTag class="help is-danger" field={{@field}}/>
           <FA :if={{ !@disable_icons && has_error }} icon="exclamation-triangle" container_class={{["is-small", "is-right"]}}/>
           <FA :if={{ !@disable_icons &&  has_change && !has_error}} icon="check" container_class={{["is-small", "is-right"]}}/>
