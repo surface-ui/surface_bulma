@@ -43,6 +43,9 @@ defmodule SurfaceBulma.Table.Column do
   """
   prop sort_by, :any, default: nil
 
+  @doc "The style to be applied to <th> element representing this column"
+  prop style, :string, default: ""
+
   # Todo, requires patching of bulma css
   # prop width, :string, default: nil
 end
