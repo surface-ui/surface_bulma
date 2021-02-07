@@ -65,7 +65,7 @@ defmodule SurfaceBulma.Table do
         <thead>
           <tr>
             <For each={{ col <- @cols }}>
-              <th style={{ col.style }}>
+              <th class={{ col.class }} style={{ col.style }}>
               <If condition={{!is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}}>
               <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
                 <TextIcon>
