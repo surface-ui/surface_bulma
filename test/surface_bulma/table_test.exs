@@ -1,8 +1,8 @@
 defmodule Surface.Components.TableTest do
-  use ExUnit.Case, async: true
+  use SurfaceBulma.ConnCase, async: true
 
-  import Phoenix.ConnTest
-  import Phoenix.LiveViewTest
+  alias SurfaceBulma.Table
+  alias SurfaceBulma.Table.Column
 
   @endpoint Endpoint
 
@@ -145,5 +145,31 @@ defmodule Surface.Components.TableTest do
     assert view
            |> element("#{row5} td:nth-child(1) span")
            |> render() =~ "1"
+  end
+
+  test "column's class" do
+    html =
+      render_surface do
+        ~H"""
+        <Table id="foo" data={{ person <- [%{name: "John"}] }}>
+          <Column label="Name" class="my_col">{{person.name}}</Column>
+        </Table>
+        """
+      end
+
+    assert html =~ ~S(<th class="my_col")
+  end
+
+  test "column's style" do
+    html =
+      render_surface do
+        ~H"""
+        <Table id="foo" data={{ person <- [%{name: "John"}] }}>
+          <Column label="Name" style="width: 200px">{{person.name}}</Column>
+        </Table>
+        """
+      end
+
+    assert html =~ ~S(<th style="width: 200px")
   end
 end
