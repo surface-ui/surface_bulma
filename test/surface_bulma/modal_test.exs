@@ -13,16 +13,32 @@ defmodule Surface.Components.ModalTest do
         """
       end
 
-    assert html =~ """
-           <div class="modal is-active">
-           <div class="modal-background"></div>
-           <div class="modal-content">
-           hello
-           </div>
-           <button aria-label="close" class="modal-close is-large">
-           </button>
-           </div>
-           """
+    parsed = Floki.parse_fragment!(html)
+
+    assert Floki.find(parsed, "div.modal > div.modal-content")
+           |> Floki.text() =~ "hello"
+  end
+
+  test "show prop properly shows and hides modal" do
+    html =
+      render_surface do
+        ~H"""
+        <Modal show={{true}}>hello</Modal>
+        """
+      end
+
+    parsed = Floki.parse_fragment!(html)
+    assert [{"div", [{"class", "modal is-active"}], _} | _] = Floki.find(parsed, "div")
+
+    html2 =
+      render_surface do
+        ~H"""
+        <Modal show={{false}}>hello</Modal>
+        """
+      end
+
+    parsed2 = Floki.parse_fragment!(html2)
+    assert [{"div", [{"class", "modal"}], _} | _] = Floki.find(parsed2, "div")
   end
 
   test "regular modal can contain anything" do
@@ -33,18 +49,8 @@ defmodule Surface.Components.ModalTest do
         """
       end
 
-    assert html =~ """
-           <div class="modal is-active">
-           <div class="modal-background"></div>
-           <div class="modal-content">
-           <button type="button" class="button">
-             ok
-           </button>
-           </div>
-           <button aria-label="close" class="modal-close is-large">
-           </button>
-           </div>
-           """
+    parsed = Floki.parse_fragment!(html)
+    assert [{"button", _, _}] = Floki.find(parsed, "div.modal-content > button")
   end
 
   test "modal should optionally show close button" do
@@ -55,16 +61,8 @@ defmodule Surface.Components.ModalTest do
         """
       end
 
-    assert html =~ """
-           <div class="modal is-active">
-           <div class="modal-background"></div>
-           <div class="modal-content">
-           hello
-           </div>
-           <button aria-label="close" class="modal-close is-large">
-           </button>
-           </div>
-           """
+    parsed = Floki.parse_fragment!(html)
+    assert [{"button", _, _}] = Floki.find(parsed, "div.modal > button")
 
     html =
       render_surface do
@@ -73,14 +71,8 @@ defmodule Surface.Components.ModalTest do
         """
       end
 
-    assert html =~ """
-           <div class="modal is-active">
-           <div class="modal-background"></div>
-           <div class="modal-content">
-           hello
-           </div>
-           </div>
-           """
+    parsed = Floki.parse_fragment!(html)
+    assert [] = Floki.find(parsed, "div.modal > button")
   end
 
   test "card modal should display content in header, footer and default slot" do
