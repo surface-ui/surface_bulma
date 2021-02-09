@@ -44,7 +44,7 @@ defmodule SurfaceBulma.MixProject do
       {:surface_font_awesome, "~> 0.1.1"},
       {:ecto, "3.5.5"},
       {:phoenix_ecto, "~> 4.1"},
-      {:surface_catalogue, "~> 0.0.3", only: :dev}
+      {:surface_catalogue, "~> 0.0.3", only: :dev},
       {:surface, "~> 0.2.1"}
     ]
   end
