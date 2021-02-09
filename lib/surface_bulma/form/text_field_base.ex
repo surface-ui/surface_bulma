@@ -43,15 +43,6 @@ defmodule SurfaceBulma.Form.TextFieldBase do
       @doc "Static input"
       prop static, :boolean
 
-      @doc "Read only"
-      prop readonly, :boolean
-
-      @doc "Max length of field, as enforced by client browser. Not validated by Elixir."
-      prop maxlength, :integer
-
-      @doc "Minimum length of field, as enforced by client browser. Not validated by Elixir."
-      prop minlength, :integer
-
       @doc """
       Slot adds content to left side of input.
       Only inputs, buttons and dropdowns are supported.

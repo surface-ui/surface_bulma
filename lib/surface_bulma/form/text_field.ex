@@ -8,6 +8,12 @@ defmodule SurfaceBulma.Form.TextField do
 
   alias Surface.Components.Form.{Field, TextInput, Label}
 
+  @doc "Max length of field, as enforced by client browser. Not validated by Elixir."
+  prop maxlength, :integer
+
+  @doc "Minimum length of field, as enforced by client browser. Not validated by Elixir."
+  prop minlength, :integer
+
   def render(assigns) do
     ~H"""
     <Field class={{"field", "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) }} name={{@field}}>
