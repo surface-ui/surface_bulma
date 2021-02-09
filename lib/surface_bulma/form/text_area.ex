@@ -28,7 +28,7 @@ defmodule SurfaceBulma.Form.TextArea do
   prop size, :string, values: ["small", "normal", "medium", "large"], default: "normal"
 
   @doc "How many rows should textarea be, defaults to 10"
-  prop rows, :integer, default: 10
+  prop rows, :integer
 
   def render(assigns) do
     %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns

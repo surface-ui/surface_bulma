@@ -3,28 +3,71 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
     title: "Sample form",
-    height: "1000px",
-    direction: "vertical"
+    height: "700px"
 
-  alias SurfaceBulma.Form.{Checkbox, TextArea, TextField}
-  alias Surface.Components.Form
+  alias SurfaceBulma.Form.{Checkbox, RadioButton, Select, TextArea, TextField}
+  alias SurfaceBulma.{Button, ButtonGroup}
+  alias Surface.Components.{Link, Form}
   alias SurfaceBulma.Catalogue.Form.SampleModel
 
-  data changeset, :map, default: SampleModel.changeset(%SampleModel{}, %{})
-
-  prop checkbox_options, :list, default: []
+  data changeset, :map,
+    default:
+      SampleModel.changeset(%SampleModel{}, %{
+        "username" => "bulma",
+        "email" => "hello@"
+      })
+      |> Map.put(:action, :insert)
 
   def render(assigns) do
     ~H"""
-    <Form for={{ @changeset }} change={{"change"}} submit={{"submit"}} opts={{ autocomplete: "off" }}>
-        <TextField field="name" label="Name" placeholder="John Doe"/>
+    <Form
+      for={{ @changeset }}
+      change={{"change"}}
+      submit={{"submit"}}
+      opts={{ autocomplete: "off" }}>
+        <TextField
+          field="name"
+          label="Name"
+           placeholder="Text input"/>
+        <TextField
+          field="username"
+          label="Username"/>
+        <TextField
+          field="email"
+          label="Email" />
+        <Select
+          field="select"
+          options={{[
+            "Select dropdown",
+            "with options"
+            ]}}/>
         <TextArea
-          field="life_history"
-          label="Life history"
-          placeholder="Lorem ipsum..."
-          size="normal"
-          rows="5"/>
-        <Checkbox field="checkbox" label="Long checkbox-text"/>
+          field="message"
+          label="Message"
+          placeholder="Textarea"
+          size="normal"/>
+        <Checkbox field="checkbox">
+        I agree to the
+        <Link to="#">terms and conditions</Link>
+        </Checkbox>
+        <RadioButton
+            field="radio"
+            options={{
+              ["yes", "no"]
+            }}/>
+        <ButtonGroup>
+          <Button
+            type="submit"
+            link>
+            Submit
+          </Button>
+          <Button
+            type="submit"
+            color="light"
+            link>
+            Submit
+          </Button>
+        </ButtonGroup>
     </Form>
     """
   end

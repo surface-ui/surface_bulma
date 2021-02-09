@@ -10,9 +10,6 @@ defmodule SurfaceBulma.Form.Checkbox do
   @doc "The the field on the changeset"
   prop field, :atom, required: true
 
-  @doc "The string label of the field"
-  prop label, :string, required: true
-
   @doc "Disable selection"
   prop disabled, :boolean, default: false
 
@@ -21,6 +18,9 @@ defmodule SurfaceBulma.Form.Checkbox do
 
   @doc "Class to apply to input"
   prop class, :css_class, default: []
+
+  @doc "The text / label of the checkbox"
+  slot default
 
   def render(assigns) do
     ~H"""
@@ -32,7 +32,7 @@ defmodule SurfaceBulma.Form.Checkbox do
             opts={{ [disabled: @disabled] ++ @opts  }}
             class={{@class}}
             />
-          {{ @label}}
+          <slot/>
         </label>
       </div>
       </Field>

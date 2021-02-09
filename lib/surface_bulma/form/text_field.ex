@@ -4,45 +4,45 @@ defmodule SurfaceBulma.Form.TextField do
   """
 
   use Surface.Component
-  import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
+  use SurfaceBulma.Form.TextFieldBase
 
-  alias Surface.Components.Form.{Field, TextInput, ErrorTag, Label}
-  alias SurfaceBulma.Icon.FontAwesome, as: FA
-
-  @doc "The the field on the changeset"
-  prop field, :atom, required: true
-
-  @doc "The string label of the field"
-  prop label, :string, required: true
-
-  @doc "Disable embedded font awesome icons"
-  prop disable_icons, :boolean, default: false
-
-  @doc "Class to apply to input"
-  prop class, :css_class, default: []
-
-  @doc "Placeholder value"
-  prop placeholder, :string, default: nil
+  alias Surface.Components.Form.{Field, TextInput, Label}
 
   def render(assigns) do
-    %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
-
-    has_error = field_has_error?(form, assigns.field)
-    has_change = field_has_change?(form, assigns.field)
-
     ~H"""
-      <Field class="field" name={{@field}}>
-        <Label class="label">{{@label}}</Label>
-        <div class={{"control", "has-icons-right": !@disable_icons && (has_error || has_change)}}>
-          <TextInput
-          class={{["input", "is-danger": has_error, "is-success": has_change && !has_error] ++ @class}}
-          field={{@field}}
-          opts={{placeholder: @placeholder}}/>
-          <ErrorTag class="help is-danger" field={{@field}}/>
-          <FA :if={{ !@disable_icons && has_error }} icon="exclamation-triangle" container_class={{["is-small", "is-right"]}}/>
-          <FA :if={{ !@disable_icons &&  has_change && !has_error}} icon="check" container_class={{["is-small", "is-right"]}}/>
-        </div>
-      </Field>
+    <Field class={{"field", "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) }} name={{@field}}>
+      <Label :if={{!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon))}} class="label">{{@label}}</Label>
+      <div :if={{ slot_assigned?(:left_addon) }} class="control">
+        <slot name="left_addon"/>
+      </div>
+      <div class={{
+        "control",
+        "has-icons-right": display_right_icon?(assigns),
+        "has-icons-left": display_left_icon?(assigns),
+        "is-expanded": @expanded
+        }}>
+        <TextInput
+        class={{[
+          "input",
+          "is-danger": has_error?(assigns),
+          "is-success": has_change?(assigns) && !has_error?(assigns),
+          "is-static": @static
+          ] ++ @class}}
+        field={{@field}}
+        opts={{
+          [
+            placeholder: @placeholder,
+            disabled: @disabled,
+            readonly: @readonly,
+            maxlength: @maxlength,
+            minlength: @minlength
+          ] ++ @opts}}/>
+        {{render_icons_and_errors(assigns)}}
+      </div>
+      <div :if={{slot_assigned?(:right_addon)}} class="control" >
+        <slot name="right_addon"/>
+      </div>
+    </Field>
     """
   end
 end

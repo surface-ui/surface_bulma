@@ -23,6 +23,9 @@ defmodule SurfaceBulma.Button do
   @doc "The vertical size of button"
   prop size, :string, values: ~w(small normal medium large)
 
+  @doc "Is link?"
+  prop link, :boolean
+
   @doc "The value for the button"
   prop value, :string
 
@@ -49,6 +52,9 @@ defmodule SurfaceBulma.Button do
 
   @doc "Selected style"
   prop selected, :boolean
+
+  @doc "Static style"
+  prop static, :boolean
 
   @doc "Loading state"
   prop loading, :boolean
@@ -84,7 +90,9 @@ defmodule SurfaceBulma.Button do
         "is-focused": @focused,
         "is-active": @active,
         "is-loading": @loading,
-        "is-selected": @selected
+        "is-selected": @selected,
+        "is-link": @link,
+        "is-static": @static
       ] ++ @class
       }}>
       <slot>{{ @label }}</slot>
