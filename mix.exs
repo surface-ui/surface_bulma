@@ -1,16 +1,21 @@
 defmodule SurfaceBulma.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/surface-ui/surface_bulma"
+  @version "0.1.0"
+
   def project do
     [
       app: :surface_bulma,
-      version: "0.1.0",
+      description: "A set of simple Surface components based on Bulma.",
+      version: @version,
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       compilers: [:phoenix] ++ Mix.compilers(),
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      package: package()
     ]
   end
 
@@ -33,19 +38,28 @@ defmodule SurfaceBulma.MixProject do
 
   defp deps do
     [
-      {:jason, "~> 1.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
-      {:surface, "~> 0.2.1"},
+      {:jason, "~> 1.0"},
       {:surface_font_awesome, "~> 0.1.1"},
       {:ecto, "3.5.5"},
       {:phoenix_ecto, "~> 4.1"},
       {:surface_catalogue, "~> 0.0.3", only: :dev}
+      {:surface, "~> 0.2.1"}
     ]
   end
 
   defp aliases do
     [
       dev: "run --no-halt dev.exs"
+    ]
+  end
+
+  defp package() do
+    [
+      files: ["lib", "mix.exs", "README*", "priv"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => @source_url}
     ]
   end
 end
