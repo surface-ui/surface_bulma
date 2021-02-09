@@ -6,17 +6,14 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
     height: "700px"
 
   alias SurfaceBulma.Form.{
-    Checkbox,
-    RadioButton,
     Select,
-    TextArea,
     TextField,
     TextFieldLeftAddon,
     TextFieldRightAddon
   }
 
   alias SurfaceBulma.{Button, Title}
-  alias Surface.Components.{Link, Form}
+  alias Surface.Components.{Form}
   alias SurfaceBulma.Catalogue.Form.SampleModel
 
   data changeset, :map,
