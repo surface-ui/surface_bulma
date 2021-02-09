@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Form.RadioButton do
   @moduledoc """
-  The checkbox component
+  The radio button component as defined in https://bulma.io/documentation/form/radio/
   """
 
   use Surface.Component

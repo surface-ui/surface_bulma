@@ -52,7 +52,7 @@ defmodule SurfaceBulma.Form.TextFieldBase do
       NOTE: If you supply addons, the label is disabled.
       You cannot combine labels and addons. If you require
       field labels with addons you must use horizontal forms.
-      See `SurfaceBulma.Form.HorizontalForm`.
+      See `SurfaceBulma.Form.HorizontalControlGroup`.
       """
       slot left_addon
 
@@ -62,7 +62,7 @@ defmodule SurfaceBulma.Form.TextFieldBase do
       NOTE: If you supply addons, the label is disabled.
       You cannot combine labels and addons. If you require
       field labels with addons you must use horizontal forms.
-      See `SurfaceBulma.Form.HorizontalForm`.
+      See `SurfaceBulma.Form.HorizontalControlGroup`.
       """
       slot right_addon
     end

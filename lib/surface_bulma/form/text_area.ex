@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Form.TextArea do
   @moduledoc """
-  The text field component
+  The text area component as defined here: https://bulma.io/documentation/form/textarea/
   """
 
   use Surface.Component

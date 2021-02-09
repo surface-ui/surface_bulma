@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Form.Select do
   @moduledoc """
-  The checkbox component
+  The select component as defined here: https://bulma.io/documentation/form/select/
   """
 
   use Surface.Component

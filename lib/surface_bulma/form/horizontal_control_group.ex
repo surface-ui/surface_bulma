@@ -1,13 +1,14 @@
 defmodule SurfaceBulma.Form.HorizontalControlGroup do
   @moduledoc """
-  The text field component
+  Structural component that creates horizontal control groups.
+  As defined here: https://bulma.io/documentation/form/general/#form-group
   """
 
   use Surface.Component
 
   alias Surface.Components.Form.{Label}
 
-  @doc "Size of select in css sense"
+  @doc "Size of the label in css sense"
   prop size, :string, values: ["small", "normal", "medium", "large"]
 
   @doc "The string label of the control group"
