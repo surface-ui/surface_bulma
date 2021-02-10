@@ -3,16 +3,19 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
     title: "Horizontal form groups",
-    height: "700px"
+    height: "700px",
+    direction: "vertical"
 
   alias SurfaceBulma.Form.{
-    Checkbox,
+    EmailInput,
+    FieldWrapper,
+    HorizontalControlGroup,
     RadioButton,
     Select,
+    # TelephoneInput,
     TextArea,
-    TextField,
-    TextFieldLeftAddon,
-    TextFieldRightAddon
+    TextInput,
+    TextInputLeftAddon,
   }
 
   alias SurfaceBulma.{Button, ButtonGroup, Title}
@@ -34,7 +37,40 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         change={{"change"}}
         submit={{"submit"}}
         opts={{ autocomplete: "off" }}>
-
+        <HorizontalControlGroup label="From">
+        <TextInput field="example_03_name" placeholder="Name" icon_left="user" expanded/>
+        <TextInput field="example_03_email" icon_left="envelope" expanded value="alex@smith.com" />
+        </HorizontalControlGroup>
+        <HorizontalControlGroup>
+        <FieldWrapper help_text="Do not enter the first zero">
+          <TextInput field="example_03_phone" placeholder="Your phone number" expanded>
+            <TextInputLeftAddon>
+            <Button static>+44</Button>
+            </TextInputLeftAddon>
+          </TextInput>
+        </FieldWrapper>
+        </HorizontalControlGroup>
+        <HorizontalControlGroup label="Department">
+        <Select field="example_03_department" placeholder="Name" options={{[
+          "Business development",
+          "Marketing",
+          "Sales"
+        ]}}/>
+        </HorizontalControlGroup>
+        <HorizontalControlGroup label="Already a member?">
+        <RadioButton
+        field="example_03_member"
+        options={{
+          ["yes", "no"]
+        }}
+        />
+        </HorizontalControlGroup>
+        <HorizontalControlGroup label="Subject">
+        <TextInput field="example_03_subject" placeholder="e.g. Partnership opportunity" expanded/>
+        </HorizontalControlGroup>
+        <HorizontalControlGroup label="Question">
+        <TextArea field="example_03_question" placeholder="Explain how we can help you" expanded/>
+        </HorizontalControlGroup>
       </Form>
     """
   end

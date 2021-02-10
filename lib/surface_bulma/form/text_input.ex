@@ -1,10 +1,10 @@
-defmodule SurfaceBulma.Form.TextField do
+defmodule SurfaceBulma.Form.TextInput do
   @moduledoc """
   The text field component as defined here: https://bulma.io/documentation/form/input/
   """
 
   use Surface.Component
-  use SurfaceBulma.Form.TextFieldBase
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.{Field, TextInput, Label}
 
@@ -16,8 +16,13 @@ defmodule SurfaceBulma.Form.TextField do
 
   def render(assigns) do
     ~H"""
-    <Field class={{"field", "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) }} name={{@field}}>
-      <Label :if={{!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon))}} class="label">{{@label}}</Label>
+    <Field class={{
+      "field",
+      "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)),
+      "is-expanded": @expanded
+      }}
+      name={{@field}}>
+      <Label :if={{!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label}} class="label">{{@label}}</Label>
       <div :if={{ slot_assigned?(:left_addon) }} class="control">
         <slot name="left_addon"/>
       </div>
@@ -41,13 +46,15 @@ defmodule SurfaceBulma.Form.TextField do
             disabled: @disabled,
             readonly: @readonly,
             maxlength: @maxlength,
-            minlength: @minlength
+            minlength: @minlength,
+            value: @value
           ] ++ @opts}}/>
-        {{render_icons_and_errors(assigns)}}
+        {{render_common_text_input_fields(assigns)}}
       </div>
       <div :if={{slot_assigned?(:right_addon)}} class="control" >
         <slot name="right_addon"/>
       </div>
+      <span :if={{@help_text && !has_error?(assigns)}} class="help">{{@help_text}}</span>
     </Field>
     """
   end

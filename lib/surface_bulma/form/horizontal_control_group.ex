@@ -2,6 +2,8 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
   @moduledoc """
   Structural component that creates horizontal control groups.
   As defined here: https://bulma.io/documentation/form/general/#form-group
+
+  You cannot use labels on the internal form controls or it will break the layout.
   """
 
   use Surface.Component

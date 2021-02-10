@@ -1,7 +1,7 @@
-defmodule SurfaceBulma.Form.TextFieldBase do
+defmodule SurfaceBulma.Form.TextInputBase do
   defmacro __using__(_) do
     quote do
-      import SurfaceBulma.Form.TextFieldBase
+      import SurfaceBulma.Form.TextInputBase
       @doc "The the field on the changeset"
       prop field, :atom, required: true
 
@@ -19,6 +19,9 @@ defmodule SurfaceBulma.Form.TextFieldBase do
 
       @doc "Placeholder value"
       prop placeholder, :string, default: nil
+
+      @doc "Value to pass on to field if you want to pre-populate"
+      prop value, :string, default: nil
 
       @doc """
       Icon to place on the left side of input box. Must be a valid icon.
@@ -45,6 +48,9 @@ defmodule SurfaceBulma.Form.TextFieldBase do
 
       @doc "Read only"
       prop readonly, :boolean
+
+      @doc "Help text, will be replaced by error text if changeset gets errors"
+      prop help_text, :string
 
       @doc """
       Slot adds content to left side of input.
@@ -105,7 +111,7 @@ defmodule SurfaceBulma.Form.TextFieldBase do
     field_has_change?(form, assigns.field)
   end
 
-  def render_icons_and_errors(assigns) do
+  def render_common_text_input_fields(assigns) do
     ~H"""
     <ErrorTag class="help is-danger" field={{assigns.field}}/>
     <If condition={{is_binary(assigns.icon_left)}}>

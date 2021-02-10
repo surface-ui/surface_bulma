@@ -11,7 +11,20 @@ defmodule SurfaceBulma.Catalogue.Form.SampleModel do
     field(:checkbox, :boolean)
     field(:radio, :string)
 
-    field(:addon_dummy, :string)
+    field(:example_02_addon_dummy1, :string)
+    field(:example_02_addon_dummy2, :string)
+    field(:example_02_addon_dummy3, :string)
+    field(:example_02_addon_dummy4, :string)
+    field(:example_02_select_dummy1, :string)
+    field(:example_02_select_dummy2, :string)
+
+    field :example_03_name, :string
+    field :example_03_email, :string
+    field :example_03_phone, :string
+    field :example_03_department, :string
+    field :example_03_member, :boolean
+    field :example_03_subject, :string
+    field :example_03_question, :string
   end
 
   @doc """
@@ -30,9 +43,23 @@ defmodule SurfaceBulma.Catalogue.Form.SampleModel do
       :textarea,
       :checkbox,
       :radio,
-      :addon_dummy
+      :example_02_addon_dummy1,
+      :example_02_addon_dummy3,
+      :example_02_addon_dummy3,
+      :example_02_addon_dummy4,
+      :example_02_select_dummy1,
+      :example_02_select_dummy2,
+      :example_02_select_dummy1,
+      :example_02_select_dummy2,
+      :example_03_name,
+      :example_03_email,
+      :example_03_phone,
+      :example_03_department,
+      :example_03_member,
+      :example_03_subject,
+      :example_03_question
     ])
-    |> validate_required([:name])
+    |> validate_required([:name, :example_03_subject])
     |> validate_format(:email, email_regex(), message: "This email is invalid")
   end
 

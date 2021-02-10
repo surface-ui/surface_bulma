@@ -5,7 +5,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
     title: "Sample form",
     height: "700px"
 
-  alias SurfaceBulma.Form.{Checkbox, RadioButton, Select, TextArea, TextField}
+  alias SurfaceBulma.Form.{Checkbox, RadioButton, Select, TextArea, TextInput}
   alias SurfaceBulma.{Button, ButtonGroup}
   alias Surface.Components.{Link, Form}
   alias SurfaceBulma.Catalogue.Form.SampleModel
@@ -25,14 +25,14 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
       change={{"change"}}
       submit={{"submit"}}
       opts={{ autocomplete: "off" }}>
-        <TextField
+        <TextInput
           field="name"
           label="Name"
            placeholder="Text input"/>
-        <TextField
+        <TextInput
           field="username"
           label="Username"/>
-        <TextField
+        <TextInput
           field="email"
           label="Email" />
         <Select

@@ -7,9 +7,9 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
 
   alias SurfaceBulma.Form.{
     Select,
-    TextField,
-    TextFieldLeftAddon,
-    TextFieldRightAddon
+    TextInput,
+    TextInputLeftAddon,
+    TextInputRightAddon
   }
 
   alias SurfaceBulma.{Button, Title}
@@ -32,63 +32,63 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
         submit={{"submit"}}
         opts={{ autocomplete: "off" }}>
       <Title size="4">Some simple addon fields</Title>
-      <TextField
-        field="addon_dummy"
+      <TextInput
+        field="example_02_addon_dummy1"
         placeholder="Find a repository">
-        <TextFieldRightAddon>
+        <TextInputRightAddon>
         <Button color="info">Search</Button>
-        </TextFieldRightAddon>
-      </TextField>
+        </TextInputRightAddon>
+      </TextInput>
 
-      <TextField
-        field="addon_dummy"
+      <TextInput
+        field="example_02_addon_dummy2"
         placeholder="Your email">
-        <TextFieldRightAddon>
+        <TextInputRightAddon>
         <Button static>@gmail.com</Button>
-        </TextFieldRightAddon>
-      </TextField>
+        </TextInputRightAddon>
+      </TextInput>
 
       <Title size="4">..with dropdowns</Title>
 
-      <TextField
-        field="addon_dummy"
+      <TextInput
+        field="example_02_addon_dummy3"
         placeholder="Amount of money"
         >
-        <TextFieldLeftAddon>
+        <TextInputLeftAddon>
         <Select
-          field="select"
+          field="example_02_select_dummy1"
           options={{[
             "$",
             "£",
             "€"
             ]}}/>
-        </TextFieldLeftAddon>
-        <TextFieldRightAddon>
+        </TextInputLeftAddon>
+        <TextInputRightAddon>
         <Button>Transfer</Button>
-        </TextFieldRightAddon>
-      </TextField>
+        </TextInputRightAddon>
+      </TextInput>
 
       <Title size="4">
         ..with dropdowns and expanded
       </Title>
-      <TextField
-      field="addon_dummy"
+      <TextInput
+      field="example_02_addon_dummy4"
       placeholder="Amount of money"
       expanded
       >
-      <TextFieldLeftAddon>
+      <TextInputLeftAddon>
       <Select
-        field="select"
+        field="example_02_select_dummy2"
         options={{[
           "$",
           "£",
           "€"
           ]}}/>
-      </TextFieldLeftAddon>
-      <TextFieldRightAddon>
+      </TextInputLeftAddon>
+      <TextInputRightAddon>
       <Button>Transfer</Button>
-      </TextFieldRightAddon>
-    </TextField>
+      </TextInputRightAddon>
+    </TextInput>
       </Form>
     """
   end
