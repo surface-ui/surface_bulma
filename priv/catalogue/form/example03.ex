@@ -3,7 +3,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
     title: "Horizontal form groups",
-    height: "700px",
+    height: "500px",
     direction: "vertical"
 
   alias SurfaceBulma.Form.{
