@@ -38,6 +38,7 @@ defmodule SurfaceBulma.Catalogue.Form.SampleModel do
     field :example_04_number, :integer
     field :example_04_password, :string
     field :example_04_range, :integer
+    field :example_04_range_right, :integer
     field :example_04_search, :string
     field :example_04_telephone, :string
     field :example_04_time, :time
@@ -87,6 +88,7 @@ defmodule SurfaceBulma.Catalogue.Form.SampleModel do
       :example_04_number,
       :example_04_password,
       :example_04_range,
+      :example_04_range_right,
       :example_04_search,
       :example_04_telephone,
       :example_04_time,
