@@ -72,6 +72,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
         field="example_04_password"
         placeholder="Your password"
         icon_left="key"/>
+      <RangeInput
+        field="example_04_range"
+        min="0"
+        max="10"
+        value="7"
+        label="Range"/>
     </Form>
     """
   end
