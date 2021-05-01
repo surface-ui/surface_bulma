@@ -41,9 +41,9 @@ defmodule SurfaceBulma.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
       {:jason, "~> 1.0"},
-      {:surface_catalogue, "~> 0.0.7", only: [:dev, :test]},
+      {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
       {:surface_font_awesome, "~> 0.1.1"},
-      {:surface, "~> 0.3.0", override: true}
+      {:surface, "~> 0.4.0", override: true}
     ]
   end
 
