@@ -52,6 +52,23 @@ defmodule Surface.Components.ButtonTest do
            """
   end
 
+  test "opts propagate to button attrs" do
+    html =
+      render_surface do
+        ~H"""
+        <Button opts={{ "data-custom": "custom" }}>
+          Ok
+        </Button>
+        """
+      end
+
+    assert html =~ """
+           <button data-custom="custom" type="button" class="button">
+             Ok
+           </button>
+           """
+  end
+
   test "aria label" do
     html = render_surface(do: ~H(<Button aria_label="Ok">Ok</Button>))
 
