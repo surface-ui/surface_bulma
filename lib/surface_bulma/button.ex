@@ -60,6 +60,11 @@ defmodule SurfaceBulma.Button do
   prop class, :css_class, default: []
 
   @doc """
+  Additional attributes to add onto the generated element
+  """
+  prop opts, :keyword, default: []
+
+  @doc """
   The content of the generated `<button>` element. If no content is provided,
   the value of property `label` is used instead.
   """
@@ -85,8 +90,8 @@ defmodule SurfaceBulma.Button do
         "is-active": @active,
         "is-loading": @loading,
         "is-selected": @selected
-      ] ++ @class
-      }}>
+      ] ++ @class}}
+      :attrs={{ @opts }}>
       <slot>{{ @label }}</slot>
     </button>
     """
