@@ -20,7 +20,7 @@ defmodule SurfaceBulma.Catalogue.Table.Example01 do
   def render(assigns) do
     ~H"""
     <Table id="foo" data={{ person <- @props.data }} :props={{ @props }}>
-      <Column width="is-1" label="Id" sort_by="id">
+      <Column label="Id" sort_by="id">
         {{ person.id }}
       </Column>
       <Column label="Name" sort_by="name">
