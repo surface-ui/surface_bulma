@@ -9,7 +9,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Modal show={{true}}>hello</Modal>
+        <Modal show={true}>hello</Modal>
         """
       end
 
@@ -29,7 +29,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Modal show={{true}}><Button>ok</Button></Modal>
+        <Modal show={true}><Button>ok</Button></Modal>
         """
       end
 
@@ -51,7 +51,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Modal show={{true}} show_close_button={{true}}>hello</Modal>
+        <Modal show={true} show_close_button={true}>hello</Modal>
         """
       end
 
@@ -69,7 +69,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Modal show={{true}} show_close_button={{false}}>hello</Modal>
+        <Modal show={true} show_close_button={false}>hello</Modal>
         """
       end
 
@@ -87,7 +87,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Card show={{true}} show_close_button={{true}}>
+        <Card show={true} show_close_button={true}>
         <Header>
         headertext
         </Header>
@@ -125,7 +125,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Card show={{false}} show_close_button={{true}}>
+        <Card show={false} show_close_button={true}>
         <Header>
         headertext
         </Header>
@@ -163,7 +163,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Card show={{false}} show_close_button={{true}}>
+        <Card show={false} show_close_button={true}>
         hello
         </Card>
         """
@@ -189,7 +189,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~H"""
-        <Card show={{false}} show_close_button={{false}}>
+        <Card show={false} show_close_button={false}>
         hello
         </Card>
         """

@@ -30,14 +30,14 @@ defmodule SurfaceBulma.Tag do
   def render(assigns) do
     ~H"""
     <span
-      class={{
+      class={
         "tag",
         "is-#{@color}": @color,
         "is-#{@size}": @size,
         "is-light": @light,
         "is-rounded": @rounded
-      }}>
-      <slot>{{ @label }}</slot>
+     }>
+      <#slot>{@label}</#slot>
     </span>
     """
   end

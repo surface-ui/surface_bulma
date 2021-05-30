@@ -15,11 +15,11 @@ defmodule SurfaceBulma.Delete do
   def render(assigns) do
     ~H"""
     <a
-      :on-phx-click={{ @click }}
-      class={{
+      :on-phx-click={@click}
+      class={
         "delete",
         "is-#{@size}": @size
-      }}>
+     }>
     </a>
     """
   end

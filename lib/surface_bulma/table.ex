@@ -55,45 +55,45 @@ defmodule SurfaceBulma.Table do
 
   def render(assigns) do
     ~H"""
-    <div class={{ @class }}>
-      <table class={{
+    <div class={@class}>
+      <table class={
         :table,
         "is-fullwidth": @expanded,
         "is-bordered": @bordered,
         "is-striped": @striped
-      }}>
+     }>
         <thead>
           <tr>
-            <For each={{ col <- @cols }}>
+            {#for col <- @cols}
               <th>
-              <If condition={{!is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
+              {#if !is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}
+              <a :on-click="sorted_click" phx-value-value={col.sort_by} href="">
                 <TextIcon>
                 <TextIconText>
-                {{ col.label }}
+                {col.label}
                 </TextIconText>
-                <FA icon={{if assigns.sort_reverse, do: "caret-up", else: "caret-down"}}/>
+                <FA icon={if assigns.sort_reverse, do: "caret-up", else: "caret-down"}/>
                 </TextIcon>
               </a>
-              </If>
-              <If condition={{!is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
-              {{ col.label }}
+              {/if}
+              {#if !is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}
+              <a :on-click="sorted_click" phx-value-value={col.sort_by} href="">
+              {col.label}
               </a>
-              </If>
-              <If condition={{is_nil(col.sort_by)}}>
-              {{ col.label }}
-              </If>
+              {/if}
+              {#if is_nil(col.sort_by)}
+              {col.label}
+              {/if}
               </th>
-            </For>
+            {/for}
           </tr>
         </thead>
         <tbody>
           <tr
-            :for={{ {item, index} <- Enum.with_index(@sorted_data) }}
-            class={{ row_class_fun(@row_class).(item, index) }}>
-            <td :for.index={{ index <- @cols }}>
-              <span><slot name="cols" index={{ index }} :props={{ item: item }}/></span>
+            :for={{item, index} <- Enum.with_index(@sorted_data)}
+            class={row_class_fun(@row_class).(item, index)}>
+            <td :for.index={index <- @cols}>
+              <span><#slot name="cols" index={index} :props={item: item}/></span>
             </td>
           </tr>
         </tbody>

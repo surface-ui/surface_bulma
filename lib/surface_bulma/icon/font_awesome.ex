@@ -13,9 +13,9 @@ defmodule SurfaceBulma.Icon.FontAwesome do
 
   def render(assigns) do
     ~H"""
-      <span class={{"icon", "is-#{@container_size}": @container_size}}>
-        {{ Icon.render(assigns) }}
-        <slot name="default" />
+      <span class={"icon", "is-#{@container_size}": @container_size}>
+        {Icon.render(assigns)}
+        <#slot name="default" />
       </span>
     """
   end
@@ -30,8 +30,8 @@ defmodule SurfaceBulma.Icon.FontAwesome.Layers do
 
   def render(assigns) do
     ~H"""
-    <span class={{"icon", "is-#{@container_size}": @container_size}}>
-      {{ Layers.render(assigns) }}
+    <span class={"icon", "is-#{@container_size}": @container_size}>
+      {Layers.render(assigns)}
     </span>
     """
   end
@@ -62,7 +62,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIcon do
   def render(assigns) do
     ~H"""
     <span class="icon-text">
-      <slot/>
+      <#slot/>
     </span>
     """
   end
@@ -79,7 +79,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIconText do
   def render(assigns) do
     ~H"""
     <span>
-    <slot/>
+    <#slot/>
     </span>
     """
   end

@@ -41,9 +41,9 @@ defmodule SurfaceBulma.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
       {:jason, "~> 1.0"},
-      {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
-      {:surface_font_awesome, "~> 0.1.1"},
-      {:surface, "~> 0.4.0", override: true}
+      {:surface_catalogue, github: "surface-ui/surface_catalogue", branch: "surface-next", only: [:dev, :test]},
+      {:surface_font_awesome, github: "msaraiva/surface_font_awesome", branch: "surface-next", override: true},
+      {:surface, github: "surface-ui/surface", branch: "surface-next", override: true}
     ]
   end
 

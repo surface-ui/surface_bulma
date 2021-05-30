@@ -31,18 +31,18 @@ defmodule SurfaceBulma.Modal.Card do
 
   def render(assigns) do
     ~H"""
-    <div class={{ "modal", "is-active": @show }}>
+    <div class={"modal", "is-active": @show}>
       <div class="modal-background"></div>
       <div class="modal-card">
-        <header :if={{@show_close_button}} class="modal-card-head">
-          <p :if={{slot_assigned?(:header)}} class="modal-card-title"><slot name="header"/></p>
-          <Button :if={{@show_close_button}} click={{@close_event}} type={{nil}} class="delete" aria_label="close"></Button>
+        <header :if={@show_close_button} class="modal-card-head">
+          <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot name="header"/></p>
+          <Button :if={@show_close_button} click={@close_event} type={nil} class="delete" aria_label="close"></Button>
         </header>
         <section class="modal-card-body">
-          <slot/>
+          <#slot/>
         </section>
-        <footer :if={{slot_assigned?(:footer)}} class="modal-card-foot" style="justify-content: flex-end">
-        <slot name="footer"/>
+        <footer :if={slot_assigned?(:footer)} class="modal-card-foot" style="justify-content: flex-end">
+        <#slot name="footer"/>
         </footer>
       </div>
     </div>

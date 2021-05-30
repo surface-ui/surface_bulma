@@ -25,12 +25,12 @@ defmodule Surface.Components.TableTest do
 
     def render(assigns) do
       ~H"""
-      <Table id="foo" data={{ person <- @props.data }} :props={{ @props }}>
+      <Table id="foo" data={person <- @props.data} :props={@props}>
         <Column label="Id" sort_by="id">
-          {{ person.id }}
+          {person.id}
         </Column>
         <Column label="Name"sort_by="name">
-        {{person.name}}
+        {person.name}
         </Column>
       </Table>
       """

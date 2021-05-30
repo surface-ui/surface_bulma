@@ -160,7 +160,7 @@ defmodule Surface.Components.IconTest do
     html =
       render_surface do
         ~H"""
-        <FA icon="camera" icon_style="duotone" secondary_color="blue" primary_opacity={{0.6}} />
+        <FA icon="camera" icon_style="duotone" secondary_color="blue" primary_opacity={0.6} />
         """
       end
 
