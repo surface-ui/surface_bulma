@@ -67,7 +67,7 @@ defmodule SurfaceBulma.Table do
             <For each={{ col <- @cols }}>
               <th>
               <If condition={{!is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
+              <a :on-click="sorted_click" phx-value-value={{ col.label }} href="#">
                 <TextIcon>
                 <TextIconText>
                 {{ col.label }}
@@ -77,7 +77,7 @@ defmodule SurfaceBulma.Table do
               </a>
               </If>
               <If condition={{!is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
+              <a :on-click="sorted_click" phx-value-value={{ col.label }} href="#">
               {{ col.label }}
               </a>
               </If>
@@ -121,27 +121,46 @@ defmodule SurfaceBulma.Table do
     {:noreply, socket}
   end
 
-  defp sorted_data(assigns) do
+  defp sorted_data(%{
+         sorted_by: sorted_by,
+         data: data,
+         cols: cols,
+         sorted_data: sorted_data,
+         sort_reverse: sort_reverse
+       }) do
     cond do
-      !is_nil(assigns.sorted_by) ->
+      !is_nil(sorted_by) ->
+        # We find the column that matches the sorted_by assign and extract the sort_by as sorter
+        sorter =
+          Enum.reduce_while(cols, nil, fn
+            %{label: ^sorted_by, sort_by: sorter}, _acc ->
+              {:halt, sorter}
+
+            _col, acc ->
+              {:cont, acc}
+          end)
+
         sorted_data =
-          case assigns.sorted_by do
+          case sorter do
             sorter when is_binary(sorter) ->
               # We have to try to fetch both by string and atom key as
               # we don't know if the data is using string or atom keys.
-              Enum.sort_by(assigns.data, fn i ->
+              Enum.sort_by(data, fn i ->
                 Map.get(i, sorter) || Map.get(i, String.to_atom(sorter))
               end)
 
             sorter when is_function(sorter) ->
-              Enum.sort_by(assigns.data, sorter)
+              Enum.sort_by(data, sorter)
 
             {sorter, comparer} when is_function(sorter) and is_function(comparer) ->
-              Enum.sort_by(assigns.data, sorter, comparer)
+              Enum.sort_by(data, sorter, comparer)
+
+            nil ->
+              data
           end
 
         sorted_data =
-          if assigns.sort_reverse == true do
+          if sort_reverse == true do
             Enum.reverse(sorted_data)
           else
             sorted_data
@@ -149,11 +168,11 @@ defmodule SurfaceBulma.Table do
 
         sorted_data
 
-      is_nil(assigns.sorted_data) ->
-        assigns.data
+      is_nil(sorted_data) ->
+        data
 
       true ->
-        assigns.sorted_data
+        sorted_data
     end
   end
 
