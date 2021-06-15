@@ -43,7 +43,7 @@ defmodule SurfaceBulma.MixProject do
       {:jason, "~> 1.0"},
       {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
       {:surface_font_awesome, "~> 0.1.1"},
-      {:surface, "~> 0.4.0", override: true}
+      {:surface, "~> 0.4.0"}
     ]
   end
 
