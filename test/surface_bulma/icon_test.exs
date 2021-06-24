@@ -7,7 +7,7 @@ defmodule Surface.Components.IconTest do
   test "basic icon usage" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <FA icon="500px" />
         """
       end
@@ -23,7 +23,7 @@ defmodule Surface.Components.IconTest do
   test "set container size" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <FA icon="500px" container_size="small" />
         """
       end
@@ -39,7 +39,7 @@ defmodule Surface.Components.IconTest do
   test "set icon size" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <FA icon="500px" size="4x" container_size="small" />
         """
       end
@@ -55,7 +55,7 @@ defmodule Surface.Components.IconTest do
   test "Layered icons" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Layers container_size="large" >
           <FA icon="camera" size="1x"/>
           <FA icon="ban" size="2x"/>
@@ -81,7 +81,7 @@ defmodule Surface.Components.IconTest do
   test "TextLayered icons" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Layers container_size="large" >
           <FA icon="camera" size="1x"/>
           <TextLayer>Something</TextLayer>
@@ -104,7 +104,7 @@ defmodule Surface.Components.IconTest do
   test "CounterLayered icons" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Layers container_size="large" >
           <FA icon="camera" size="1x"/>
           <CounterLayer>10</CounterLayer>
@@ -127,7 +127,7 @@ defmodule Surface.Components.IconTest do
   test "transformations of the icon" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <FA icon="500px" transform="grow-10 left-20"/>
         """
       end
@@ -143,7 +143,7 @@ defmodule Surface.Components.IconTest do
   test "setting the primary color" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <FA icon="camera" icon_style="duotone" primary_color="blue" />
         """
       end
@@ -159,8 +159,8 @@ defmodule Surface.Components.IconTest do
   test "setting the primary opacity and secondary color" do
     html =
       render_surface do
-        ~H"""
-        <FA icon="camera" icon_style="duotone" secondary_color="blue" primary_opacity={{0.6}} />
+        ~F"""
+        <FA icon="camera" icon_style="duotone" secondary_color="blue" primary_opacity={0.6} />
         """
       end
 
@@ -175,7 +175,7 @@ defmodule Surface.Components.IconTest do
   test "text icon text" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <TextIcon>
         <FA icon="camera"/>
         <TextIconText>Hello</TextIconText>

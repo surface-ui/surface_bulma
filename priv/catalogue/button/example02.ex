@@ -8,7 +8,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example02 do
     container: {:div, class: "buttons"}
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <Button>Default</Button>
     <Button size="small" color="info">Small</Button>
     <Button size="normal" color="primary">Normal</Button>

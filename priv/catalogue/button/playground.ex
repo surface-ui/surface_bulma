@@ -12,7 +12,7 @@ defmodule SurfaceBulma.Catalogue.Button.Playground do
     }
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <Button :props={{ @props }} />
     """
   end

@@ -13,13 +13,13 @@ defmodule SurfaceBulma.Delete do
   prop click, :event
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <a
-      :on-phx-click={{ @click }}
-      class={{
+      :on-phx-click={@click}
+      class={
         "delete",
         "is-#{@size}": @size
-      }}>
+      }>
     </a>
     """
   end

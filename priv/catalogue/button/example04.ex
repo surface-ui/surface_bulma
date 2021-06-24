@@ -6,7 +6,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example04 do
     height: "200px"
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div class="buttons has-addons">
       <Button color="success" selected>Yes</Button>
       <Button>Maybe</Button>
