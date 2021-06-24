@@ -6,7 +6,7 @@ defmodule Surface.Components.TagTest do
   test "create a tag" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag>tag</Tag>
         """
       end
@@ -21,7 +21,7 @@ defmodule Surface.Components.TagTest do
   test "create a tag according to the given label" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag label="tag" />
         """
       end
@@ -36,7 +36,7 @@ defmodule Surface.Components.TagTest do
   test "prop color" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag label="tag" color="primary" />
         """
       end
@@ -51,7 +51,7 @@ defmodule Surface.Components.TagTest do
   test "prop size" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag label="tag" size="normal" />
         """
       end
@@ -66,7 +66,7 @@ defmodule Surface.Components.TagTest do
   test "prop light" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag label="tag" color="primary" light />
         """
       end
@@ -81,7 +81,7 @@ defmodule Surface.Components.TagTest do
   test "prop rounded" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Tag label="tag" color="primary" rounded />
         """
       end

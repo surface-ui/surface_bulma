@@ -8,8 +8,8 @@ defmodule Surface.Components.ModalTest do
   test "renders regular modal with simple text in it" do
     html =
       render_surface do
-        ~H"""
-        <Modal show={{true}}>hello</Modal>
+        ~F"""
+        <Modal show={true}>hello</Modal>
         """
       end
 
@@ -28,8 +28,8 @@ defmodule Surface.Components.ModalTest do
   test "regular modal can contain anything" do
     html =
       render_surface do
-        ~H"""
-        <Modal show={{true}}><Button>ok</Button></Modal>
+        ~F"""
+        <Modal show={true}><Button>ok</Button></Modal>
         """
       end
 
@@ -50,8 +50,8 @@ defmodule Surface.Components.ModalTest do
   test "modal should optionally show close button" do
     html =
       render_surface do
-        ~H"""
-        <Modal show={{true}} show_close_button={{true}}>hello</Modal>
+        ~F"""
+        <Modal show={true} show_close_button={true}>hello</Modal>
         """
       end
 
@@ -68,8 +68,8 @@ defmodule Surface.Components.ModalTest do
 
     html =
       render_surface do
-        ~H"""
-        <Modal show={{true}} show_close_button={{false}}>hello</Modal>
+        ~F"""
+        <Modal show={true} show_close_button={false}>hello</Modal>
         """
       end
 
@@ -86,8 +86,8 @@ defmodule Surface.Components.ModalTest do
   test "card modal should display content in header, footer and default slot" do
     html =
       render_surface do
-        ~H"""
-        <Card show={{true}} show_close_button={{true}}>
+        ~F"""
+        <Card show={true} show_close_button={true}>
         <Header>
         headertext
         </Header>
@@ -124,8 +124,8 @@ defmodule Surface.Components.ModalTest do
   test "card modal should display should respect show prop" do
     html =
       render_surface do
-        ~H"""
-        <Card show={{false}} show_close_button={{true}}>
+        ~F"""
+        <Card show={false} show_close_button={true}>
         <Header>
         headertext
         </Header>
@@ -162,8 +162,8 @@ defmodule Surface.Components.ModalTest do
   test "card modal should be usable without header and footer should still show close button" do
     html =
       render_surface do
-        ~H"""
-        <Card show={{false}} show_close_button={{true}}>
+        ~F"""
+        <Card show={false} show_close_button={true}>
         hello
         </Card>
         """
@@ -188,8 +188,8 @@ defmodule Surface.Components.ModalTest do
   test "card modal should be usable without header and footer. If no close button don't show header" do
     html =
       render_surface do
-        ~H"""
-        <Card show={{false}} show_close_button={{false}}>
+        ~F"""
+        <Card show={false} show_close_button={false}>
         hello
         </Card>
         """
