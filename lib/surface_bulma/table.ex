@@ -46,8 +46,13 @@ defmodule SurfaceBulma.Table do
   @doc "Clicking column again should reverse search"
   data sort_reverse, :boolean, default: false
 
+  data updated?, :boolean, default: false
+
   def update(assigns, socket) do
+    assigns = Map.put(assigns, :updated?, assigns[:data] != socket.assigns[:data])
+
     socket = assign(socket, assigns)
+
     socket = assign(socket, :sorted_data, sorted_data(socket.assigns))
 
     {:ok, socket}
@@ -126,7 +131,8 @@ defmodule SurfaceBulma.Table do
          data: data,
          cols: cols,
          sorted_data: sorted_data,
-         sort_reverse: sort_reverse
+         sort_reverse: sort_reverse,
+         updated?: updated?
        }) do
     cond do
       !is_nil(sorted_by) ->
@@ -152,8 +158,14 @@ defmodule SurfaceBulma.Table do
             sorter when is_function(sorter) ->
               Enum.sort_by(data, sorter)
 
+            sorter when is_list(sorter) ->
+              Enum.sort_by(data, &get_nested_data(&1, sorter))
+
             {sorter, comparer} when is_function(sorter) and is_function(comparer) ->
               Enum.sort_by(data, sorter, comparer)
+
+            {sorter, comparer} when is_list(sorter) and is_function(comparer) ->
+              Enum.sort_by(data, &get_nested_data(&1, sorter), comparer)
 
             nil ->
               data
@@ -168,7 +180,7 @@ defmodule SurfaceBulma.Table do
 
         sorted_data
 
-      is_nil(sorted_data) ->
+      is_nil(sorted_data) or updated? ->
         data
 
       true ->
@@ -178,4 +190,17 @@ defmodule SurfaceBulma.Table do
 
   defp row_class_fun(nil), do: fn _, _ -> "" end
   defp row_class_fun(row_class), do: row_class
+
+  defp get_nested_data(row, keys) do
+    Enum.reduce_while(keys, row, fn
+      key, acc when (is_atom(key) or is_binary(key)) and is_map(acc) ->
+        {:cont, Map.get(acc, key)}
+
+      index, acc when is_integer(index) and is_list(acc) ->
+        {:cont, Enum.at(acc, index)}
+
+      key, value ->
+        {:halt, value}
+    end)
+  end
 end
