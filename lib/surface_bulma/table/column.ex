@@ -13,9 +13,10 @@ defmodule SurfaceBulma.Table.Column do
 
   @doc """
   This prop takes a sort field, the following values are valid:
-  - A string that is a valid field on the table
+  - A string that is a valid field on the table, or a list of selectors to access nested data. If element of list is binary or atom, `Map.get` is used, if it is an integer, `Enum.at` is used.
   - A function of arity 1 (uses default sorter)
   - A tuple of {sorter_function/1, compare_function/2}
+  - A tuple of {list_of_selectors, compare_function/2}. The list of selectors is the same as described above.
   All three options are sent as-is to Enum.sort_by/3
 
   If function it will be used as such:

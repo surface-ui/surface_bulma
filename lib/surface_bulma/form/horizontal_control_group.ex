@@ -19,18 +19,18 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
   slot default
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div class="field is-horizontal">
-      <div class={{
+      <div class={
         [
           "field-label",
           "is-#{@size}": @size
         ]
-      }}>
-        <Label :if={{@label}} class="label">{{@label}}</Label>
+      }>
+        <Label :if={@label} class="label">{@label}</Label>
       </div>
       <div class="field-body">
-      <slot/>
+      <#slot/>
       </div>
     </div>
     """

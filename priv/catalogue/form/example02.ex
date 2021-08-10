@@ -25,12 +25,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       |> Map.put(:action, :insert)
 
   def render(assigns) do
-    ~H"""
+    ~F"""
       <Form
-        for={{ @changeset }}
-        change={{"change"}}
-        submit={{"submit"}}
-        opts={{ autocomplete: "off" }}>
+        for={@changeset}
+        change={"change"}
+        submit={"submit"}
+        opts={autocomplete: "off"}>
       <Title size="4">Some simple addon fields</Title>
       <TextInput
         field="example_02_addon_dummy1"
@@ -57,11 +57,11 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
         <TextInputLeftAddon>
         <Select
           field="example_02_select_dummy1"
-          options={{[
+          options={[
             "$",
             "£",
             "€"
-            ]}}/>
+            ]}/>
         </TextInputLeftAddon>
         <TextInputRightAddon>
         <Button>Transfer</Button>
@@ -79,11 +79,11 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       <TextInputLeftAddon>
       <Select
         field="example_02_select_dummy2"
-        options={{[
+        options={[
           "$",
           "£",
           "€"
-          ]}}/>
+          ]}/>
       </TextInputLeftAddon>
       <TextInputRightAddon>
       <Button>Transfer</Button>

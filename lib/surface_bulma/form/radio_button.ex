@@ -36,21 +36,21 @@ defmodule SurfaceBulma.Form.RadioButton do
   slot default
 
   def render(assigns) do
-    ~H"""
-      <Field class="field" name={{@field}}>
+    ~F"""
+      <Field class="field" name={@field}>
       <div class="control">
-        <For each={{ entry <- @options}}>
+        {#for entry <- @options}
           <label class="radio">
             <RadioButton
-              field={{@field}}
-              opts={{ [disabled: get_disabled(entry)] ++ @opts  }}
-              class={{@class}}
-              value={{get_key(entry)}}
+              field={@field}
+              opts={[disabled: get_disabled(entry)] ++ @opts }
+              class={@class}
+              value={get_key(entry)}
 
               />
-            {{get_value(entry)}}
+            {get_value(entry)}
           </label>
-        </For>
+        {/for}
       </div>
       </Field>
     """

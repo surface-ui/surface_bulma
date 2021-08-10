@@ -31,12 +31,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
       |> Map.put(:action, :insert)
 
   def render(assigns) do
-    ~H"""
+    ~F"""
       <Form
-        for={{ @changeset }}
-        change={{"change"}}
-        submit={{"submit"}}
-        opts={{ autocomplete: "off" }}>
+        for={@changeset}
+        change={"change"}
+        submit={"submit"}
+        opts={autocomplete: "off"}>
         <HorizontalControlGroup label="From">
         <TextInput field="example_03_name" placeholder="Name" icon_left="user" expanded/>
         <TextInput field="example_03_email" icon_left="envelope" expanded value="alex@smith.com" />
@@ -51,18 +51,18 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         </FieldWrapper>
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Department">
-        <Select field="example_03_department" placeholder="Name" options={{[
+        <Select field="example_03_department" placeholder="Name" options={[
           "Business development",
           "Marketing",
           "Sales"
-        ]}}/>
+        ]}/>
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Already a member?">
         <RadioButton
         field="example_03_member"
-        options={{
+        options={
           ["yes", "no"]
-        }}
+        }
         />
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Subject">

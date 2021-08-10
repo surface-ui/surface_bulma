@@ -15,10 +15,10 @@ defmodule SurfaceBulma.Form.FieldWrapper do
   slot default
 
   def render(assigns) do
-    ~H"""
-    <div class={{"field", "is-expanded": @expanded}}>
-    <slot/>
-    <span :if={{@help_text}} class="help">{{@help_text}}</span>
+    ~F"""
+    <div class={"field", "is-expanded": @expanded}>
+    <#slot/>
+    <span :if={@help_text} class="help">{@help_text}</span>
     </div>
     """
   end

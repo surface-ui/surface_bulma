@@ -66,20 +66,25 @@ defmodule SurfaceBulma.Button do
   prop class, :css_class, default: []
 
   @doc """
+  Additional attributes to add onto the generated element
+  """
+  prop opts, :keyword, default: []
+
+  @doc """
   The content of the generated `<button>` element. If no content is provided,
   the value of property `label` is used instead.
   """
   slot default
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <button
-      type={{@type}}
-      aria-label={{@aria_label}}
-      :on-click={{@click}}
-      disabled={{@disabled}}
-      value={{@value}}
-      class={{
+      type={@type}
+      aria-label={@aria_label}
+      :on-click={@click}
+      disabled={@disabled}
+      value={@value}
+      class={
         [button: @class == [],
         "is-#{@color}": @color,
         "is-#{@size}": @size,
@@ -94,8 +99,9 @@ defmodule SurfaceBulma.Button do
         "is-link": @link,
         "is-static": @static
       ] ++ @class
-      }}>
-      <slot>{{ @label }}</slot>
+      }
+      :attrs={@opts}>
+      <#slot>{@label}</#slot>
     </button>
     """
   end

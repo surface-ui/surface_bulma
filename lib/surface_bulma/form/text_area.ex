@@ -36,25 +36,25 @@ defmodule SurfaceBulma.Form.TextArea do
     has_error = field_has_error?(form, assigns.field)
     has_change = field_has_change?(form, assigns.field)
 
-    ~H"""
-      <Field class="field" name={{@field}}>
-        <Label class="label">{{@label}}</Label>
-        <div class={{"control", "has-icons-right": !@disable_icons && (has_error || has_change)}}>
+    ~F"""
+      <Field class="field" name={@field}>
+        <Label class="label">{@label}</Label>
+        <div class={"control", "has-icons-right": !@disable_icons && (has_error || has_change)}>
           <TextArea
-          class={{[
+          class={[
             "textarea",
             "is-#{@size}",
             "is-danger": has_error,
             "is-success": has_change && !has_error,
-            ] ++ @class}}
-          field={{@field}}
-          opts={{
+            ] ++ @class}
+          field={@field}
+          opts={
             placeholder: @placeholder,
             rows: @rows
-            }}/>
-          <ErrorTag class="help is-danger" field={{@field}}/>
-          <FA :if={{ !@disable_icons && has_error }} icon="exclamation-triangle" container_class={{["is-small", "is-right"]}}/>
-          <FA :if={{ !@disable_icons &&  has_change && !has_error}} icon="check" container_class={{["is-small", "is-right"]}}/>
+            }/>
+          <ErrorTag class="help is-danger" field={@field}/>
+          <FA :if={!@disable_icons && has_error} icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
+          <FA :if={!@disable_icons &&  has_change && !has_error} icon="check" container_class={["is-small", "is-right"]}/>
         </div>
       </Field>
     """

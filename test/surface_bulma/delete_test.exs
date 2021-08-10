@@ -6,7 +6,7 @@ defmodule Surface.Components.DeleteTest do
   test "creates a link element with class delete" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Delete />
         """
       end
@@ -20,7 +20,7 @@ defmodule Surface.Components.DeleteTest do
   test "prop size" do
     html =
       render_surface do
-        ~H"""
+        ~F"""
         <Delete size="small"/>
         """
       end

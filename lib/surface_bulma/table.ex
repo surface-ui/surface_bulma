@@ -35,7 +35,7 @@ defmodule SurfaceBulma.Table do
   prop row_class, :fun
 
   @doc "The columns of the table"
-  slot cols, props: [item: ^data], required: true
+  slot cols, args: [item: ^data], required: true
 
   @doc "Internal holder of sorted data"
   data sorted_data, :list, default: nil
@@ -46,54 +46,59 @@ defmodule SurfaceBulma.Table do
   @doc "Clicking column again should reverse search"
   data sort_reverse, :boolean, default: false
 
+  data updated?, :boolean, default: false
+
   def update(assigns, socket) do
+    assigns = Map.put(assigns, :updated?, assigns[:data] != socket.assigns[:data])
+
     socket = assign(socket, assigns)
+
     socket = assign(socket, :sorted_data, sorted_data(socket.assigns))
 
     {:ok, socket}
   end
 
   def render(assigns) do
-    ~H"""
-    <div class={{ @class }}>
-      <table class={{
+    ~F"""
+    <div class={@class}>
+      <table class={
         :table,
         "is-fullwidth": @expanded,
         "is-bordered": @bordered,
         "is-striped": @striped
-      }}>
+      }>
         <thead>
           <tr>
-            <For each={{ col <- @cols }}>
+            {#for col <- @cols}
               <th>
-              <If condition={{!is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
+              {#if !is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}
+              <a :on-click="sorted_click" phx-value-value={col.label} href="#">
                 <TextIcon>
                 <TextIconText>
-                {{ col.label }}
+                {col.label}
                 </TextIconText>
-                <FA icon={{if assigns.sort_reverse, do: "caret-up", else: "caret-down"}}/>
+                <FA icon={if assigns.sort_reverse, do: "caret-up", else: "caret-down"}/>
                 </TextIcon>
               </a>
-              </If>
-              <If condition={{!is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}}>
-              <a :on-click="sorted_click" phx-value-value={{ col.sort_by }} href="">
-              {{ col.label }}
+              {/if}
+              {#if !is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}
+              <a :on-click="sorted_click" phx-value-value={col.label} href="#">
+              {col.label}
               </a>
-              </If>
-              <If condition={{is_nil(col.sort_by)}}>
-              {{ col.label }}
-              </If>
+              {/if}
+              {#if is_nil(col.sort_by)}
+              {col.label}
+              {/if}
               </th>
-            </For>
+            {/for}
           </tr>
         </thead>
         <tbody>
           <tr
-            :for={{ {item, index} <- Enum.with_index(@sorted_data) }}
-            class={{ row_class_fun(@row_class).(item, index) }}>
-            <td :for.index={{ index <- @cols }}>
-              <span><slot name="cols" index={{ index }} :props={{ item: item }}/></span>
+            :for={{item, index} <- Enum.with_index(@sorted_data)}
+            class={row_class_fun(@row_class).(item, index)}>
+            <td :for.index={index <- @cols}>
+              <span><#slot name="cols" index={index} :args={item: item}/></span>
             </td>
           </tr>
         </tbody>
@@ -121,27 +126,53 @@ defmodule SurfaceBulma.Table do
     {:noreply, socket}
   end
 
-  defp sorted_data(assigns) do
+  defp sorted_data(%{
+         sorted_by: sorted_by,
+         data: data,
+         cols: cols,
+         sorted_data: sorted_data,
+         sort_reverse: sort_reverse,
+         updated?: updated?
+       }) do
     cond do
-      !is_nil(assigns.sorted_by) ->
+      !is_nil(sorted_by) ->
+        # We find the column that matches the sorted_by assign and extract the sort_by as sorter
+        sorter =
+          Enum.reduce_while(cols, nil, fn
+            %{label: ^sorted_by, sort_by: sorter}, _acc ->
+              {:halt, sorter}
+
+            _col, acc ->
+              {:cont, acc}
+          end)
+
         sorted_data =
-          case assigns.sorted_by do
+          case sorter do
             sorter when is_binary(sorter) ->
               # We have to try to fetch both by string and atom key as
               # we don't know if the data is using string or atom keys.
-              Enum.sort_by(assigns.data, fn i ->
+              Enum.sort_by(data, fn i ->
                 Map.get(i, sorter) || Map.get(i, String.to_atom(sorter))
               end)
 
             sorter when is_function(sorter) ->
-              Enum.sort_by(assigns.data, sorter)
+              Enum.sort_by(data, sorter)
+
+            sorter when is_list(sorter) ->
+              Enum.sort_by(data, &get_nested_data(&1, sorter))
 
             {sorter, comparer} when is_function(sorter) and is_function(comparer) ->
-              Enum.sort_by(assigns.data, sorter, comparer)
+              Enum.sort_by(data, sorter, comparer)
+
+            {sorter, comparer} when is_list(sorter) and is_function(comparer) ->
+              Enum.sort_by(data, &get_nested_data(&1, sorter), comparer)
+
+            nil ->
+              data
           end
 
         sorted_data =
-          if assigns.sort_reverse == true do
+          if sort_reverse == true do
             Enum.reverse(sorted_data)
           else
             sorted_data
@@ -149,14 +180,27 @@ defmodule SurfaceBulma.Table do
 
         sorted_data
 
-      is_nil(assigns.sorted_data) ->
-        assigns.data
+      is_nil(sorted_data) or updated? ->
+        data
 
       true ->
-        assigns.sorted_data
+        sorted_data
     end
   end
 
   defp row_class_fun(nil), do: fn _, _ -> "" end
   defp row_class_fun(row_class), do: row_class
+
+  defp get_nested_data(row, keys) do
+    Enum.reduce_while(keys, row, fn
+      key, acc when (is_atom(key) or is_binary(key)) and is_map(acc) ->
+        {:cont, Map.get(acc, key)}
+
+      index, acc when is_integer(index) and is_list(acc) ->
+        {:cont, Enum.at(acc, index)}
+
+      key, value ->
+        {:halt, value}
+    end)
+  end
 end

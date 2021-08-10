@@ -93,16 +93,16 @@ defmodule SurfaceBulma.Form.InputBase do
   end
 
   def render_common_text_input_fields(assigns) do
-    ~H"""
-    <ErrorTag class="help is-danger" field={{assigns.field}}/>
-    <If condition={{is_binary(Map.get(assigns, :icon_left))}}>
-      <FA icon={{Map.get(assigns, :icon_left)}} container_class={{["is-small", "is-left"]}}/>
-    </If>
-    <If condition={{is_binary(Map.get(assigns, :icon_right))}}>
-      <FA icon={{Map.get(assigns, :icon_right)}} container_class={{["is-small", "is-right"]}}/>
-    </If>
-    <FA :if={{ display_error_icon?(assigns) }} primary_color="red" icon="exclamation-triangle" container_class={{["is-small", "is-right"]}}/>
-    <FA :if={{ display_valid_icon?(assigns)}} primary_color="green" icon="check" container_class={{["is-small", "is-right"]}}/>
+    ~F"""
+    <ErrorTag class="help is-danger" field={assigns.field}/>
+    {#if is_binary(Map.get(assigns, :icon_left))}
+      <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
+    {/if}
+    {#if is_binary(Map.get(assigns, :icon_right))}
+      <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
+    {/if}
+    <FA :if={display_error_icon?(assigns)} primary_color="red" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
+    <FA :if={display_valid_icon?(assigns)} primary_color="green" icon="check" container_class={["is-small", "is-right"]}/>
     """
   end
 end

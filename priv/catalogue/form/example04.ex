@@ -30,12 +30,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
   )
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <Form
-    for={{ @changeset }}
-    change={{"change"}}
-    submit={{"submit"}}
-    opts={{ autocomplete: "off" }}>
+    for={@changeset}
+    change={"change"}
+    submit={"submit"}
+    opts={autocomplete: "off"}>
     <ColorInput
       field="example_04_color"
       label="Color"
@@ -55,13 +55,13 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
       />
     <Select
       field="example_04_multiple_select"
-      options={{
+      options={
         [
           "Option 1",
           "Option 2",
           "Option 3"
         ]
-      }}
+      }
       multiple
       expanded
       rounded/>

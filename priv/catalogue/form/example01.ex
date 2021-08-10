@@ -19,12 +19,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
       |> Map.put(:action, :insert)
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <Form
-      for={{ @changeset }}
-      change={{"change"}}
-      submit={{"submit"}}
-      opts={{ autocomplete: "off" }}>
+      for={@changeset}
+      change={"change"}
+      submit={"submit"}
+      opts={autocomplete: "off"}>
         <TextInput
           field="name"
           label="Name"
@@ -37,10 +37,10 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
           label="Email" />
         <Select
           field="select"
-          options={{[
+          options={[
             "Select dropdown",
             "with options"
-            ]}}/>
+            ]}/>
         <TextArea
           field="message"
           label="Message"
@@ -52,9 +52,9 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
         </Checkbox>
         <RadioButton
             field="radio"
-            options={{
+            options={
               ["yes", "no"]
-            }}/>
+            }/>
         <ButtonGroup>
           <Button
             type="submit"

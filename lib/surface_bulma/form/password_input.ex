@@ -18,32 +18,32 @@ defmodule SurfaceBulma.Form.PasswordInput do
   prop minlength, :integer
 
   def render(assigns) do
-    ~H"""
-    <Field class={{
+    ~F"""
+    <Field class={
       "field",
       "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)),
       "is-expanded": @expanded
-      }}
-      name={{@field}}>
-      <Label :if={{!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label}} class="label">{{@label}}</Label>
-      <div :if={{ slot_assigned?(:left_addon) }} class="control">
-        <slot name="left_addon"/>
+      }
+      name={@field}>
+      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label} class="label">{@label}</Label>
+      <div :if={slot_assigned?(:left_addon)} class="control">
+        <#slot name="left_addon"/>
       </div>
-      <div class={{
+      <div class={
         "control",
         "has-icons-right": display_right_icon?(assigns),
         "has-icons-left": display_left_icon?(assigns),
         "is-expanded": @expanded
-        }}>
+        }>
         <PasswordInput
-        class={{[
+        class={[
           "input",
           "is-danger": has_error?(assigns),
           "is-success": has_change?(assigns) && !has_error?(assigns),
           "is-static": @static
-          ] ++ @class}}
-        field={{@field}}
-        opts={{
+          ] ++ @class}
+        field={@field}
+        opts={
           [
             placeholder: @placeholder,
             disabled: @disabled,
@@ -51,13 +51,13 @@ defmodule SurfaceBulma.Form.PasswordInput do
             maxlength: @maxlength,
             minlength: @minlength,
             value: @value
-          ] ++ @opts}}/>
-        {{render_common_text_input_fields(assigns)}}
+          ] ++ @opts}/>
+        {render_common_text_input_fields(assigns)}
       </div>
-      <div :if={{slot_assigned?(:right_addon)}} class="control" >
-        <slot name="right_addon"/>
+      <div :if={slot_assigned?(:right_addon)} class="control" >
+        <#slot name="right_addon"/>
       </div>
-      <span :if={{@help_text && !has_error?(assigns)}} class="help">{{@help_text}}</span>
+      <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
     </Field>
     """
   end

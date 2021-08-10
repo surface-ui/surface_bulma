@@ -23,16 +23,16 @@ defmodule SurfaceBulma.Form.Checkbox do
   slot default
 
   def render(assigns) do
-    ~H"""
-      <Field class="field" name={{@field}}>
+    ~F"""
+      <Field class="field" name={@field}>
       <div class="control">
         <label class="checkbox">
           <Checkbox
-            field={{@field}}
-            opts={{ [disabled: @disabled] ++ @opts  }}
-            class={{@class}}
+            field={@field}
+            opts={[disabled: @disabled] ++ @opts }
+            class={@class}
             />
-          <slot/>
+          <#slot/>
         </label>
       </div>
       </Field>
