@@ -7,6 +7,8 @@ defmodule SurfaceBulma.Modal.Card do
   The modal is a stateless component and as such requires outside
   handling of whether or not the modal should be shown.
 
+  Pressing the "Escape" key will cause the `close_event` to fire.
+
   This component is currently not usable with javascript control of
   if component should be shown or not.
   """
@@ -31,12 +33,12 @@ defmodule SurfaceBulma.Modal.Card do
 
   def render(assigns) do
     ~F"""
-    <div class={"modal", "is-active": @show}>
+    <div class={"modal", "is-active": @show} phx-window-keyup={@close_event} phx-key="Esc">
       <div class="modal-background"></div>
       <div class="modal-card">
-        <header :if={@show_close_button} class="modal-card-head">
+        <header :if={@show_close_button || slot_assigned?(:header)} class="modal-card-head">
           <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot name="header"/></p>
-          <Button :if={@show_close_button} click={@close_event} type={nil} class="delete" aria_label="close"></Button>
+          <a :if={@show_close_button} :on-click={@close_event} class="button delete" aria-label="close"></a>
         </header>
         <section class="modal-card-body">
           <#slot/>
