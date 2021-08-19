@@ -3,38 +3,29 @@ defmodule SurfaceBulma.Form.Checkbox do
   The checkbox component
   """
 
-  use Surface.Component
+  use Surface.Components.Form.Input
 
   alias Surface.Components.Form.{Field, Checkbox}
 
-  @doc "The the field on the changeset"
-  prop field, :atom, required: true
-
   @doc "Disable selection"
   prop disabled, :boolean, default: false
-
-  @doc "Any opts you want to pass on to internal `Surface.Checkbox` and `Phoenix.HTML.Form.checkbox/3`"
-  prop opts, :keyword, default: []
-
-  @doc "Class to apply to input"
-  prop class, :css_class, default: []
 
   @doc "The text / label of the checkbox"
   slot default
 
   def render(assigns) do
+    checkbox_props = Enum.reduce(__MODULE__.__props__(), %{}, fn %{name: name}, acc -> Map.put(acc, name, assigns[name]) end)
     ~F"""
       <Field class="field" name={@field}>
-      <div class="control">
-        <label class="checkbox">
-          <Checkbox
-            field={@field}
-            opts={[disabled: @disabled] ++ @opts }
-            class={@class}
-            />
-          <#slot/>
-        </label>
-      </div>
+        <div class="control">
+          <label class="checkbox">
+            <Checkbox
+              opts={[disabled: @disabled] ++ @opts }
+              {...checkbox_props}
+              />
+            <#slot/>
+          </label>
+        </div>
       </Field>
     """
   end

@@ -1,7 +1,7 @@
 defmodule SurfaceBulma.Components.FormTest do
   use SurfaceBulma.ConnCase
-  alias Surface.Components.Form
-  alias Surface.Components.Form.TextInput
+  alias SurfaceBulma.Form
+  alias SurfaceBulma.Form.TextInput
 
   defmodule User do
     use Ecto.Schema

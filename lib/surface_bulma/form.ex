@@ -6,8 +6,8 @@ defmodule SurfaceBulma.Form do
   Form components, Bulma style
   """
 
-  for prop <- Form.__props__() do
-    Module.put_attribute(__MODULE__, :props, prop)
+  for prop <- Surface.Components.Form.__props__() do
+    Module.put_attribute(__MODULE__, :prop, prop)
     Module.put_attribute(__MODULE__, :assigns, prop)
   end
 
@@ -26,11 +26,14 @@ defmodule SurfaceBulma.Form do
     Ecto.Changeset.get_change(form.source, field, false)
   end
 
-    def render(assigns) do
-      form_props = Enum.reduce(__MODULE__.__assigns__(), %{}, fn {k, v}, acc -> Map.put(acc, k, v) end)
+
+  def render(assigns) do
+    form_props = Enum.reduce(__MODULE__.__props__(), %{}, fn %{name: name}, acc -> Map.put(acc, name, assigns[name]) end)
     ~F"""
       <Form {...form_props}>
-        <#slot />
+        <Context get={form: form}>
+          <#slot :args={form: form}/>
+        </Context>
       </Form>
     """
   end
