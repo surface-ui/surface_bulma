@@ -36,9 +36,12 @@ defmodule SurfaceBulma.Modal.Card do
     <div class={"modal", "is-active": @show} phx-window-keyup={@close_event} phx-key="Esc">
       <div class="modal-background"></div>
       <div class="modal-card">
-        <header :if={@show_close_button || slot_assigned?(:header)} class="modal-card-head">
+        <header :if={@show_close_button || slot_assigned?(:header)} 
+          class={"modal-card-head", "flex-direction-column": (!slot_assigned?(:header) && @show_close_button)} >
           <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot name="header"/></p>
-          <a :if={@show_close_button} :on-click={@close_event} class="button delete" aria-label="close"></a>
+          <a :if={@show_close_button} :on-click={@close_event} 
+            class={"delete", "is-align-content-end": (!slot_assigned?(:header) && @show_close_button)}
+            aria-label="close"></a>
         </header>
         <section class="modal-card-body">
           <#slot/>

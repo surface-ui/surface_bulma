@@ -107,7 +107,7 @@ defmodule Surface.Components.ModalTest do
                  <p class="modal-card-title">
            headertext
            </p>
-                 <a phx-click="modal_close" class="button delete" aria-label="close"></a>
+                 <a phx-click="modal_close" class="delete" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
            hello
@@ -144,7 +144,7 @@ defmodule Surface.Components.ModalTest do
                  <p class="modal-card-title">
            headertext
            </p>
-                 <a phx-click="modal_close" class="button delete" aria-label="close"></a>
+                 <a phx-click="modal_close" class="delete" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
            hello
@@ -171,8 +171,8 @@ defmodule Surface.Components.ModalTest do
            <div class="modal" phx-window-keyup="modal_close" phx-key="Esc">
              <div class="modal-background"></div>
              <div class="modal-card">
-               <header class="modal-card-head">
-                 <a phx-click="modal_close" class="button delete" aria-label="close"></a>
+               <header class="modal-card-head flex-direction-column">
+                 <a phx-click="modal_close" class="delete is-align-content-end" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
            hello
