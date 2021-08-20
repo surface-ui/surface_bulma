@@ -40,7 +40,7 @@ defmodule SurfaceBulma.Modal.Card do
           class={"modal-card-head", "is-flex-direction-column": (!slot_assigned?(:header) && @show_close_button)} >
           <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot name="header"/></p>
           <a :if={@show_close_button} :on-click={@close_event} 
-            class={"delete", "is-align-content-end": (!slot_assigned?(:header) && @show_close_button)}
+            class={"delete", "is-align-self-flex-end": (!slot_assigned?(:header) && @show_close_button)}
             aria-label="close"></a>
         </header>
         <section class="modal-card-body">

@@ -172,7 +172,7 @@ defmodule Surface.Components.ModalTest do
              <div class="modal-background"></div>
              <div class="modal-card">
                <header class="modal-card-head is-flex-direction-column">
-                 <a phx-click="modal_close" class="delete is-align-content-end" aria-label="close"></a>
+                 <a phx-click="modal_close" class="delete is-align-self-flex-end" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
            hello
