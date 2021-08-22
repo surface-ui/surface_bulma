@@ -1,6 +1,5 @@
 defmodule SurfaceBulma.Modal.Card do
   use Surface.Component
-  alias SurfaceBulma.Button
 
   @moduledoc """
   The card **modal**, with various configuration options.
@@ -20,7 +19,7 @@ defmodule SurfaceBulma.Modal.Card do
   prop show_close_button, :boolean, default: true
 
   @doc "What event to emit on close event"
-  prop close_event, :event, default: "modal_close"
+  prop close_event, :event, default: %{name: "modal_close", target: :live_view}
 
   @doc "Header content, use via Modal.Header"
   slot header
@@ -33,7 +32,7 @@ defmodule SurfaceBulma.Modal.Card do
 
   def render(assigns) do
     ~F"""
-    <div class={"modal", "is-active": @show} phx-window-keyup={@close_event} phx-key="Esc">
+    <div class={"modal", "is-active": @show} phx-window-keyup={@close_event.name} phx-key="Esc">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header :if={@show_close_button || slot_assigned?(:header)} 

@@ -210,6 +210,7 @@ defmodule Surface.Components.ModalTest do
         ~F"""
         <Card show={false} show_close_button={false}>
           <Header>hello</Header>
+          Test
         </Card>
         """
       end
@@ -222,6 +223,7 @@ defmodule Surface.Components.ModalTest do
                  <p class="modal-card-title">hello</p>
                </header>
                <section class="modal-card-body">
+             Test
                </section>
              </div>
            </div>

@@ -199,7 +199,7 @@ defmodule SurfaceBulma.Table do
       index, acc when is_integer(index) and is_list(acc) ->
         {:cont, Enum.at(acc, index)}
 
-      key, value ->
+      _key, value ->
         {:halt, value}
     end)
   end
