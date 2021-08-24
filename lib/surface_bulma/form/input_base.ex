@@ -81,7 +81,7 @@ defmodule SurfaceBulma.Form.InputBase do
 
   def has_error?(assigns) do
     case assigns do
-      %{__context__: %{{Surface.Components.Form, :form} => form}} ->
+      %{__context__: %{{Surface.Components.Form, :form} => form}} when is_map(form) ->
         field_has_error?(form, assigns.field)
 
       _ ->
@@ -91,7 +91,7 @@ defmodule SurfaceBulma.Form.InputBase do
 
   def has_change?(assigns) do
     case assigns do
-      %{__context__: %{{Surface.Components.Form, :form} => form}} ->
+      %{__context__: %{{Surface.Components.Form, :form} => form}} when is_map(form) ->
         field_has_change?(form, assigns.field)
 
       _ ->
@@ -99,10 +99,11 @@ defmodule SurfaceBulma.Form.InputBase do
     end
   end
 
-  def render_common_text_input_fields(%{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
-
-) do
-        ~F"""
+  def render_common_text_input_fields(
+        %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
+      )
+      when is_map(form) do
+    ~F"""
     <ErrorTag class="help is-danger" field={assigns.field} form={form}/>
     {#if is_binary(Map.get(assigns, :icon_left))}
       <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
@@ -114,5 +115,6 @@ defmodule SurfaceBulma.Form.InputBase do
     <FA :if={display_valid_icon?(assigns)} primary_color="green" icon="check" container_class={["is-small", "is-right"]}/>
     """
   end
+
   def render_common_text_input_fields(_), do: nil
 end
