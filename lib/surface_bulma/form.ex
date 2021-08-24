@@ -23,7 +23,6 @@ defmodule SurfaceBulma.Form do
     Ecto.Changeset.get_change(form.source, field, false)
   end
 
-
   def render(assigns) do
     ~F"""
       <Form {...included_props(assigns)}>

@@ -3,14 +3,13 @@ defmodule SurfaceBulma.Form.TextArea do
   The text area component as defined here: https://bulma.io/documentation/form/textarea/
   """
 
-  use Surface.Component
+  use SurfaceBulma.Component
   import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
 
   alias Surface.Components.Form.{Field, TextArea, ErrorTag, Label}
   alias SurfaceBulma.Icon.FontAwesome, as: FA
-
-  @doc "The the field on the changeset"
-  prop field, :atom, required: true
+  
+  include TextArea
 
   @doc "The string label of the field"
   prop label, :string, required: true
@@ -18,17 +17,11 @@ defmodule SurfaceBulma.Form.TextArea do
   @doc "Disable embedded font awesome icons"
   prop disable_icons, :boolean, default: false
 
-  @doc "Class to apply to input"
-  prop class, :css_class, default: []
-
   @doc "Placeholder value"
   prop placeholder, :string, default: nil
 
   @doc "Size of textarea in css sense"
   prop size, :string, values: ["small", "normal", "medium", "large"], default: "normal"
-
-  @doc "How many rows should textarea be, defaults to 10"
-  prop rows, :integer
 
   def render(assigns) do
     %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns

@@ -15,7 +15,7 @@ defmodule Surface.Components.IconTest do
     assert html =~
              """
                <span class="icon">
-                 <i class="fas fa-500px"></i>
+                 <i class="fab fa-500px"></i>
                </span>
              """
   end
@@ -31,7 +31,7 @@ defmodule Surface.Components.IconTest do
     assert html =~
              """
                <span class="icon is-small">
-                 <i class="fas fa-500px"></i>
+                 <i class="fab fa-500px"></i>
                </span>
              """
   end
@@ -47,7 +47,7 @@ defmodule Surface.Components.IconTest do
     assert html =~
              """
                <span class="icon is-small">
-                 <i class="fas fa-500px fa-4x"></i>
+                 <i class="fab fa-500px fa-4x"></i>
                </span>
              """
   end
@@ -135,7 +135,7 @@ defmodule Surface.Components.IconTest do
     assert html =~
              """
                <span class="icon">
-                 <i data-fa-transform="grow-10 left-20" class="fas fa-500px"></i>
+                 <i data-fa-transform="grow-10 left-20" class="fab fa-500px"></i>
                </span>
              """
   end

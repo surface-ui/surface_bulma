@@ -146,22 +146,3 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
            """
   end
 end
-
-defmodule Surface.Components.Form.SelectConfigTest do
-  use SurfaceBulma.ConnCase
-
-  alias SurfaceBulma.Form.Select
-
-  test ":default_class config" do
-    using_config Select, default_class: "default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <Select />
-          """
-        end
-
-      assert html =~ ~r/class="default_class"/
-    end
-  end
-end
