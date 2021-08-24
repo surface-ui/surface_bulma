@@ -9,10 +9,10 @@ defmodule SurfaceBulma.Form.TextInput do
   alias Surface.Components.Form.{Field, TextInput, Label}
 
   @doc "Max length of field, as enforced by client browser. Not validated by Elixir."
-  prop maxlength, :integer
+  prop(maxlength, :integer)
 
   @doc "Minimum length of field, as enforced by client browser. Not validated by Elixir."
-  prop minlength, :integer
+  prop(minlength, :integer)
 
   def render(assigns) do
     ~F"""
@@ -22,7 +22,7 @@ defmodule SurfaceBulma.Form.TextInput do
       "is-expanded": @expanded
       }
       name={@field}>
-      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label}>{@label}</Label>
+      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label} class="label">{@label}</Label>
       <div :if={slot_assigned?(:left_addon)} class="control">
         <#slot name="left_addon"/>
       </div>
@@ -46,9 +46,10 @@ defmodule SurfaceBulma.Form.TextInput do
             disabled: @disabled,
             readonly: @readonly,
             maxlength: @maxlength,
-            minlength: @minlength,
-            value: @value
-          ] ++ @opts}/>
+            minlength: @minlength
+          ] ++ @opts ++ 
+            (not is_nil(@value) && [value: @value] || [])
+        }/>
         {render_common_text_input_fields(assigns)}
       </div>
       <div :if={slot_assigned?(:right_addon)} class="control" >

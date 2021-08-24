@@ -3,52 +3,52 @@ defmodule SurfaceBulma.Form.InputBase do
     quote do
       import SurfaceBulma.Form.InputBase
       @doc "The the field on the changeset"
-      prop field, :any, required: true
+      prop(field, :any, required: true)
 
       @doc "The string label of the field"
-      prop label, :string
+      prop(label, :string)
 
       @doc "Disable default fontawesome icons tied to validation"
-      prop disable_icons, :boolean, default: false
+      prop(disable_icons, :boolean, default: false)
 
       @doc "Class to apply to input"
-      prop class, :css_class, default: []
+      prop(class, :css_class, default: [])
 
       @doc "Any opts you want to pass on to internal `input` from `Phoenix.HTML.Form`"
-      prop opts, :keyword, default: []
+      prop(opts, :keyword, default: [])
 
       @doc "Value to pass on to field if you want to pre-populate"
-      prop value, :string, default: nil
+      prop(value, :string, default: nil)
 
       @doc "Should input fill entire width of form?"
-      prop expanded, :boolean
+      prop(expanded, :boolean)
 
       @doc "Disable input"
-      prop disabled, :boolean
+      prop(disabled, :boolean)
 
       @doc "Static input"
-      prop static, :boolean
+      prop(static, :boolean)
 
       @doc "Read only"
-      prop readonly, :boolean
+      prop(readonly, :boolean)
 
       @doc "Help text, will be replaced by error text if changeset gets errors"
-      prop help_text, :string
+      prop(help_text, :string)
 
       @doc "Triggered when the component loses focus"
-      prop blur, :event
+      prop(blur, :event)
 
       @doc "Triggered when the component receives focus"
-      prop focus, :event
+      prop(focus, :event)
 
       @doc "Triggered when the component receives click"
-      prop capture_click, :event
+      prop(capture_click, :event)
 
       @doc "Triggered when a button on the keyboard is pressed"
-      prop keydown, :event
+      prop(keydown, :event)
 
       @doc "Triggered when a button on the keyboard is released"
-      prop keyup, :event
+      prop(keyup, :event)
     end
   end
 
@@ -61,11 +61,11 @@ defmodule SurfaceBulma.Form.InputBase do
   def display_right_icon?(assigns) do
     (!Map.get(assigns, :disable_icons) &&
        (has_error?(assigns) || has_change?(assigns))) ||
-      Map.get(assigns, :icon_right)
+    Map.get(assigns, :icon_right)
   end
 
   def display_left_icon?(assigns) do
-    Map.get(assigns, :icon_left)
+      Map.get(assigns, :icon_left)
   end
 
   def display_error_icon?(assigns) do
@@ -92,8 +92,10 @@ defmodule SurfaceBulma.Form.InputBase do
   end
 
   def render_common_text_input_fields(assigns) do
+    %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
+
     ~F"""
-    <ErrorTag class="help is-danger" field={assigns.field}/>
+    <ErrorTag class="help is-danger" field={assigns.field} form={form}/>
     {#if is_binary(Map.get(assigns, :icon_left))}
       <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
     {/if}
