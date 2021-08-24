@@ -13,14 +13,14 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
       end
 
     assert html =~ """
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
-          <input id="user_admin" name="user[admin]" type="hidden" value="false">\
-          <input id="user_admin" name="user[admin]" type="checkbox" value="true">
-        </label>
-      </div>
-    </div>
+             <div class="field">
+               <div class="control">
+                 <label class="checkbox">
+           <input name="user[admin]" type="hidden" value="false">\
+           <input id="user_admin" name="user[admin]" type="checkbox" value="true">
+                 </label>
+               </div>
+           </div>
            """
   end
 
@@ -48,17 +48,16 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
       end
 
     assert html =~ """
-<form action="#" method="post">
-           <input name="_csrf_token" type="hidden" value="test">
-            <div class="field">
-              <div class="control">
-                <label class="checkbox">
-                 <input name="user[admin]" type="hidden" value="false">\
-                 <input id="user_admin" name="user[admin]" type="checkbox" value="true">
-                </label>
-              </div>
-            </div>
-           </form>
+             <form action="#" method="post"><input name="_csrf_token" type="hidden" value="test">
+               <div class="field">
+               <div class="control">
+                 <label class="checkbox">
+           <input name="user[admin]" type="hidden" value="false">\
+           <input id="user_admin" name="user[admin]" type="checkbox" value="true">
+                 </label>
+               </div>
+          </div>
+          </form>
            """
   end
 
@@ -93,8 +92,15 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
       end
 
     assert html =~ """
-           <input id="user_admin" name="user[admin]" type="checkbox" value="admin">
-           """
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+    <input name="user[admin]" type="hidden" value="false">\
+    <input id="user_admin" name="user[admin]" type="checkbox" value="admin">
+          </label>
+        </div>
+    </div>
+    """
   end
 
   test "setting the value" do
@@ -187,51 +193,3 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
            """
   end
 end
-
-defmodule Surface.Components.Form.CheckboxConfigTest do
-  use SurfaceBulma.ConnCase
-
-  alias SurfaceBulma.Form.Input
-  alias SurfaceBulma.Form.Checkbox
-
-  test ":default_class config" do
-    using_config Checkbox, default_class: "default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <Checkbox />
-          """
-        end
-
-      assert html =~ ~r/class="default_class"/
-    end
-  end
-
-  test "component inherits :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <Checkbox/>
-          """
-        end
-
-      assert html =~ ~r/class="inherited_default_class"/
-    end
-  end
-
-  test ":default_class config overrides inherited :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      using_config Checkbox, default_class: "default_class" do
-        html =
-          render_surface do
-            ~F"""
-            <Checkbox/>
-            """
-          end
-
-        assert html =~ ~r/class="default_class"/
-      end
-    end
-  end
-end 

@@ -38,7 +38,7 @@ defmodule SurfaceBulma.Form.TextArea do
 
     ~F"""
       <Field class="field" name={@field}>
-        <Label class="label">{@label}</Label>
+        <Label >{@label}</Label>
         <div class={"control", "has-icons-right": !@disable_icons && (has_error || has_change)}>
           <TextArea
           class={[

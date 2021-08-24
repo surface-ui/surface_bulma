@@ -3,7 +3,7 @@ defmodule SurfaceBulma.Form.InputBase do
     quote do
       import SurfaceBulma.Form.InputBase
       @doc "The the field on the changeset"
-      prop field, :atom, required: true
+      prop field, :any, required: true
 
       @doc "The string label of the field"
       prop label, :string
@@ -56,7 +56,6 @@ defmodule SurfaceBulma.Form.InputBase do
   import Surface
   alias Surface.Components.Form.ErrorTag
   alias SurfaceBulma.Icon.FontAwesome, as: FA
-  alias Surface.Constructs.If
   import Phoenix.LiveView.Helpers
 
   def display_right_icon?(assigns) do

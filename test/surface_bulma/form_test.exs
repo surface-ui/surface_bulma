@@ -8,6 +8,10 @@ defmodule SurfaceBulma.Components.FormTest do
 
     schema "user" do
       field(:name, :string)
+      field(:date, :date)
+      field(:checked, :boolean)
+      field(:color, :string)
+      field(:password, :string)
     end
   end
 

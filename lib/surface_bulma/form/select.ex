@@ -10,32 +10,16 @@ defmodule SurfaceBulma.Form.Select do
 
   alias Surface.Components.Form.{Field, Label, MultipleSelect, Select}
 
-  @doc "The the field on the changeset"
-  prop field, :atom, required: true
+  for prop <- Select.__props__() do
+    Module.put_attribute(__MODULE__, :prop, prop)
+    Module.put_attribute(__MODULE__, :assigns, prop)
+  end
 
   @doc "The string label of the field"
   prop label, :string
 
   @doc "Disable selection"
   prop disabled, :boolean, default: false
-
-  @doc "Any opts you want to pass on to internal `Surface.Checkbox` and `Phoenix.HTML.Form.checkbox/3`"
-  prop opts, :keyword, default: []
-
-  @doc "Class to apply to input"
-  prop class, :css_class, default: []
-
-  @doc "The select options"
-  prop options, :any, default: []
-
-  @doc """
-  The selected value.
-  For multiple selects this has to be a list that matches the value options.
-  """
-  prop selected, :any
-
-  @doc "The prompt (nothing selected yet) string, is ignored for multiple selects."
-  prop prompt, :string
 
   @doc "Size of select in css sense"
   prop size, :string, values: ["small", "normal", "medium", "large"]
@@ -55,10 +39,20 @@ defmodule SurfaceBulma.Form.Select do
   prop multiple, :boolean
 
   def render(assigns) do
+    select_props =
+      Enum.reduce(Select.__props__(), %{}, fn %{name: name}, acc ->
+        Map.put(acc, name, assigns[name])
+      end)
+      |> Map.update(:class, [], fn nil -> 
+          get_config(Select, :default_class)
+        value ->
+        value
+      end)
+
     ~F"""
       <Field class={ "field", "is-expanded": @expanded } name={@field}>
         <div class="control">
-          <Label :if={@label} class="label">{@label}</Label>
+          <Label :if={@label}>{@label}</Label>
             <div class={
               "select",
               "is-#{@size}": @size,
@@ -67,22 +61,24 @@ defmodule SurfaceBulma.Form.Select do
               "is-fullwidth": @expanded}>
             {#if @multiple}
             <MultipleSelect
+                {...select_props}
                 field={@field}
                 opts={[disabled: @disabled] ++ @opts }
-                class={["is-fullwidth": @expanded, rounded: @rounded] ++ @class}
+                class={["is-fullwidth": @expanded, rounded: @rounded] ++ (@class || [])}
                 options={@options}
                 selected={@selected}
                 />
             {/if}
             {#if !@multiple}
               <Select
+                  {...select_props}
                 field={@field}
                 opts={[disabled: @disabled] ++ @opts }
                 class={
                   [
                     "is-fullwidth": @expanded,
                     rounded: @rounded
-                  ] ++ @class}
+                  ] ++ (@class || [])}
                 options={@options}
                 selected={@selected}
                 prompt={@prompt}

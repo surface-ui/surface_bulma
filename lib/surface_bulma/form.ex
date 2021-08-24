@@ -1,15 +1,12 @@
 defmodule SurfaceBulma.Form do
-  use Surface.Component
+  use SurfaceBulma.Component
   alias Surface.Components.Form
 
   @moduledoc """
   Form components, Bulma style
   """
 
-  for prop <- Surface.Components.Form.__props__() do
-    Module.put_attribute(__MODULE__, :prop, prop)
-    Module.put_attribute(__MODULE__, :assigns, prop)
-  end
+  include(Surface.Components.Form)
 
   @doc "The content of the `<form>`"
   slot default, args: [:form]
@@ -28,9 +25,8 @@ defmodule SurfaceBulma.Form do
 
 
   def render(assigns) do
-    form_props = Enum.reduce(__MODULE__.__props__(), %{}, fn %{name: name}, acc -> Map.put(acc, name, assigns[name]) end)
     ~F"""
-      <Form {...form_props}>
+      <Form {...included_props(assigns)}>
         <Context get={form: form}>
           <#slot :args={form: form}/>
         </Context>

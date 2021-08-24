@@ -2,10 +2,10 @@ defmodule SurfaceBulma.Form.Checkbox do
   @moduledoc """
   The checkbox component
   """
-
-  use Surface.Components.Form.Input
-
+  use SurfaceBulma.Component
   alias Surface.Components.Form.{Field, Checkbox}
+
+  include(Checkbox)
 
   @doc "Disable selection"
   prop disabled, :boolean, default: false
@@ -14,14 +14,13 @@ defmodule SurfaceBulma.Form.Checkbox do
   slot default
 
   def render(assigns) do
-    checkbox_props = Enum.reduce(__MODULE__.__props__(), %{}, fn %{name: name}, acc -> Map.put(acc, name, assigns[name]) end)
     ~F"""
-      <Field class="field" name={@field}>
+      <Field name={@field}>
         <div class="control">
-          <label class="checkbox">
+          <label class="checkbox" disabled={@disabled}>
             <Checkbox
               opts={[disabled: @disabled] ++ @opts }
-              {...checkbox_props}
+              {...included_props(assigns)}
               />
             <#slot/>
           </label>
