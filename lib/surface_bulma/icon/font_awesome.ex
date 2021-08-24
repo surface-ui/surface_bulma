@@ -85,7 +85,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIconText do
   def render(assigns) do
     ~F"""
     <span>
-    <#slot/>
+      <#slot/>
     </span>
     """
   end
