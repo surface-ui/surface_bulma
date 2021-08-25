@@ -50,6 +50,7 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
           "is-static": @static
           ] ++ @class}
         field={@field}
+        value={@value}
         opts={
           [
             disabled: @disabled,
@@ -57,7 +58,6 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
             max: @max,
             min: @min,
             step: @step,
-            value: @value
           ] ++ @opts}/>
         {render_common_text_input_fields(assigns)}
       </div>

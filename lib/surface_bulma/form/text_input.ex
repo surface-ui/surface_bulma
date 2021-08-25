@@ -40,6 +40,7 @@ defmodule SurfaceBulma.Form.TextInput do
           "is-static": @static
           ] ++ @class}
         field={@field}
+        value={@value}
         opts={
           [
             placeholder: @placeholder,
@@ -47,9 +48,7 @@ defmodule SurfaceBulma.Form.TextInput do
             readonly: @readonly,
             maxlength: @maxlength,
             minlength: @minlength
-          ] ++ @opts ++ 
-            (not is_nil(@value) && [value: @value] || [])
-        }/>
+          ] ++ @opts}/>
         {render_common_text_input_fields(assigns)}
       </div>
       <div :if={slot_assigned?(:right_addon)} class="control" >

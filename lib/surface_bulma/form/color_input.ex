@@ -36,11 +36,11 @@ defmodule SurfaceBulma.Form.ColorInput do
           "is-static": @static
           ] ++ @class}
         field={@field}
+        value={@value}
         opts={
           [
             disabled: @disabled,
             readonly: @readonly,
-            value: @value
           ] ++ @opts}/>
         {render_common_text_input_fields(assigns)}
       </div>

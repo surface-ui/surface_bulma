@@ -43,6 +43,7 @@ defmodule SurfaceBulma.Form.PasswordInput do
           "is-static": @static
           ] ++ @class}
         field={@field}
+        value={@value}
         opts={
           [
             placeholder: @placeholder,
@@ -50,7 +51,6 @@ defmodule SurfaceBulma.Form.PasswordInput do
             readonly: @readonly,
             maxlength: @maxlength,
             minlength: @minlength,
-            value: @value
           ] ++ @opts}/>
         {render_common_text_input_fields(assigns)}
       </div>

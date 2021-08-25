@@ -51,13 +51,13 @@ defmodule SurfaceBulma.Form.RangeInput do
           "is-static": @static
           ] ++ @class}
         field={@field}
+        value={@value}
         opts={
           [
             disabled: @disabled,
             readonly: @readonly,
             max: @max,
             min: @min,
-            value: @value
           ] ++ @opts}/>
         {render_common_text_input_fields(assigns)}
       </div>
