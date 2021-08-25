@@ -20,7 +20,11 @@ defmodule SurfaceBulma.Form do
 
   @doc "Helper function used by the form controls"
   def field_has_change?(form, field) do
-    Ecto.Changeset.get_change(form.source, field, false)
+    if is_map(form.source) do
+      Ecto.Changeset.get_change(form.source, field, false)
+    else
+      false
+    end
   end
 
   def render(assigns) do
