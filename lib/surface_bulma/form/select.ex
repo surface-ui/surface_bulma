@@ -52,7 +52,7 @@ defmodule SurfaceBulma.Form.Select do
     ~F"""
       <Field class={ "field", "is-expanded": @expanded } name={@field}>
         <div class="control">
-          <Label :if={@label}>{@label}</Label>
+          <Label :if={@label} class="label">{@label}</Label>
             <div class={
               "select",
               "is-#{@size}": @size,

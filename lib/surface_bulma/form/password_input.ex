@@ -25,7 +25,7 @@ defmodule SurfaceBulma.Form.PasswordInput do
       "is-expanded": @expanded
       }
       name={@field}>
-      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label}>{@label}</Label>
+      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label} class="label">{@label}</Label>
       <div :if={slot_assigned?(:left_addon)} class="control">
         <#slot name="left_addon"/>
       </div>

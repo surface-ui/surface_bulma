@@ -7,7 +7,7 @@ defmodule SurfaceBulma.Form.Reset do
   @impl true
   def render(assigns) do
     ~F"""
-      <Reset {...included_props(assigns)} class={["button"] ++ @class} />
+      <Reset {...included_props(assigns)} class={["button"] ++ (@class || [])} />
     """
   end
 end
