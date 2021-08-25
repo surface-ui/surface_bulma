@@ -27,7 +27,7 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
           "is-#{@size}": @size
         ]
       }>
-        <Label :if={@label} >{@label}</Label>
+        <Label :if={@label} class="label">{@label}</Label>
       </div>
       <div class="field-body">
       <#slot/>
