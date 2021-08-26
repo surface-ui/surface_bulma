@@ -59,7 +59,6 @@ defmodule SurfaceBulma.Table do
   end
 
   def render(assigns) do
-    IO.inspect({assigns.sorted_by})
     ~F"""
     <div class={@class}>
       <table class={
