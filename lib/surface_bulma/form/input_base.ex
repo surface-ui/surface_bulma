@@ -111,8 +111,8 @@ defmodule SurfaceBulma.Form.InputBase do
     {#if is_binary(Map.get(assigns, :icon_right))}
       <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
     {/if}
-    <FA :if={display_error_icon?(assigns)} primary_color="red" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
-    <FA :if={display_valid_icon?(assigns)} primary_color="green" icon="check" container_class={["is-small", "is-right"]}/>
+    <FA :if={display_error_icon?(assigns)} color="danger" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
+    <FA :if={display_valid_icon?(assigns)} color="success" icon="check" container_class={["is-small", "is-right"]}/>
     """
   end
 
