@@ -6,14 +6,11 @@ defmodule SurfaceBulma.Form.Select do
   - https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#multiple_select/4
   """
 
-  use Surface.Component
-
+  use SurfaceBulma.Component
+  use SurfaceBulma.Form.InputAddonBase
   alias Surface.Components.Form.{Field, Label, MultipleSelect, Select}
 
-  for prop <- Select.__props__() do
-    Module.put_attribute(__MODULE__, :prop, prop)
-    Module.put_attribute(__MODULE__, :assigns, prop)
-  end
+  include(Select)
 
   @doc "The string label of the field"
   prop label, :string
@@ -39,20 +36,28 @@ defmodule SurfaceBulma.Form.Select do
   prop multiple, :boolean
 
   def render(assigns) do
-    select_props =
-      Enum.reduce(Select.__props__(), %{}, fn %{name: name}, acc ->
-        Map.put(acc, name, assigns[name])
-      end)
-      |> Map.update(:class, [], fn nil -> 
+    props =
+      included_props(assigns)
+      |> Map.update(:class, [], fn
+        nil ->
           get_config(Select, :default_class)
+
         value ->
-        value
+          value
       end)
 
     ~F"""
-      <Field class={ "field", "is-expanded": @expanded } name={@field}>
+      <Field class={
+        "field", 
+        "is-expanded": @expanded, 
+        "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon))
+        }
+        name={@field}>
+        <Label :if={@label} class="label">{@label}</Label>
+        <div :if={slot_assigned?(:left_addon)} class="control">
+          <#slot name="left_addon"/>
+        </div>
         <div class="control">
-          <Label :if={@label} class="label">{@label}</Label>
             <div class={
               "select",
               "is-#{@size}": @size,
@@ -60,31 +65,26 @@ defmodule SurfaceBulma.Form.Select do
               "is-multiple": @multiple,
               "is-fullwidth": @expanded}>
             {#if @multiple}
-            <MultipleSelect
-                {...select_props}
-                field={@field}
+              <MultipleSelect
+                {...props}
                 opts={[disabled: @disabled] ++ @opts }
                 class={["is-fullwidth": @expanded, rounded: @rounded] ++ (@class || [])}
-                options={@options}
-                selected={@selected}
                 />
-            {/if}
-            {#if !@multiple}
+            {#else}
               <Select
-                  {...select_props}
-                field={@field}
+                {...props}
                 opts={[disabled: @disabled] ++ @opts }
                 class={
                   [
                     "is-fullwidth": @expanded,
                     rounded: @rounded
                   ] ++ (@class || [])}
-                options={@options}
-                selected={@selected}
-                prompt={@prompt}
                 />
             {/if}
             </div>
+        </div>
+        <div :if={slot_assigned?(:right_addon)} class="control" >
+          <#slot name="right_addon"/>
         </div>
       </Field>
     """
