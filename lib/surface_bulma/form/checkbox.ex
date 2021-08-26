@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Form.Checkbox do
 
   def render(assigns) do
     ~F"""
-      <Field name={@field}>
+      <Field name={@field} class="field">
         <div class="control">
           <label class="checkbox" disabled={@disabled}>
             <Checkbox
