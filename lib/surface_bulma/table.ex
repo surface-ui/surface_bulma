@@ -59,6 +59,7 @@ defmodule SurfaceBulma.Table do
   end
 
   def render(assigns) do
+    IO.inspect({assigns.sorted_by})
     ~F"""
     <div class={@class}>
       <table class={
@@ -71,7 +72,7 @@ defmodule SurfaceBulma.Table do
           <tr>
             {#for col <- @cols}
               <th>
-              {#if !is_nil(col.sort_by) && assigns.sorted_by == col.sort_by}
+              {#if !is_nil(col.sort_by) && assigns.sorted_by == col.label}
               <a :on-click="sorted_click" phx-value-value={col.label} href="#">
                 <TextIcon>
                 <TextIconText>
@@ -81,7 +82,7 @@ defmodule SurfaceBulma.Table do
                 </TextIcon>
               </a>
               {/if}
-              {#if !is_nil(col.sort_by) && assigns.sorted_by != col.sort_by}
+              {#if !is_nil(col.sort_by) && assigns.sorted_by != col.label}
               <a :on-click="sorted_click" phx-value-value={col.label} href="#">
               {col.label}
               </a>
