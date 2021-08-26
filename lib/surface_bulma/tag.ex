@@ -9,8 +9,7 @@ defmodule SurfaceBulma.Tag do
   @doc "The label of the tag, when no content (default slot) is provided"
   prop label, :string
 
-  @doc "The color of the tag"
-  prop color, :string, values: ~w(black dark light white primary link info success warning danger)
+  use SurfaceBulma.ColorProp
 
   @doc "The size of the delete"
   prop size, :string, values: ~w(normal medium large)
@@ -27,7 +26,23 @@ defmodule SurfaceBulma.Tag do
   """
   slot default
 
+  @doc "Addon tags that are attached together"
+  slot addons
+
   def render(assigns) do
+    ~F"""
+    {#if slot_assigned?(:addons) }
+    <div class="tags has-addons">
+      {render_tag(assigns)}
+      <#slot name="addons" />
+    </div>
+    {#else}
+      {render_tag(assigns)}
+    {/if}
+    """
+  end
+
+  defp render_tag(assigns) do
     ~F"""
     <span
       class={
@@ -40,5 +55,5 @@ defmodule SurfaceBulma.Tag do
       <#slot>{@label}</#slot>
     </span>
     """
-  end
+    end
 end

@@ -21,10 +21,7 @@ defmodule SurfaceBulma.Form.Select do
   @doc "Size of select in css sense"
   prop size, :string, values: ["small", "normal", "medium", "large"]
 
-  @doc "Color of select"
-  prop color_type, :string,
-    values: ["primary", "link", "info", "success", "warning", "danger"],
-    default: nil
+  use SurfaceBulma.ColorProp
 
   @doc "Will expand dropdown to full with"
   prop expanded, :boolean

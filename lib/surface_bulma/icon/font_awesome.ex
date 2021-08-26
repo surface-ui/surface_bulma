@@ -5,6 +5,7 @@ defmodule SurfaceBulma.Icon.FontAwesome do
 
   alias SurfaceFontAwesome.Icon
   use SurfaceFontAwesome, :icon
+  use SurfaceBulma.ColorProp, "icon"
 
   @doc "Specifies the size of the span that wraps the icon."
   prop container_size, :string, values: ["small", "medium", "large"]
@@ -16,7 +17,7 @@ defmodule SurfaceBulma.Icon.FontAwesome do
 
   def render(assigns) do
     ~F"""
-      <span class={["icon", "is-#{@container_size}": @container_size] ++ @container_class}>
+      <span class={["icon", "has-text-#{@color}": @color, "is-#{@container_size}": @container_size] ++ @container_class}>
         {Icon.render(assigns)}
         <span :if={slot_assigned?(:default)}><#slot name="default" /></span>
       </span>

@@ -17,8 +17,7 @@ defmodule SurfaceBulma.Button do
   @doc "The aria label for the button"
   prop aria_label, :string
 
-  @doc "The color of the button"
-  prop color, :string, values: ~w(white black light dark primary link info success warning danger)
+  use SurfaceBulma.ColorProp
 
   @doc "The vertical size of button"
   prop size, :string, values: ~w(small normal medium large)
