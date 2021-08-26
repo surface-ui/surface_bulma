@@ -58,7 +58,7 @@ defmodule SurfaceBulma.Form.Select do
             <div class={
               "select",
               "is-#{@size}": @size,
-              "is-#{@color_type}": @color_type,
+              "is-#{@color}": @color,
               "is-multiple": @multiple,
               "is-fullwidth": @expanded}>
             {#if @multiple}
