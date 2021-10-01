@@ -13,7 +13,7 @@ defmodule Surface.Components.Form.LabelTest do
         """
       end
 
-    assert html =~ ~r[<label id="my_id">(.+)</label>]s
+    assert html =~ ~r[<label .* id="my_id">(.+)</label>]s
   end
 
   test "property class" do
@@ -46,7 +46,7 @@ defmodule Surface.Components.Form.LabelTest do
         """
       end
 
-    assert html =~ ~r[<label for="user_name">(.+)</label>]s
+    assert html =~ ~r[<label .*for="user_name">(.+)</label>]s
   end
 
   test "properties form and field as :atom" do
@@ -57,7 +57,7 @@ defmodule Surface.Components.Form.LabelTest do
         """
       end
 
-    assert html =~ ~r[<label for="user_name">(.+)</label>]s
+    assert html =~ ~r[<label .*for="user_name">(.+)</label>]s
   end
 
   test "use context's form and field by default" do
@@ -72,7 +72,7 @@ defmodule Surface.Components.Form.LabelTest do
         """
       end
 
-    assert html =~ ~r[<label for="user_name">(.+)</label>]s
+    assert html =~ ~r[<label .*for="user_name">(.+)</label>]s
   end
 
   test "events with parent live view as target" do
@@ -89,32 +89,32 @@ defmodule Surface.Components.Form.LabelTest do
   describe "is compatible with phoenix label/2" do
     test "with block" do
       html = render_surface(do: ~F[<Label>Block</Label>])
-      assert html =~ ~r[<label>(.*)Block(.*)</label>]s
+      assert html =~ ~r[<label class="label">(.*)Block(.*)</label>]s
 
       html = render_surface(do: ~F[<Label class="foo">Block</Label>])
-      assert html =~ ~r[<label class="foo">(.*)Block(.*)</label>]s
+      assert html =~ ~r[<label.* class="foo">(.*)Block(.*)</label>]s
     end
 
     test "with field but no content" do
       html = render_surface(do: ~F[<Label form={:search} field={:key} />])
-      assert html =~ ~r[<label for="search_key">(.*)Key(.*)</label>]s
+      assert html =~ ~r[<label.*for="search_key">(.*)Key(.*)</label>]s
 
       html = render_surface(do: ~F[<Label form={:search} field={:key} opts={for: "test_key"} />])
 
-      assert html =~ ~r[<label for="test_key">(.*)Key(.*)</label>]s
+      assert html =~ ~r[<label.* for="test_key">(.*)Key(.*)</label>]s
 
       html = render_surface(do: ~F[<Label form={:search} field={:key} class="foo" opts={for: "test_key"} />])
 
-      assert html =~ ~r[<label class="foo" for="test_key">(.*)Key(.*)</label>]s
+      assert html =~ ~r[<label.* class="foo" for="test_key">(.*)Key(.*)</label>]s
     end
 
     test "with field and inline content" do
       html = render_surface(do: ~F[<Label text="Search" form={:search} field={:key} />])
-      assert html =~ ~r[<label for="search_key">(.*)Search(.*)</label>]s
+      assert html =~ ~r[<label.*for="search_key">(.*)Search(.*)</label>]s
 
       html = render_surface(do: ~F[<Label text="Search" form={:search} field={:key} opts={for: "test_key"} />])
 
-      assert html =~ ~r[<label for="test_key">(.*)Search(.*)</label>]s
+      assert html =~ ~r[<label.* for="test_key">(.*)Search(.*)</label>]s
 
       html =
         render_surface do
@@ -127,7 +127,7 @@ defmodule Surface.Components.Form.LabelTest do
           """
         end
 
-      assert html =~ ~r[<label for="search_key">(.+)Search(.*)</label>]s
+      assert html =~ ~r[<label.* for="search_key">(.+)Search(.*)</label>]s
 
       html =
         render_surface do
@@ -140,7 +140,7 @@ defmodule Surface.Components.Form.LabelTest do
           """
         end
 
-      assert html =~ ~r[<label for="test_key">(.+)Search(.*)</label>]s
+      assert html =~ ~r[<label.* for="test_key">(.+)Search(.*)</label>]s
 
       html =
         render_surface do
@@ -159,7 +159,7 @@ defmodule Surface.Components.Form.LabelTest do
     test "with field and inline safe content" do
       html = render_surface(do: ~F[<Label text={{:safe, "<em>Search</em>"}} form={:search} field={:key} />])
 
-      assert html =~ ~r[<label for="search_key">(.*)<em>Search</em>(.*)</label>]s
+      assert html =~ ~r[<label.*for="search_key">(.*)<em>Search</em>(.*)</label>]s
     end
 
     test "with field and block content" do
@@ -174,39 +174,20 @@ defmodule Surface.Components.Form.LabelTest do
           """
         end
 
-      assert html =~ ~r[<label for="search_key">(.+)Hello(.*)</label>]s
+      assert html =~ ~r[<label.*for="search_key">(.+)Hello(.*)</label>]s
 
       html =
         render_surface do
           ~F"""
           <Form for={:search}>
             <Field name="key">
-              <Label class="test-label">Hello</Label>
+              <Label class="label test-label">Hello</Label>
             </Field>
           </Form>
           """
         end
 
-      assert html =~ ~r[<label class="test-label" for="search_key">(.+)Hello(.*)</label>]s
-    end
-  end
-end
-
-defmodule Surface.Components.Form.LabelConfigTest do
-  use SurfaceBulma.ConnCase
-
-  alias SurfaceBulma.Form.Label
-
-  test ":default_class config" do
-    using_config Label, default_class: "default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <Label/>
-          """
-        end
-
-      assert html =~ ~r/class="default_class"/
+      assert html =~ ~r[<label class="label test-label" for="search_key">(.+)Hello(.*)</label>]s
     end
   end
 end
