@@ -12,20 +12,20 @@ defmodule SurfaceBulma.Form do
   slot default, args: [:form]
 
   @doc "Helper function used by the form controls"
-  def field_has_error?(form, field) do
-    Enum.any?(form.errors, fn {field_name, _} ->
+  def field_has_error?(%{errors: errors}, field) do
+    Enum.any?(errors, fn {field_name, _} ->
       field_name == field
     end)
   end
 
+  def field_has_error?(_not_form, _field), do: false
+
   @doc "Helper function used by the form controls"
-  def field_has_change?(form, field) do
-    if is_map(form.source) do
-      Ecto.Changeset.get_change(form.source, field, false)
-    else
-      false
-    end
+  def field_has_change?(%{source: source}, field) when is_map(source) do
+    Ecto.Changeset.get_change(source, field, false)
   end
+
+  def field_has_change?(_not_form, _field), do: false
 
   def render(assigns) do
     ~F"""
