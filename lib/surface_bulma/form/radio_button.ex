@@ -3,7 +3,7 @@ defmodule SurfaceBulma.Form.RadioButton do
   The radio button component as defined in https://bulma.io/documentation/form/radio/
   """
 
-  use Surface.Component
+  use SurfaceBulma.Component
 
   alias Surface.Components.Form.{Field, RadioButton}
 

@@ -4,10 +4,9 @@ defmodule SurfaceBulma.Form.TextArea do
   """
 
   use SurfaceBulma.Component
-  import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
+  import SurfaceBulma.Form.InputWrapper, only: [has_error?: 1, has_change?: 1, render_common_text_input_fields: 1]
 
-  alias Surface.Components.Form.{Field, TextArea, ErrorTag, Label}
-  alias SurfaceBulma.Icon.FontAwesome, as: FA
+  alias Surface.Components.Form.{Field, TextArea, Label}
   
   include TextArea
 
@@ -24,30 +23,25 @@ defmodule SurfaceBulma.Form.TextArea do
   prop size, :string, values: ["small", "normal", "medium", "large"], default: "normal"
 
   def render(assigns) do
-    %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
-
-    has_error = field_has_error?(form, assigns.field)
-    has_change = field_has_change?(form, assigns.field)
-
     ~F"""
       <Field class="field" name={@field}>
         <Label :if={@label} class="label">{@label}</Label>
-        <div class={"control", "has-icons-right": !@disable_icons && (has_error || has_change)}>
+        <div class={"control", "has-icons-right": !@disable_icons && (has_error?(assigns) || has_change?(assigns))}>
           <TextArea
+          {...included_props(assigns)}
           class={[
             "textarea",
             "is-#{@size}",
-            "is-danger": has_error,
-            "is-success": has_change && !has_error,
-            ] ++ @class}
+            "is-danger": has_error?(assigns),
+            "is-success": has_change?(assigns) && !has_error?(assigns),
+            ] ++ (@class || [])}
           field={@field}
           opts={
-            placeholder: @placeholder,
-            rows: @rows
-            }/>
-          <ErrorTag class="help is-danger" field={@field}/>
-          <FA :if={!@disable_icons && has_error} icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
-          <FA :if={!@disable_icons &&  has_change && !has_error} icon="check" container_class={["is-small", "is-right"]}/>
+            [placeholder: @placeholder,
+            rows: @rows] 
+            ++ @opts
+            } />
+          {render_common_text_input_fields(assigns)}
         </div>
       </Field>
     """

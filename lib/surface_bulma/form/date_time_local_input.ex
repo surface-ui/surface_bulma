@@ -3,12 +3,11 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
   The datetime standardized input
   """
 
-  use Surface.Component
   use SurfaceBulma.Form.InputBase
-  use SurfaceBulma.Form.InputIconBase
-  use SurfaceBulma.Form.InputAddonBase
+  import SurfaceBulma.Form.InputWrapper
 
-  alias Surface.Components.Form.{Field, DateTimeLocalInput, Label}
+  alias Surface.Components.Form.DateTimeLocalInput
+  include(DateTimeLocalInput)
 
   @doc "Largest datetime allowed, as enforced by client browser. Not validated by Elixir."
   prop max, :integer
@@ -25,47 +24,40 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
   prop step, :integer, default: 60
 
   def render(assigns) do
+    props = included_props(assigns)
+
     ~F"""
-    <Field class={
-      "field",
-      "has-addons": (slot_assigned?(:left_addon) || slot_assigned?(:right_addon)),
-      "is-expanded": @expanded
-      }
-      name={@field}>
-      <Label :if={!(slot_assigned?(:left_addon) || slot_assigned?(:right_addon)) && @label} class="label">{@label}</Label>
-      <div :if={slot_assigned?(:left_addon)} class="control">
-        <#slot name="left_addon"/>
-      </div>
-      <div class={
-        "control",
-        "has-icons-right": display_right_icon?(assigns),
-        "has-icons-left": display_left_icon?(assigns),
-        "is-expanded": @expanded
-        }>
-        <DateTimeLocalInput
-        class={[
-          "input",
-          "is-danger": has_error?(assigns),
-          "is-success": has_change?(assigns) && !has_error?(assigns),
-          "is-static": @static
-          ] ++ @class}
+      <SurfaceBulma.Form.InputWrapper :let={form: form}
         field={@field}
-        value={@value}
-        opts={
-          [
-            disabled: @disabled,
-            readonly: @readonly,
-            max: @max,
-            min: @min,
-            step: @step,
-          ] ++ @opts}/>
-        {render_common_text_input_fields(assigns)}
-      </div>
-      <div :if={slot_assigned?(:right_addon)} class="control" >
-        <#slot name="right_addon"/>
-      </div>
-      <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
-    </Field>
+        label={@label}
+        expanded={@expanded}
+        help_text={@help_text}
+        disable_icons={@disable_icons}
+        icon_left={@icon_left}
+        icon_right={@icon_right}
+        has_addons?={has_addons?(assigns)}>
+        <:left_addon>{render_left_addon(assigns)}</:left_addon>
+        <DateTimeLocalInput
+          {...props} 
+          class={[
+            "input",
+            "is-danger": has_error?(assigns),
+            "is-success": has_change?(assigns) && !has_error?(assigns),
+            "is-static": @static
+            ] ++ (@class || [])}
+          field={@field}
+          form={form || @form}
+          value={@value}
+          opts={
+            [
+              disabled: @disabled,
+              readonly: @readonly,
+              max: @max,
+              min: @min,
+              step: @step,
+            ] ++ @opts}/>
+        <:right_addon>{render_right_addon(assigns)}</:right_addon>
+      </SurfaceBulma.Form.InputWrapper>
     """
   end
 end

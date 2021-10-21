@@ -1,120 +1,56 @@
 defmodule SurfaceBulma.Form.InputBase do
   defmacro __using__(_) do
     quote do
-      import SurfaceBulma.Form.InputBase
-      @doc "The the field on the changeset"
-      prop(field, :any, required: true)
+      use SurfaceBulma.Component
 
-      @doc "The string label of the field"
-      prop(label, :string)
-
-      @doc "Disable default fontawesome icons tied to validation"
-      prop(disable_icons, :boolean, default: false)
-
-      @doc "Class to apply to input"
-      prop(class, :css_class, default: [])
-
-      @doc "Any opts you want to pass on to internal `input` from `Phoenix.HTML.Form`"
-      prop(opts, :keyword, default: [])
-
-      @doc "Value to pass on to field if you want to pre-populate"
-      prop(value, :string, default: nil)
-
-      @doc "Should input fill entire width of form?"
-      prop(expanded, :boolean)
-
-      @doc "Disable input"
-      prop(disabled, :boolean)
+      alias SurfaceBulma.Form.InputWrapper
 
       @doc "Static input"
       prop(static, :boolean)
 
+      @doc "Disable input"
+      prop(disabled, :boolean)
+
       @doc "Read only"
       prop(readonly, :boolean)
+
+      @doc "The string label of the field"
+      prop(label, :string)
+
+      @doc "Placeholder value"
+      prop placeholder, :string, default: nil
+
+      @doc "Should input fill entire width of form?"
+      prop(expanded, :boolean)
+
+      @doc """
+      Icon to place on the left side of input box. Must be a valid icon.
+      Bulma does not currently support stacked / layered icons inside a form control.
+      """
+      prop icon_left, :any, default: nil
+
+      @doc """
+      Icon to place on the right side of input box. Must be a valid icon.
+      Setting this prop will overwrite (and not display) any of the generated
+      icons for validations, similar to setting disable_icons="true".
+      Bulma does not currently support stacked / layered icons inside a form control.
+      """
+      prop icon_right, :any, default: nil
+
+      @doc "Whether or not the field is horizontal"
+      prop is_horizontal, :boolean, default: false
+
+      @doc "Disable default fontawesome icons tied to validation"
+      prop(disable_icons, :boolean, default: false)
+
+      @doc "Class to apply to Field"
+      prop(field_class, :css_class, default: [])
 
       @doc "Help text, will be replaced by error text if changeset gets errors"
       prop(help_text, :string)
 
-      @doc "Triggered when the component loses focus"
-      prop(blur, :event)
-
-      @doc "Triggered when the component receives focus"
-      prop(focus, :event)
-
-      @doc "Triggered when the component receives click"
-      prop(capture_click, :event)
-
-      @doc "Triggered when a button on the keyboard is pressed"
-      prop(keydown, :event)
-
-      @doc "Triggered when a button on the keyboard is released"
-      prop(keyup, :event)
+      slot left_addon, args: [:form]
+      slot right_addon, args: [:form]
     end
   end
-
-  import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
-  import Surface
-  alias Surface.Components.Form.ErrorTag
-  alias SurfaceBulma.Icon.FontAwesome, as: FA
-  import Phoenix.LiveView.Helpers
-
-  def display_right_icon?(assigns) do
-    (!Map.get(assigns, :disable_icons) &&
-       (has_error?(assigns) || has_change?(assigns))) ||
-      Map.get(assigns, :icon_right)
-  end
-
-  def display_left_icon?(assigns) do
-    Map.get(assigns, :icon_left)
-  end
-
-  def display_error_icon?(assigns) do
-    !Map.get(assigns, :disable_icons) && !Map.get(assigns, :icon_right) && has_error?(assigns)
-  end
-
-  def display_valid_icon?(assigns) do
-    !Map.get(assigns, :disable_icons) &&
-      !Map.get(assigns, :icon_right) &&
-      has_change?(assigns) &&
-      !has_error?(assigns)
-  end
-
-  def has_error?(assigns) do
-    case assigns do
-      %{__context__: %{{Surface.Components.Form, :form} => form}} when is_map(form) ->
-        field_has_error?(form, assigns.field)
-
-      _ ->
-        false
-    end
-  end
-
-  def has_change?(assigns) do
-    case assigns do
-      %{__context__: %{{Surface.Components.Form, :form} => form}} when is_map(form) ->
-        field_has_change?(form, assigns.field)
-
-      _ ->
-        false
-    end
-  end
-
-  def render_common_text_input_fields(
-        %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
-      )
-      when is_map(form) do
-    ~F"""
-    <ErrorTag class="help is-danger" field={assigns.field} form={form}/>
-    {#if is_binary(Map.get(assigns, :icon_left))}
-      <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
-    {/if}
-    {#if is_binary(Map.get(assigns, :icon_right))}
-      <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
-    {/if}
-    <FA :if={display_error_icon?(assigns)} color="danger" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
-    <FA :if={display_valid_icon?(assigns)} color="success" icon="check" container_class={["is-small", "is-right"]}/>
-    """
-  end
-
-  def render_common_text_input_fields(_), do: nil
 end
