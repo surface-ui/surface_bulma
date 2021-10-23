@@ -12,7 +12,7 @@ defmodule SurfaceBulma.Form do
   slot default, args: [:form]
 
   @doc "Helper function used by the form controls"
-  def field_has_error?(%{errors: errors}, field) do
+  def field_has_error?(%{source: %{errors: errors}}, field) do
     Enum.any?(errors, fn {field_name, _} ->
       field_name == field
     end)
