@@ -27,7 +27,7 @@ defmodule SurfaceBulma.MixProject do
 
   def catalogues do
     [
-      #"priv/catalogue",
+      # "priv/catalogue",
       "deps/surface/priv/catalogue"
     ]
   end
@@ -41,13 +41,12 @@ defmodule SurfaceBulma.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
       {:jason, "~> 1.0"},
-      # {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
+      #{:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
       {:surface_font_awesome, "~> 0.2.0"},
       {:credo, "~> 1.5.6", only: :dev},
       {:surface, "~> 0.6.0"},
-      #{:surface, git: "https://github.com/surface-ui/surface", override: true},
       {:phoenix_ecto, "~> 4.0", only: :test},
-      {:ecto, "~> 3.4.2", only: [:test, :dev]},
+      {:ecto, "~> 3.4.2", only: [:test, :dev]}
     ]
   end
 
