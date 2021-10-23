@@ -30,7 +30,7 @@ defmodule SurfaceBulma.Form.NumberInput do
         disable_icons={@disable_icons}
         icon_left={@icon_left}
         icon_right={@icon_right}
-        has_addons?={has_addons?(assigns)}>
+        has_addons={has_addons?(assigns)}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <NumberInput
         {...included_props(assigns)} 

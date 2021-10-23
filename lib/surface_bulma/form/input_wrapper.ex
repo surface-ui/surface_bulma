@@ -7,7 +7,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
   import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
 
   @doc "Whether the input has addons"
-  prop has_addons?, :boolean
+  prop has_addons, :boolean, default: false
 
   prop field, :any
 
@@ -15,18 +15,22 @@ defmodule SurfaceBulma.Form.InputWrapper do
 
   def render(assigns) do
     ~F"""
-    <Context get={is_addon: is_addon, form: form}>
+    <Context get={is_addon: is_addon} get={Surface.Components.Form, form: form}>
+      {#if is_addon}
+        <#slot :args={form: form} />
+        {render_common_text_input_fields(assigns)}
+        <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
+      {#else}
       <Field class={
         [field: !is_addon,
         control: is_addon,
-        "has-addons": @has_addons?,
+        "has-addons": @has_addons,
         "is-expanded": @expanded,
         "is-horizontal": @is_horizontal
-        ]++ @field_class
-        }
+        ]++ @field_class}
         name={@field}>
-        <Label :if={!@has_addons? && @label} class="label">{@label}</Label>
-          <#slot name="left_addon" />
+        <Label :if={!@has_addons && @label} class="label">{@label}</Label>
+        <#slot name="left_addon" :args={form: form}/>
         <div class={
           "control",
           "has-icons-right": display_right_icon?(assigns),
@@ -34,11 +38,18 @@ defmodule SurfaceBulma.Form.InputWrapper do
           "is-expanded": @expanded
           }>
           <#slot :args={form: form} />
+          {#if is_binary(Map.get(assigns, :icon_left))}
+            <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
+          {/if}
+          {#if is_binary(Map.get(assigns, :icon_right))}
+            <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
+          {/if}
           {render_common_text_input_fields(assigns)}
         </div>
-        <#slot name="right_addon" />
+        <#slot name="right_addon" :args={form: form}/>
         <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
       </Field>
+      {/if}
     </Context>
     """
   end
@@ -87,12 +98,6 @@ defmodule SurfaceBulma.Form.InputWrapper do
 
     ~F"""
     <ErrorTag class="help is-danger" field={field} form={form}/>
-    {#if is_binary(Map.get(assigns, :icon_left))}
-      <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
-    {/if}
-    {#if is_binary(Map.get(assigns, :icon_right))}
-      <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
-    {/if}
     <FA :if={display_error_icon?(assigns)} color="danger" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
     <FA :if={display_valid_icon?(assigns)} color="success" icon="check" container_class={["is-small", "is-right"]}/>
     """
@@ -106,21 +111,21 @@ defmodule SurfaceBulma.Form.InputWrapper do
 
   def render_left_addon(assigns) do
     ~F"""
-      <div :if={slot_assigned?(:left_addon)} class="control">
-        <Context put={is_addon: true}>
-          <#slot name="left_addon" />
-        </Context>
+    <Context :if={slot_assigned?(:left_addon)} put={is_addon: true}>
+      <div class="control">
+        <#slot name="left_addon" />
       </div>
+    </Context>
     """
   end
 
   def render_right_addon(assigns) do
     ~F"""
-      <div :if={slot_assigned?(:right_addon)} class="control">
-        <Context put={is_addon: true}>
-          <#slot name="right_addon" />
-        </Context>
+    <Context :if={slot_assigned?(:right_addon)} put={is_addon: true}>
+      <div class="control">
+        <#slot name="right_addon" />
       </div>
+    </Context>
     """
   end
 
@@ -129,7 +134,6 @@ defmodule SurfaceBulma.Form.InputWrapper do
   end
 
   defp get_form(_) do
-    %{errors: [],
-      changes: []}
+    %{errors: [], changes: []}
   end
 end
