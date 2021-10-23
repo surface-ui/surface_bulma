@@ -189,6 +189,8 @@ defmodule Surface.Components.IconTest do
              {"i", [{"class", "fas fa-camera"}], []}
            ]
 
-    assert Floki.find(parsed, "span.icon-text > :not(span.icon)") == [{"span", [], ["\n  Hello\n"]}]
+    assert Floki.find(parsed, "span.icon-text > :not(span.icon)") == [
+             {"span", [], ["\n  Hello\n"]}
+           ]
   end
 end

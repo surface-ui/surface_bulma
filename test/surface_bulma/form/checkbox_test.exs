@@ -56,8 +56,8 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
            <input id="user_admin" name="user[admin]" type="checkbox" value="true">
                  </label>
                </div>
-          </div>
-          </form>
+           </div>
+           </form>
            """
   end
 
@@ -92,15 +92,15 @@ defmodule SurfaceBulma.Components.Form.CheckboxTest do
       end
 
     assert html =~ """
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-    <input name="user[admin]" type="hidden" value="false">\
-    <input id="user_admin" name="user[admin]" type="checkbox" value="admin">
-          </label>
-        </div>
-    </div>
-    """
+             <div class="field">
+               <div class="control">
+                 <label class="checkbox">
+           <input name="user[admin]" type="hidden" value="false">\
+           <input id="user_admin" name="user[admin]" type="checkbox" value="admin">
+                 </label>
+               </div>
+           </div>
+           """
   end
 
   test "setting the value" do

@@ -2,8 +2,9 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
   use SurfaceBulma.ConnCase
 
   alias SurfaceBulma.Form.Select
+  alias Surface.Components.Form
 
-  def wrap_in_field(html, debug \\false) do
+  def wrap_in_field(html, debug \\ false) do
     wrapped = """
       <div class="field">
         <div class="control">
@@ -12,7 +13,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     </div>
     """
 
-    if debug, do: IO.puts "wrapped:\n" <> wrapped
+    if debug, do: IO.puts("wrapped:\n" <> wrapped)
     wrapped
   end
 
@@ -23,11 +24,13 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
         <Select form="user" field="role" />
         """
       end
-    assert html =~ wrap_in_field("""
-    <div class="select">
-      <select id="user_role" name="user[role]"></select>
-            </div>
-    """)
+
+    assert html =~
+             wrap_in_field("""
+             <div class="select">
+               <select id="user_role" name="user[role]"></select>
+                     </div>
+             """)
   end
 
   test "select with atom field" do
@@ -109,7 +112,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     assert html =~ """
            <select id="user_role" name="user[role]">\
            <option value="admin">Admin</option>\
-           <option value="user" selected>User</option>\
+           <option selected value="user">User</option>\
            </select>
            """
   end
@@ -123,7 +126,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
       end
 
     assert html =~ """
-           <select id="user_role" name="user[role]" disabled>\
+           <select disabled id="user_role" name="user[role]">\
            <option value="admin">Admin</option>\
            <option value="user">User</option>\
            </select>
@@ -143,6 +146,32 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
            <option value="admin">Admin</option>\
            <option value="user">User</option>\
            </select>
+           """
+  end
+
+  test "with form context" do
+    html =
+      render_surface do
+        ~F"""
+        <Form for={:user} csrf_token="test">
+          <Select form="user" field="role" id="role" name="role" options={["Admin": "admin", "User": "user"]}>
+            <:left_addon>BLABLABLA</:left_addon>
+          </Select>
+        </Form>
+        """
+      end
+
+    assert html =~ """
+             <form action="#" method="post"><input name="_csrf_token" type="hidden" value="test">
+               <div class="field">
+               <div class="control">
+                <select id="role" name="role">\
+                <option value="admin">Admin</option>\
+                <option value="user">User</option>\
+                </select>
+               </div>
+           </div>
+           </form>
            """
   end
 end

@@ -7,8 +7,9 @@ defmodule SurfaceBulma.Form.Select do
   """
 
   use SurfaceBulma.Form.InputBase
+
   import SurfaceBulma.Form.InputWrapper,
-          only: [has_addons?: 1, render_left_addon: 1, render_right_addon: 1]
+    only: [has_addons?: 1, render_left_addon: 1, render_right_addon: 1]
 
   alias Surface.Components.Form.{MultipleSelect, Select}
 
@@ -40,7 +41,7 @@ defmodule SurfaceBulma.Form.Select do
       <SurfaceBulma.Form.InputWrapper :let={form: form}
         field={@field}
         expanded={@expanded}
-        has_addons?={has_addons?(assigns)}>
+        has_addons={has_addons?(assigns)}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <div class={
           "select",

@@ -4,7 +4,7 @@ defmodule SurfaceBulma.Form.FieldWrapper do
 
   https://bulma.io/documentation/elements/button/#list-of-buttons
   """
-  use Surface.Component
+  use SurfaceBulma.Component
 
   @doc "Are buttons attached to eachother?"
   prop expanded, :boolean

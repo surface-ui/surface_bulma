@@ -45,7 +45,9 @@ defmodule SurfaceBulma.Component do
       end
 
       def included_props(assigns) do
-        Enum.reduce(unquote(other_component).__props__(), %{}, fn %{name: name}, acc -> Map.put(acc, name, assigns[name]) end)
+        Enum.reduce(unquote(other_component).__props__(), %{}, fn %{name: name}, acc ->
+          Map.put(acc, name, assigns[name])
+        end)
       end
     end
   end

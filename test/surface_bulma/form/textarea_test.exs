@@ -53,7 +53,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ ~r/class="input"/
+    assert html =~ ~r/class="textarea is-normal input"/
   end
 
   test "setting multiple classes" do
@@ -64,7 +64,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ ~r/class="input primary"/
+    assert html =~ ~r/class="textarea is-normal input primary"/
   end
 
   test "passing other options" do
@@ -118,53 +118,5 @@ defmodule Surface.Components.Form.TextAreaTest do
            <textarea id="user_summary" name="user[summary]" phx-value-a="one" phx-value-b="two" phx-value-c="3">
            </textarea>
            """
-  end
-end
-
-defmodule Surface.Components.Form.TextAreaConfigTest do
-  use SurfaceBulma.ConnCase
-
-  alias SurfaceBulma.Form.Input
-  alias SurfaceBulma.Form.TextArea
-
-  test ":default_class config" do
-    using_config TextArea, default_class: "default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <TextArea/>
-          """
-        end
-
-      assert html =~ ~r/class="default_class"/
-    end
-  end
-
-  test "component inherits :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <TextArea/>
-          """
-        end
-
-      assert html =~ ~r/class="inherited_default_class"/
-    end
-  end
-
-  test ":default_class config overrides inherited :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      using_config TextArea, default_class: "default_class" do
-        html =
-          render_surface do
-            ~F"""
-            <TextArea/>
-            """
-          end
-
-        assert html =~ ~r/class="default_class"/
-      end
-    end
   end
 end

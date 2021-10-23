@@ -4,11 +4,13 @@ defmodule SurfaceBulma.Form.TextArea do
   """
 
   use SurfaceBulma.Component
-  import SurfaceBulma.Form.InputWrapper, only: [has_error?: 1, has_change?: 1, render_common_text_input_fields: 1]
+
+  import SurfaceBulma.Form.InputWrapper,
+    only: [has_error?: 1, has_change?: 1, render_common_text_input_fields: 1]
 
   alias Surface.Components.Form.{Field, TextArea, Label}
-  
-  include TextArea
+
+  include(TextArea)
 
   @doc "The string label of the field"
   prop label, :string, required: true

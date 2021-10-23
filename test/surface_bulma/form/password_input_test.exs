@@ -12,7 +12,11 @@ defmodule Surface.Components.Form.PasswordInputTest do
       end
 
     assert html =~ """
-           <input id="user_password" name="user[password]" type="password">
+           <div class="field">
+             <div class="control">
+             <input class="input" id="user_password" name="user[password]" type="password">
+             </div>
+           </div>
            """
   end
 
@@ -24,9 +28,7 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="user_password" name="user[password]" type="password">
-           """
+    assert html =~ ~r/<input id="user_password" name="user[password]"/
   end
 
   test "setting the value" do
@@ -37,31 +39,29 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="user_password" name="user[password]" type="password" value="secret">
-           """
+    assert html =~ ~r/<input .* value="secret"/
   end
 
   test "setting the class" do
     html =
       render_surface do
         ~F"""
-        <PasswordInput form="user" field="password" class="input" />
+        <PasswordInput form="user" field="password" class="test" />
         """
       end
 
-    assert html =~ ~r/class="input"/
+    assert html =~ ~r/class="input test"/
   end
 
   test "setting multiple classes" do
     html =
       render_surface do
         ~F"""
-        <PasswordInput form="user" field="password" class="input primary" />
+        <PasswordInput form="user" field="password" class="primary password" />
         """
       end
 
-    assert html =~ ~r/class="input primary"/
+    assert html =~ ~r/class="input primary password"/
   end
 
   test "passing other options" do
@@ -72,9 +72,7 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ """
-           <input autofocus="autofocus" id="user_password" name="user[password]" type="password">
-           """
+    assert html =~ ~r(<input autofocus="autofocus".*>)
   end
 
   test "events with parent live view as target" do
@@ -96,9 +94,7 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="secret" name="secret" type="password">
-           """
+    assert html =~ ~r(<input .* id="secret" name="secret" type="password">)
   end
 
   test "setting the phx-value-* values" do
@@ -112,53 +108,5 @@ defmodule Surface.Components.Form.PasswordInputTest do
     assert html =~ """
            <input id="user_password" name="user[password]" phx-value-a="one" phx-value-b="two" phx-value-c="3" type="password">
            """
-  end
-end
-
-defmodule Surface.Components.Form.PasswordInputConfigTest do
-  use SurfaceBulma.ConnCase
-
-  alias SurfaceBulma.Form.Input
-  alias SurfaceBulma.Form.PasswordInput
-
-  test ":default_class config" do
-    using_config PasswordInput, default_class: "default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <PasswordInput/>
-          """
-        end
-
-      assert html =~ ~r/class="default_class"/
-    end
-  end
-
-  test "component inherits :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      html =
-        render_surface do
-          ~F"""
-          <PasswordInput/>
-          """
-        end
-
-      assert html =~ ~r/class="inherited_default_class"/
-    end
-  end
-
-  test ":default_class config overrides inherited :default_class from Form.Input" do
-    using_config Input, default_class: "inherited_default_class" do
-      using_config PasswordInput, default_class: "default_class" do
-        html =
-          render_surface do
-            ~F"""
-            <PasswordInput/>
-            """
-          end
-
-        assert html =~ ~r/class="default_class"/
-      end
-    end
   end
 end

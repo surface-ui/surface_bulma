@@ -94,16 +94,17 @@ defmodule Surface.Components.TagTest do
   end
 
   test "tags can have addons" do
-    html = render_surface do
-      ~F"""
-      <Tag label="tag">
-        <:addons><Tag label="tag2"/></:addons>
-      </Tag>
-      """
+    html =
+      render_surface do
+        ~F"""
+        <Tag label="tag">
+          <:addons><Tag label="tag2"/></:addons>
+        </Tag>
+        """
       end
-    
+
     assert html =~ """
-           
+
            <div class="tags has-addons">
              <span class="tag">
              tag

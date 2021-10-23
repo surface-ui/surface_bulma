@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
     # TelephoneInput,
     TextArea,
     TextInput,
-    TextInputLeftAddon,
+    TextInputLeftAddon
   }
 
   alias SurfaceBulma.{Button, ButtonGroup, Title}
@@ -59,7 +59,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Already a member?">
         <RadioButton
-        field="example_03_member"
+        field={:example_03_member}
         options={
           ["yes", "no"]
         }

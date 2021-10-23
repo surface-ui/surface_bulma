@@ -227,14 +227,14 @@ defmodule Surface.Components.ModalTest do
     alias SurfaceBulma.Modal.Card
 
     data show_modal, :boolean, default: true
-    
+
     @impl true
     def render(assigns) do
       ~F"""
         <Card show={@show_modal}>Modal content</Card>
       """
     end
-    
+
     @impl true
     def handle_event("modal_close", _, socket) do
       {:noreply, assign(socket, show_modal: false)}
