@@ -9,6 +9,9 @@ defmodule SurfaceBulma.Form.InputWrapper do
   @doc "Whether the input has addons"
   prop has_addons, :boolean, default: false
 
+  @doc "Whether or not the right_icon should always be hidden"
+  prop disable_right_icon, :boolean, default: false
+
   prop field, :any
 
   slot default, args: [:form]
@@ -41,7 +44,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
           {#if is_binary(Map.get(assigns, :icon_left))}
             <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
           {/if}
-          {#if is_binary(Map.get(assigns, :icon_right))}
+          {#if is_binary(Map.get(assigns, :icon_right)) && !@disable_right_icon}
             <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
           {/if}
           {render_common_text_input_fields(assigns)}
@@ -54,6 +57,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
     """
   end
 
+  def display_right_icon?(%{disable_right_icon: true}), do: false
   def display_right_icon?(assigns) do
     (!Map.get(assigns, :disable_icons) &&
        (has_error?(assigns) || has_change?(assigns))) ||
@@ -65,14 +69,14 @@ defmodule SurfaceBulma.Form.InputWrapper do
   end
 
   def display_error_icon?(assigns) do
-    !Map.get(assigns, :disable_icons) && !Map.get(assigns, :icon_right) && has_error?(assigns)
+    !Map.get(assigns, :disable_icons) && !Map.get(assigns, :icon_right) && has_error?(assigns) && display_right_icon?(assigns)
   end
 
   def display_valid_icon?(assigns) do
     !Map.get(assigns, :disable_icons) &&
       !Map.get(assigns, :icon_right) &&
       has_change?(assigns) &&
-      !has_error?(assigns)
+      !has_error?(assigns) && display_right_icon?(assigns)
   end
 
   def has_error?(assigns) do

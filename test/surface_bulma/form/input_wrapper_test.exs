@@ -44,9 +44,11 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
     import SurfaceBulma.Form.InputWrapper
     prop field, :any
 
+    prop disable_right_icon, :boolean
+
     def render(assigns) do
       ~F"""
-      <InputWrapper field={@field} label={@label} icon_right={@icon_right} has_addons={has_addons?(assigns)} :let={form: form}>
+      <InputWrapper field={@field} label={@label} icon_right={@icon_right} has_addons={has_addons?(assigns)} disable_right_icon={@disable_right_icon} :let={form: form}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         TestInput{form && form.id}
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
@@ -186,6 +188,32 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
 
       refute html =~ ~r/fa-check/
       assert html =~ ~r/right_test/
+    end
+
+    test "right icon is not displayed if explicitly disabled" do
+      html =
+        render_surface do
+          ~F"""
+          <Surface.Components.Form csrf_token={false} for={User.changeset(%User{}, %{date: "Test"})}>
+            <TestInput field={:date} disable_right_icon />
+          </Surface.Components.Form>
+          """
+        end
+
+      refute html =~ ~r/fa-exclamation-triangle/
+      refute html =~ ~r/right_test/
+
+      html =
+        render_surface do
+          ~F"""
+          <Surface.Components.Form csrf_token={false} for={User.changeset(%User{}, %{name: "Test"})}>
+            <TestInput field={:name} icon_right="right_test" disable_right_icon/>
+          </Surface.Components.Form>
+          """
+        end
+
+      refute html =~ ~r/fa-check/
+      refute html =~ ~r/right_test/
     end
   end
 end
