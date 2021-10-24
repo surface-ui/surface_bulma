@@ -41,7 +41,7 @@ defmodule SurfaceBulma.Form.Select do
       <SurfaceBulma.Form.InputWrapper :let={form: form}
         field={@field}
         expanded={@expanded}
-        no_right_icon={true}
+        disable_right_icon={true}
         has_addons={has_addons?(assigns)}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <div class={
