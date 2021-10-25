@@ -1,4 +1,12 @@
 defmodule SurfaceBulma.Form.InputBase do
+  defmodule RightAddon do
+    use Surface.Component, slot: "right_addon"
+    slot default
+  end
+  defmodule LeftAddon do
+    use Surface.Component, slot: "left_addon"
+    slot default
+  end
   defmacro __using__(_) do
     quote do
       use SurfaceBulma.Component
@@ -49,8 +57,9 @@ defmodule SurfaceBulma.Form.InputBase do
       @doc "Help text, will be replaced by error text if changeset gets errors"
       prop(help_text, :string)
 
-      slot left_addon, args: [:form]
-      slot right_addon, args: [:form]
+      slot left_addon #, args: [:form]
+      slot right_addon #, args: [:form]
     end
   end
+
 end

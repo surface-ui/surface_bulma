@@ -33,7 +33,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
         ]++ @field_class}
         name={@field}>
         <Label :if={!@has_addons && @label} class="label">{@label}</Label>
-        <#slot name="left_addon" :args={form: form}/>
+        <#slot name="left_addon" />
         <div class={
           "control",
           "has-icons-right": display_right_icon?(assigns),
@@ -49,7 +49,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
           {/if}
           {render_common_text_input_fields(assigns)}
         </div>
-        <#slot name="right_addon" :args={form: form}/>
+        <#slot name="right_addon" />
         <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
       </Field>
       {/if}
@@ -116,9 +116,11 @@ defmodule SurfaceBulma.Form.InputWrapper do
   def render_left_addon(assigns) do
     ~F"""
     <Context :if={slot_assigned?(:left_addon)} put={is_addon: true}>
-      <div class="control">
-        <#slot name="left_addon" />
-      </div>
+      {#for {_, index} <- Enum.with_index(@left_addon)}
+        <div class="control">
+          <#slot name="left_addon" index={index}/>
+        </div>
+      {/for}
     </Context>
     """
   end
@@ -126,9 +128,11 @@ defmodule SurfaceBulma.Form.InputWrapper do
   def render_right_addon(assigns) do
     ~F"""
     <Context :if={slot_assigned?(:right_addon)} put={is_addon: true}>
-      <div class="control">
-        <#slot name="right_addon" />
-      </div>
+      {#for {_, index} <- Enum.with_index(@right_addon)}
+        <div class="control">
+          <#slot name="right_addon" index={index}/>
+        </div>
+      {/for}
     </Context>
     """
   end

@@ -38,6 +38,7 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
     refute html =~ ~r[class="label">\n.*Test\n.*</label>]
   end
 
+    alias SurfaceBulma.Form.InputBase.{RightAddon, LeftAddon}
   defmodule TestInput do
     use SurfaceBulma.Form.InputBase
 
@@ -71,17 +72,43 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
     assert html =~ """
 
              <div class="field has-addons">
-             <div class="control">
-             TestInput
-             </div>
                <div class="control">
              TestInput
                </div>
-             <div class="control">
+               <div class="control">
              TestInput
-             </div>
+               </div>
+               <div class="control">
+             TestInput
+               </div>
            </div>
            """
+  end
+
+  test "multiple addons can be set" do
+    html = render_surface do
+      ~F"""
+      <TestInput label="parent">
+        <LeftAddon><TestInput label="left" /></LeftAddon>
+        <LeftAddon><TestInput label="nested left" /></LeftAddon>
+      </TestInput>
+      """
+    end
+
+    assert html =~ """
+
+      <div class="field has-addons">
+        <div class="control">
+      TestInput
+        </div>
+        <div class="control">
+      TestInput
+        </div>
+        <div class="control">
+      TestInput
+        </div>
+    </div>
+    """
   end
 
   defmodule User do
