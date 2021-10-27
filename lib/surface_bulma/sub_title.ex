@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.SubTitle do
   @moduledoc """
-  <hX> elements of subtitle type
+  `<hX>` elements of subtitle type
   """
 
   use Surface.Component

@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Title do
   @moduledoc """
-  <hX> elements of title type
+  `<hX>` elements of title type
   """
 
   use Surface.Component
