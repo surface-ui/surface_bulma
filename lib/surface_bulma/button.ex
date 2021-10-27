@@ -70,6 +70,11 @@ defmodule SurfaceBulma.Button do
   prop opts, :keyword, default: []
 
   @doc """
+  Whether or not this button is used as an addon to a form field.
+  """
+  prop addon, :boolean, default: false
+
+  @doc """
   The content of the generated `<button>` element. If no content is provided,
   the value of property `label` is used instead.
   """
@@ -77,31 +82,43 @@ defmodule SurfaceBulma.Button do
 
   def render(assigns) do
     ~F"""
-    <button
-      type={@type}
-      aria-label={@aria_label}
-      :on-click={@click}
-      disabled={@disabled}
-      value={@value}
-      class={
-        [button: @class == [],
-        "is-#{@color}": @color,
-        "is-#{@size}": @size,
-        "is-fullwidth": @expand,
-        "is-outlined": @outlined,
-        "is-rounded": @rounded,
-        "is-hovered": @hovered,
-        "is-focused": @focused,
-        "is-active": @active,
-        "is-loading": @loading,
-        "is-selected": @selected,
-        "is-link": @link,
-        "is-static": @static
-      ] ++ @class
-      }
-      :attrs={@opts}>
-      <#slot>{@label}</#slot>
-    </button>
+    {#if @addon }
+      <div class="control">
+        {render_button(assigns)}
+      </div>
+    {#else}
+      {render_button(assigns)}
+    {/if}
+    """
+  end
+
+  def render_button(assigns) do
+    ~F"""
+      <button
+        type={@type}
+        aria-label={@aria_label}
+        :on-click={@click}
+        disabled={@disabled}
+        value={@value}
+        class={
+          [button: @class == [],
+          "is-#{@color}": @color,
+          "is-#{@size}": @size,
+          "is-fullwidth": @expand,
+          "is-outlined": @outlined,
+          "is-rounded": @rounded,
+          "is-hovered": @hovered,
+          "is-focused": @focused,
+          "is-active": @active,
+          "is-loading": @loading,
+          "is-selected": @selected,
+          "is-link": @link,
+          "is-static": @static
+        ] ++ @class
+        }
+        :attrs={@opts}>
+        <#slot>{@label}</#slot>
+      </button>
     """
   end
 end
