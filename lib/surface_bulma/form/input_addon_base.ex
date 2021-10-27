@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Form.InputAddonBase do
+  @moduledoc false
   defmacro __using__(_) do
     quote do
       @doc """

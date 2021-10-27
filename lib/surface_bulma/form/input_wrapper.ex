@@ -99,23 +99,22 @@ defmodule SurfaceBulma.Form.InputWrapper do
     slot_assigned?(:left_addon) || slot_assigned?(:right_addon)
   end
 
-  def render_common_text_input_fields(
-        %{__context__: %{{Surface.Components.Form, :form} => form}} = assigns
-      )
-      when is_map(form) do
-    field =
-      if is_binary(assigns.field) do
-        String.to_atom(assigns.field)
-      else
-        assigns.field
-      end
+  def render_common_text_input_fields(assigns) do
+    if form = get_form(assigns) do
+      field =
+        if is_binary(assigns.field) do
+          String.to_atom(assigns.field)
+        else
+          assigns.field
+        end
 
-    ~F"""
-    <ErrorTag class="help is-danger" field={field} form={form}/>
-    <FA :if={display_error_icon?(assigns)} color="danger" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
-    <FA :if={display_valid_icon?(assigns)} color="success" icon="check" container_class={["is-small", "is-right"]}/>
-    """
+      ~F"""
+      <ErrorTag class="help is-danger" field={field} form={form}/>
+      <FA :if={display_error_icon?(assigns)} color="danger" icon="exclamation-triangle" container_class={["is-small", "is-right"]}/>
+      <FA :if={display_valid_icon?(assigns)} color="success" icon="check" container_class={["is-small", "is-right"]}/>
+      """
+    else
+      nil
+    end
   end
-
-  def render_common_text_input_fields(_), do: nil
 end

@@ -34,7 +34,7 @@ defmodule SurfaceBulma.Form.DateInput do
         <DateInput
         {...props} 
         class={input_classes}
-        form={form || @form}
+        form={@form || form}
         field={@field}
         value={@value}
         opts={

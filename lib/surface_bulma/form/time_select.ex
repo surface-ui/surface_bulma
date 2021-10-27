@@ -1,4 +1,7 @@
 defmodule SurfaceBulma.Form.TimeSelect do
+  @moduledoc """
+  A time selector with configurable separators between the parts of the time.
+  """
   use SurfaceBulma.Form.FieldBase
   use SurfaceBulma.Form.InputIconBase, :left
   use SurfaceBulma.Form.InputAddonBase
@@ -51,7 +54,7 @@ defmodule SurfaceBulma.Form.TimeSelect do
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <TimeSelect
           {...props}
-          form={form || @form}
+          form={@form || form}
           hour={@hour || []}
           minute={@minute || [class: "pl-3"]}
           opts={@opts}

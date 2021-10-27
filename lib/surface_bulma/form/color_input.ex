@@ -27,7 +27,7 @@ defmodule SurfaceBulma.Form.ColorInput do
         {...props} 
         class={input_classes}
         field={@field}
-        form={form || @form}
+        form={@form || form}
         value={@value}
         opts={
           [

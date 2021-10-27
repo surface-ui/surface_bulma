@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Form.InputIconBase do
+  @moduledoc false
   defmacro __using__(side) do
     case side do
       :left ->

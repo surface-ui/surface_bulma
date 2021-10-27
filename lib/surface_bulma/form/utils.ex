@@ -1,12 +1,19 @@
 defmodule SurfaceBulma.Form.Utils do
-  def input_classes(assigns) do
-    [
-      "input",
-      "is-danger": has_error?(assigns),
-      "is-success": has_change?(assigns) && !has_error?(assigns),
-      "is-#{assigns[:size]}": assigns[:size] != "normal",
-      "is-static": assigns[:static]
-    ] ++ (assigns[:class] || [])
+  def input_classes(assigns, other_classes \\ [])
+
+  def input_classes(assigns, other_classes) when is_binary(other_classes) do
+    input_classes(assigns, [other_classes])
+  end
+
+  def input_classes(assigns, other_classes) do
+    ["input"] ++
+      other_classes ++
+      [
+        "is-danger": has_error?(assigns),
+        "is-success": has_change?(assigns) && !has_error?(assigns),
+        "is-#{assigns[:size]}": assigns[:size] != "normal",
+        "is-static": assigns[:static]
+      ] ++ (assigns[:class] || [])
   end
 
   def display_right_icon?(%{disable_right_icon: true}), do: false
@@ -59,12 +66,13 @@ defmodule SurfaceBulma.Form.Utils do
 
   def field_has_change?(_not_form, _field), do: false
 
-  defp get_form(%{__context__: %{{Surface.Components.Form, :form} => form}}) when is_map(form) do
-    form
-  end
-
-  defp get_form(_) do
-    %{errors: [], changes: []}
+  @doc "Gets the form from the context. Works with a `Surface.Components.Form` and `SurfaceBulma.Form`."
+  def get_form(%{__context__: context}) do
+    case context do
+      %{{Surface.Components.Form, :form} => form} -> form
+      %{{SurfaceBulma.Form, :form} => form} -> form
+      _ -> nil
+    end
   end
 
   def text_size(size) do

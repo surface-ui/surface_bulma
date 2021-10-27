@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Form.InputBase do
+  @moduledoc false
   defmacro __using__(_) do
     quote do
       use SurfaceBulma.Form.FieldBase

@@ -57,14 +57,14 @@ defmodule SurfaceBulma.Form.Select do
         {#if @multiple}
           <MultipleSelect
             {...props}
-            form={form || @form}
+            form={@form || form}
             opts={[disabled: @disabled] ++ @opts }
             class={["is-fullwidth": @expanded, rounded: @rounded] ++ (@class || [])}
             />
         {#else}
           <Select
             {...props}
-            form={form || @form}
+            form={@form || form}
             opts={[disabled: @disabled] ++ @opts }
             class={
               [

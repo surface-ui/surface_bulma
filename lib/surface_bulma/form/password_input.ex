@@ -35,7 +35,7 @@ defmodule SurfaceBulma.Form.PasswordInput do
         <PasswordInput {...props}
         class={input_classes}
         value={@value}
-        form={form || @form}
+        form={@form || form}
         opts={
           [
             placeholder: @placeholder,

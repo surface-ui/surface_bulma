@@ -1,4 +1,7 @@
 defmodule SurfaceBulma.Form.Reset do
+  @moduledoc """
+  A thin wrapper around `Surface.Components.Form.Reset`
+  """
   use SurfaceBulma.Component
   alias Surface.Components.Form.Reset
 

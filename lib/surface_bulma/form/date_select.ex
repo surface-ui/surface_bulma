@@ -1,4 +1,7 @@
 defmodule SurfaceBulma.Form.DateSelect do
+  @moduledoc """
+  A date selector with configurable separators between the parts of the date.
+  """
   use SurfaceBulma.Form.FieldBase
   use SurfaceBulma.Form.InputIconBase, :left
   use SurfaceBulma.Form.InputAddonBase
@@ -49,7 +52,7 @@ defmodule SurfaceBulma.Form.DateSelect do
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <DateSelect
           {...props}
-          form={form || @form}
+          form={@form || form}
           opts={@opts}
           builder={builder}
           year={@year || []}

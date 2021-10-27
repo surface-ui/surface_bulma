@@ -36,7 +36,7 @@ defmodule SurfaceBulma.Form.SearchInput do
         {...included_props(assigns)} 
         class={input_classes}
         field={@field}
-        form={form || @form}
+        form={@form || form}
         value={@value}
         opts={
           [

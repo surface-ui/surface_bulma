@@ -33,7 +33,7 @@ defmodule SurfaceBulma.Form.TextInput do
         {...included_props(assigns)} 
         class={input_classes}
         field={@field}
-        form={form || @form}
+        form={@form || form}
         value={@value}
         opts={
           [
