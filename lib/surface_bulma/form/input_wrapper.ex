@@ -1,32 +1,40 @@
 defmodule SurfaceBulma.Form.InputWrapper do
-  use SurfaceBulma.Form.InputBase
+  @moduledoc """
+  This component provides a wrapper for form inputs.
+
+  This can be used to wrap new inputs that want to have addons and icons.
+  """
+  use SurfaceBulma.Form.FieldBase
+  use SurfaceBulma.Form.InputAddonBase
+  use SurfaceBulma.Form.InputIconBase
 
   alias Surface.Components.Form.{ErrorTag, Field, Label}
   alias SurfaceBulma.Icon.FontAwesome, as: FA
+
+  import SurfaceBulma.Form.Utils
   import Phoenix.LiveView.Helpers
-  import SurfaceBulma.Form, only: [field_has_error?: 2, field_has_change?: 2]
 
   @doc "Whether the input has addons"
   prop has_addons, :boolean, default: false
 
-  @doc "Whether or not the right_icon should always be hidden"
-  prop disable_right_icon, :boolean, default: false
-
   prop field, :any
+
+  @doc "Attrs to add to the control div"
+  prop control_attrs, :map, default: %{}
+
+  @doc "Disable default fontawesome icons tied to validation"
+  prop(disable_icons, :boolean, default: false)
 
   slot default, args: [:form]
 
   def render(assigns) do
     ~F"""
-    <Context get={is_addon: is_addon} get={Surface.Components.Form, form: form}>
+    <Context get={is_addon: is_addon}>
       {#if is_addon}
-        <#slot :args={form: form} />
-        {render_common_text_input_fields(assigns)}
-        <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
+        {render_input(assigns)}
       {#else}
       <Field class={
-        [field: !is_addon,
-        control: is_addon,
+        ["field",
         "has-addons": @has_addons,
         "is-expanded": @expanded,
         "is-horizontal": @is_horizontal
@@ -34,21 +42,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
         name={@field}>
         <Label :if={!@has_addons && @label} class="label">{@label}</Label>
         <#slot name="left_addon" />
-        <div class={
-          "control",
-          "has-icons-right": display_right_icon?(assigns),
-          "has-icons-left": display_left_icon?(assigns),
-          "is-expanded": @expanded
-          }>
-          <#slot :args={form: form} />
-          {#if is_binary(Map.get(assigns, :icon_left))}
-            <FA icon={Map.get(assigns, :icon_left)} container_class={["is-small", "is-left"]}/>
-          {/if}
-          {#if is_binary(Map.get(assigns, :icon_right)) && !@disable_right_icon}
-            <FA icon={Map.get(assigns, :icon_right)} container_class={["is-small", "is-right"]}/>
-          {/if}
-          {render_common_text_input_fields(assigns)}
-        </div>
+        {render_input(assigns)}
         <#slot name="right_addon" />
         <span :if={@help_text && !has_error?(assigns)} class="help">{@help_text}</span>
       </Field>
@@ -57,36 +51,52 @@ defmodule SurfaceBulma.Form.InputWrapper do
     """
   end
 
-  def display_right_icon?(%{disable_right_icon: true}), do: false
-  def display_right_icon?(assigns) do
-    (!Map.get(assigns, :disable_icons) &&
-       (has_error?(assigns) || has_change?(assigns))) ||
-      Map.get(assigns, :icon_right)
+  def render_input(assigns) do
+    ~F"""
+    <Context get={Surface.Components.Form, form: form}>
+      <div class={
+        "control",
+        "has-icons-right": display_right_icon?(assigns),
+        "has-icons-left": display_left_icon?(assigns),
+        "is-expanded": @expanded
+        } {...@control_attrs}>
+        <#slot :args={form: form} />
+        {#if is_binary(Map.get(assigns, :icon_left))}
+          <FA icon={Map.get(assigns, :icon_left)} container_class={["is-#{@size}", "is-left"]}/>
+        {/if}
+        {#if is_binary(Map.get(assigns, :icon_right))}
+          <FA icon={Map.get(assigns, :icon_right)} size={@size} container_class={["is-right"]}/>
+        {/if}
+        {render_common_text_input_fields(assigns)}
+      </div>
+    </Context>
+    """
   end
 
-  def display_left_icon?(assigns) do
-    Map.get(assigns, :icon_left)
+  def render_left_addon(assigns) do
+    ~F"""
+    <Context :if={slot_assigned?(:left_addon)} put={is_addon: true}>
+      {#for {_, index} <- Enum.with_index(@left_addon)}
+        <Context put={is_addon: true}>
+          <#slot name="left_addon" index={index}/>
+        </Context>
+      {/for}
+    </Context>
+    """
   end
 
-  def display_error_icon?(assigns) do
-    !Map.get(assigns, :disable_icons) && !Map.get(assigns, :icon_right) && has_error?(assigns) && display_right_icon?(assigns)
+  def render_right_addon(assigns) do
+    ~F"""
+    <Context :if={slot_assigned?(:right_addon)} put={is_addon: true}>
+      {#for {_, index} <- Enum.with_index(@right_addon)}
+        <#slot name="right_addon" index={index}/>
+      {/for}
+    </Context>
+    """
   end
 
-  def display_valid_icon?(assigns) do
-    !Map.get(assigns, :disable_icons) &&
-      !Map.get(assigns, :icon_right) &&
-      has_change?(assigns) &&
-      !has_error?(assigns) && display_right_icon?(assigns)
-  end
-
-  def has_error?(assigns) do
-    get_form(assigns)
-    |> field_has_error?(assigns.field)
-  end
-
-  def has_change?(assigns) do
-    get_form(assigns)
-    |> field_has_change?(assigns.field)
+  def has_addons?(assigns) do
+    slot_assigned?(:left_addon) || slot_assigned?(:right_addon)
   end
 
   def render_common_text_input_fields(
@@ -108,40 +118,4 @@ defmodule SurfaceBulma.Form.InputWrapper do
   end
 
   def render_common_text_input_fields(_), do: nil
-
-  def has_addons?(assigns) do
-    slot_assigned?(:left_addon) || slot_assigned?(:right_addon)
-  end
-
-  def render_left_addon(assigns) do
-    ~F"""
-    <Context :if={slot_assigned?(:left_addon)} put={is_addon: true}>
-      {#for {_, index} <- Enum.with_index(@left_addon)}
-        <div class="control">
-          <#slot name="left_addon" index={index}/>
-        </div>
-      {/for}
-    </Context>
-    """
-  end
-
-  def render_right_addon(assigns) do
-    ~F"""
-    <Context :if={slot_assigned?(:right_addon)} put={is_addon: true}>
-      {#for {_, index} <- Enum.with_index(@right_addon)}
-        <div class="control">
-          <#slot name="right_addon" index={index}/>
-        </div>
-      {/for}
-    </Context>
-    """
-  end
-
-  defp get_form(%{__context__: %{{Surface.Components.Form, :form} => form}}) when is_map(form) do
-    form
-  end
-
-  defp get_form(_) do
-    %{errors: [], changes: []}
-  end
 end

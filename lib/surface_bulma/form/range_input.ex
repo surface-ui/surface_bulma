@@ -8,9 +8,7 @@ defmodule SurfaceBulma.Form.RangeInput do
   - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
   """
 
-  use SurfaceBulma.Form.InputBase
-
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.RangeInput
   include(RangeInput)
@@ -19,7 +17,7 @@ defmodule SurfaceBulma.Form.RangeInput do
     props = included_props(assigns)
 
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         label={@label}
         field={@field}
         expanded={@expanded}
@@ -49,7 +47,7 @@ defmodule SurfaceBulma.Form.RangeInput do
             min: @min,
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

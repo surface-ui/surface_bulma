@@ -3,8 +3,7 @@ defmodule SurfaceBulma.Form.TelephoneInput do
   The telephone field component as defined here: https://bulma.io/documentation/form/input/
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.TelephoneInput
 
@@ -17,12 +16,11 @@ defmodule SurfaceBulma.Form.TelephoneInput do
 
   def render(assigns) do
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         label={@label}
         expanded={@expanded}
         help_text={@help_text}
-        disable_icons={@disable_icons}
         icon_left={@icon_left}
         icon_right={@icon_right}
         field_class={@field_class}
@@ -48,7 +46,7 @@ defmodule SurfaceBulma.Form.TelephoneInput do
             minlength: @minlength
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

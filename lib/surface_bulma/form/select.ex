@@ -6,7 +6,11 @@ defmodule SurfaceBulma.Form.Select do
   - https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#multiple_select/4
   """
 
-  use SurfaceBulma.Form.InputBase
+  use SurfaceBulma.Form.FieldBase
+  use SurfaceBulma.Form.InputIconBase, :left
+  use SurfaceBulma.Form.InputAddonBase
+
+  alias SurfaceBulma.Form.InputWrapper
 
   import SurfaceBulma.Form.InputWrapper,
     only: [has_addons?: 1, render_left_addon: 1, render_right_addon: 1]
@@ -15,10 +19,10 @@ defmodule SurfaceBulma.Form.Select do
 
   include(Select)
 
-  @doc "Size of select in css sense"
-  prop size, :string, values: ["small", "normal", "medium", "large"]
-
   use SurfaceBulma.ColorProp
+
+  @doc "Disable the select"
+  prop(disabled, :boolean)
 
   @doc "Will show rounded dropdown, ignored for multiple select"
   prop rounded, :boolean
@@ -38,10 +42,10 @@ defmodule SurfaceBulma.Form.Select do
       end)
 
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         expanded={@expanded}
-        disable_right_icon={true}
+        icon_left={@icon_left}
         has_addons={has_addons?(assigns)}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <div class={
@@ -71,7 +75,7 @@ defmodule SurfaceBulma.Form.Select do
         {/if}
         </div>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

@@ -5,8 +5,7 @@ defmodule SurfaceBulma.Form.NumberInput do
   - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.NumberInput
   include(NumberInput)
@@ -21,8 +20,10 @@ defmodule SurfaceBulma.Form.NumberInput do
   prop step, :integer
 
   def render(assigns) do
+    input_classes = input_classes(assigns)
+
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         label={@label}
         expanded={@expanded}
@@ -34,12 +35,7 @@ defmodule SurfaceBulma.Form.NumberInput do
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <NumberInput
         {...included_props(assigns)} 
-        class={[
-          "input",
-          "is-danger": has_error?(assigns),
-          "is-success": has_change?(assigns) && !has_error?(assigns),
-          "is-static": @static
-          ] ++ (@class || [])}
+        class={input_classes}
         field={@field}
         form={form || @form}
         value={@value}
@@ -52,7 +48,7 @@ defmodule SurfaceBulma.Form.NumberInput do
             step: @step,
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

@@ -3,8 +3,7 @@ defmodule SurfaceBulma.Form.TextInput do
   The text field component as defined here: https://bulma.io/documentation/form/input/
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.TextInput
 
@@ -16,8 +15,10 @@ defmodule SurfaceBulma.Form.TextInput do
   prop(minlength, :integer)
 
   def render(assigns) do
+    input_classes = input_classes(assigns)
+
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         label={@label}
         expanded={@expanded}
@@ -27,15 +28,10 @@ defmodule SurfaceBulma.Form.TextInput do
         icon_right={@icon_right}
         field_class={@field_class}
         has_addons={has_addons?(assigns)}>
-        <:left_addon>{render_left_addon(assigns)}</:left_addon>
+        <:left_addon><#slot name="left_addon" /></:left_addon>
         <TextInput
         {...included_props(assigns)} 
-        class={[
-          "input",
-          "is-danger": has_error?(assigns),
-          "is-success": has_change?(assigns) && !has_error?(assigns),
-          "is-static": @static
-          ] ++ (@class || [])}
+        class={input_classes}
         field={@field}
         form={form || @form}
         value={@value}
@@ -48,7 +44,7 @@ defmodule SurfaceBulma.Form.TextInput do
             minlength: @minlength
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

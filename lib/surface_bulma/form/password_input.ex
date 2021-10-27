@@ -6,9 +6,8 @@ defmodule SurfaceBulma.Form.PasswordInput do
   - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
   """
 
-  use SurfaceBulma.Form.InputBase
+  use SurfaceBulma.Form.TextInputBase
 
-  import SurfaceBulma.Form.InputWrapper
   alias Surface.Components.Form.PasswordInput
   include(PasswordInput)
 
@@ -19,10 +18,11 @@ defmodule SurfaceBulma.Form.PasswordInput do
   prop(minlength, :integer)
 
   def render(assigns) do
+    input_classes = input_classes(assigns)
     props = included_props(assigns)
 
     ~F"""
-      <SurfaceBulma.Form.InputWrapper  :let={form: form}
+      <InputWrapper  :let={form: form}
         label={@label}
         field={@field}
         expanded={@expanded}
@@ -33,12 +33,7 @@ defmodule SurfaceBulma.Form.PasswordInput do
         has_addons={has_addons?(assigns)}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <PasswordInput {...props}
-        class={[
-          "input",
-          "is-danger": has_error?(assigns),
-          "is-success": has_change?(assigns) && !has_error?(assigns),
-          "is-static": @static
-          ] ++ (@class || [])}
+        class={input_classes}
         value={@value}
         form={form || @form}
         opts={
@@ -50,7 +45,7 @@ defmodule SurfaceBulma.Form.PasswordInput do
             minlength: @minlength,
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

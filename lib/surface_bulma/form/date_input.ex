@@ -5,8 +5,7 @@ defmodule SurfaceBulma.Form.DateInput do
   - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.DateInput
   include(DateInput)
@@ -19,9 +18,10 @@ defmodule SurfaceBulma.Form.DateInput do
 
   def render(assigns) do
     props = included_props(assigns)
+    input_classes = input_classes(assigns)
 
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         label={@label}
         expanded={@expanded}
         field={@field}
@@ -33,12 +33,7 @@ defmodule SurfaceBulma.Form.DateInput do
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <DateInput
         {...props} 
-        class={[
-          "input",
-          "is-danger": has_error?(assigns),
-          "is-success": has_change?(assigns) && !has_error?(assigns),
-          "is-static": @static
-          ] ++ (@class || [])}
+        class={input_classes}
         form={form || @form}
         field={@field}
         value={@value}
@@ -50,7 +45,7 @@ defmodule SurfaceBulma.Form.DateInput do
             min: @min,
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

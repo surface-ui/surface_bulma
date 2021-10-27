@@ -3,8 +3,7 @@ defmodule SurfaceBulma.Form.EmailInput do
   The email field component as defined here: https://bulma.io/documentation/form/input/
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.EmailInput
 
@@ -17,7 +16,7 @@ defmodule SurfaceBulma.Form.EmailInput do
 
   def render(assigns) do
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         label={@label}
         expanded={@expanded}
@@ -48,7 +47,7 @@ defmodule SurfaceBulma.Form.EmailInput do
             minlength: @minlength
           ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end

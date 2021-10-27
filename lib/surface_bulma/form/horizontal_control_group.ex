@@ -6,7 +6,7 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
   You cannot use labels on the internal form controls or it will break the layout.
   """
 
-  use Surface.Component
+  use SurfaceBulma.Component
 
   alias Surface.Components.Form.{Label}
 

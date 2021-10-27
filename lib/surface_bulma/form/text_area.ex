@@ -5,8 +5,8 @@ defmodule SurfaceBulma.Form.TextArea do
 
   use SurfaceBulma.Component
 
-  import SurfaceBulma.Form.InputWrapper,
-    only: [has_error?: 1, has_change?: 1, render_common_text_input_fields: 1]
+  import SurfaceBulma.Form.Utils
+  import SurfaceBulma.Form.InputWrapper, only: [render_common_text_input_fields: 1]
 
   alias Surface.Components.Form.{Field, TextArea, Label}
 
@@ -25,18 +25,15 @@ defmodule SurfaceBulma.Form.TextArea do
   prop size, :string, values: ["small", "normal", "medium", "large"], default: "normal"
 
   def render(assigns) do
+    input_classes = input_classes(assigns)
+
     ~F"""
       <Field class="field" name={@field}>
         <Label :if={@label} class="label">{@label}</Label>
         <div class={"control", "has-icons-right": !@disable_icons && (has_error?(assigns) || has_change?(assigns))}>
           <TextArea
           {...included_props(assigns)}
-          class={[
-            "textarea",
-            "is-#{@size}",
-            "is-danger": has_error?(assigns),
-            "is-success": has_change?(assigns) && !has_error?(assigns),
-            ] ++ (@class || [])}
+          class={["textarea"] ++ input_classes}
           field={@field}
           opts={
             [placeholder: @placeholder,

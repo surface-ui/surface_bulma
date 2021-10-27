@@ -3,8 +3,7 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
   The datetime standardized input
   """
 
-  use SurfaceBulma.Form.InputBase
-  import SurfaceBulma.Form.InputWrapper
+  use SurfaceBulma.Form.TextInputBase
 
   alias Surface.Components.Form.DateTimeLocalInput
   include(DateTimeLocalInput)
@@ -20,14 +19,13 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
   with a scaling factor of 1000 (since the underlying numeric value is in milliseconds).
   The default value of step is 60, indicating 60 seconds (or 1 minute, or 60,000 milliseconds).
   """
-
   prop step, :integer, default: 60
 
   def render(assigns) do
     props = included_props(assigns)
 
     ~F"""
-      <SurfaceBulma.Form.InputWrapper :let={form: form}
+      <InputWrapper :let={form: form}
         field={@field}
         label={@label}
         expanded={@expanded}
@@ -57,7 +55,7 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
               step: @step,
             ] ++ @opts}/>
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </SurfaceBulma.Form.InputWrapper>
+      </InputWrapper>
     """
   end
 end
