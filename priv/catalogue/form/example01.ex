@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example01 do
+  @moduledoc false
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -26,23 +27,23 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
       submit={"submit"}
       opts={autocomplete: "off"}>
         <TextInput
-          field="name"
+          field={:name}
           label="Name"
            placeholder="Text input"/>
         <TextInput
           field="username"
           label="Username"/>
         <TextInput
-          field="email"
+          field={:email}
           label="Email" />
         <Select
-          field="select"
+          field={:select}
           options={[
             "Select dropdown",
             "with options"
             ]}/>
         <TextArea
-          field="message"
+          field={:message}
           label="Message"
           placeholder="Textarea"
           size="normal"/>
@@ -51,7 +52,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
         <Link to="#">terms and conditions</Link>
         </Checkbox>
         <RadioButton
-            field="radio"
+            field={:radio}
             options={
               ["yes", "no"]
             }/>

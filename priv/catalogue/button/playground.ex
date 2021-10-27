@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Button.Playground do
+  @moduledoc false
   use Surface.Catalogue.Playground,
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,

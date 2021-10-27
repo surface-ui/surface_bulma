@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Table.Example01 do
+  @moduledoc false
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Table,
     catalogue: SurfaceBulma.Catalogue,

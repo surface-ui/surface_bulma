@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example03 do
+  @moduledoc false
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -51,7 +52,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         </FieldWrapper>
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Department">
-        <Select field="example_03_department" placeholder="Name" options={[
+        <Select field="example_03_department" options={[
           "Business development",
           "Marketing",
           "Sales"

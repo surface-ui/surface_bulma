@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Button.Example02 do
+  @moduledoc false
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Button,
     catalogue: SurfaceBulma.Catalogue,

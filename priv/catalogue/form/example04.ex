@@ -1,4 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example04 do
+  @moduledoc false
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
