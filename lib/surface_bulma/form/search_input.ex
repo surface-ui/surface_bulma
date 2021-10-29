@@ -30,6 +30,7 @@ defmodule SurfaceBulma.Form.SearchInput do
         icon_left={@icon_left}
         icon_right={@icon_right}
         field_class={@field_class}
+        control_attrs={class: "is-flex-grow-1"}
         has_addons={true}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <SearchInput
@@ -44,10 +45,13 @@ defmodule SurfaceBulma.Form.SearchInput do
             disabled: @disabled,
           ] ++ @opts}/>
         <:right_addon>
-        <div :if={!slot_assigned?(:right_addon) || !@hide_button} class="control">
-          <Submit color="primary" {...@button_props}>{@label || "Search"}</Submit>
-        </div>
-        {render_right_addon(assigns)}</:right_addon>
+          {#if !slot_assigned?(:right_addon) || !@hide_button}
+            <Context put={is_addon: true}>
+              <Submit color="primary" {...@button_props}>{@label || "Search"}</Submit>
+            </Context>
+          {/if}
+          {render_right_addon(assigns)}
+        </:right_addon>
       </InputWrapper>
     """
   end
