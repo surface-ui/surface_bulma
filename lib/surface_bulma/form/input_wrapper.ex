@@ -55,11 +55,11 @@ defmodule SurfaceBulma.Form.InputWrapper do
     ~F"""
     <Context get={Surface.Components.Form, form: form}>
       <div class={
-        "control",
+        ["control",
         "has-icons-right": display_right_icon?(assigns),
         "has-icons-left": display_left_icon?(assigns),
-        "is-expanded": @expanded
-        } {...@control_attrs}>
+        "is-expanded": @expanded] ++ ([@control_attrs[:class]] || [])
+        }>
         <#slot :args={form: form} />
         {#if is_binary(Map.get(assigns, :icon_left))}
           <FA icon={Map.get(assigns, :icon_left)} container_class={["is-#{@size}", "is-left"]}/>
