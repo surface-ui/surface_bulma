@@ -8,9 +8,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
 
   alias SurfaceBulma.Form.{
     Select,
-    TextInput,
-    TextInputLeftAddon,
-    TextInputRightAddon
+    TextInput
   }
 
   alias SurfaceBulma.{Button, Title}
@@ -36,17 +34,17 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       <TextInput
         field="example_02_addon_dummy1"
         placeholder="Find a repository">
-        <TextInputRightAddon>
+        <:right_addon>
         <Button color="info">Search</Button>
-        </TextInputRightAddon>
+        </:right_addon>
       </TextInput>
 
       <TextInput
         field="example_02_addon_dummy2"
         placeholder="Your email">
-        <TextInputRightAddon>
+        <:right_addon>
         <Button static>@gmail.com</Button>
-        </TextInputRightAddon>
+        </:right_addon>
       </TextInput>
 
       <Title size="4">..with dropdowns</Title>
@@ -55,7 +53,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
         field="example_02_addon_dummy3"
         placeholder="Amount of money"
         >
-        <TextInputLeftAddon>
+        <:left_addon>
         <Select
           field="example_02_select_dummy1"
           options={[
@@ -63,10 +61,10 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
             "£",
             "€"
             ]}/>
-        </TextInputLeftAddon>
-        <TextInputRightAddon>
+        </:left_addon>
+        <:right_addon>
         <Button>Transfer</Button>
-        </TextInputRightAddon>
+        </:right_addon>
       </TextInput>
 
       <Title size="4">
@@ -77,7 +75,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       placeholder="Amount of money"
       expanded
       >
-      <TextInputLeftAddon>
+      <:left_addon>
       <Select
         field="example_02_select_dummy2"
         options={[
@@ -85,10 +83,10 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
           "£",
           "€"
           ]}/>
-      </TextInputLeftAddon>
-      <TextInputRightAddon>
+      </:left_addon>
+      <:right_addon>
       <Button>Transfer</Button>
-      </TextInputRightAddon>
+      </:right_addon>
     </TextInput>
       </Form>
     """

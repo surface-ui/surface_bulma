@@ -15,8 +15,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
     Select,
     # TelephoneInput,
     TextArea,
-    TextInput,
-    TextInputLeftAddon
+    TextInput
   }
 
   alias SurfaceBulma.{Button, ButtonGroup, Title}
@@ -45,9 +44,9 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         <HorizontalControlGroup>
         <FieldWrapper help_text="Do not enter the first zero">
           <TextInput field="example_03_phone" placeholder="Your phone number" expanded>
-            <TextInputLeftAddon>
+            <:left_addon>
             <Button static>+44</Button>
-            </TextInputLeftAddon>
+            </:left_addon>
           </TextInput>
         </FieldWrapper>
         </HorizontalControlGroup>
