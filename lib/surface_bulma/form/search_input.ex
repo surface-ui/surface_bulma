@@ -46,7 +46,7 @@ defmodule SurfaceBulma.Form.SearchInput do
           ] ++ @opts}/>
         <:right_addon>
           {#if !slot_assigned?(:right_addon) || !@hide_button}
-            <Context put={is_addon: true}>
+            <Context put={SurfaceBulma.Form, is_addon: true}>
               <Submit color="primary" {...@button_props}>{@label || "Search"}</Submit>
             </Context>
           {/if}
