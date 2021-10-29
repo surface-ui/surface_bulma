@@ -18,6 +18,9 @@ based on [Bulma](https://bulma.io/).
     The inevitable HTML table.
   * [Tabs](http://surface-demo.msaraiva.io/uicomponents/Tabs) -
     A simple horizontal navigation tabs component.
+  * Form inputs
+    Most of the Form inputs that exist in Surface are now available.
+  * Panel component
   * Dialog (Soon!)
   * Card (Soon!)
 
