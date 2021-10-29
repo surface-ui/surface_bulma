@@ -77,9 +77,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
     ~F"""
     <Context :if={slot_assigned?(:left_addon)} put={SurfaceBulma.Form, is_addon: true}>
       {#for {_, index} <- Enum.with_index(@left_addon)}
-        <Context put={SurfaceBulma.Form, is_addon: true}>
-          <#slot name="left_addon" index={index}/>
-        </Context>
+        <#slot name="left_addon" index={index}/>
       {/for}
     </Context>
     """
