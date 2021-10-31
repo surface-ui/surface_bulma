@@ -13,8 +13,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
     NumberInput,
     PasswordInput,
     RangeInput,
-    Select,
-    TextInputRightAddon
+    Select
   }
 
   alias SurfaceBulma.{Button}
@@ -42,9 +41,9 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
       label="Color"
       placeholder="Text input"
       value="#c33c3c">
-      <TextInputRightAddon>
+      <:right_addon>
       <Button color="primary" >Select</Button>
-      </TextInputRightAddon>
+      </:right_addon>
     </ColorInput>
     <DateInput
       field="example_04_date"
