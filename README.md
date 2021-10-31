@@ -21,6 +21,7 @@ based on [Bulma](https://bulma.io/).
   * Form inputs
     Most of the Form inputs that exist in Surface are now available.
   * Panel component
+  * Navbar (Soon!)
   * Dialog (Soon!)
   * Card (Soon!)
 
@@ -50,7 +51,7 @@ Add `surface_bulma` to the list of dependencies in `mix.exs`:
 def deps do
   [
     ...
-    {:surface_bulma, "~> 0.2.0"}
+    {:surface_bulma, "~> 0.3.0"}
   ]
 end
 ```

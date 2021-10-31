@@ -2,7 +2,7 @@ defmodule SurfaceBulma.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/surface-ui/surface_bulma"
-  @version "0.2.1"
+  @version "0.3.0"
 
   def project do
     [
@@ -12,7 +12,7 @@ defmodule SurfaceBulma.MixProject do
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      compilers: [:phoenix] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers() ++ [:surface],
       deps: deps(),
       aliases: aliases(),
       package: package(),
@@ -65,7 +65,7 @@ defmodule SurfaceBulma.MixProject do
 
   defp package() do
     [
-      files: ["lib", "mix.exs", "README*", "priv"],
+      files: ["lib", "mix.exs", "README*", "priv", "assets/js"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
     ]
