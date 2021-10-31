@@ -12,7 +12,7 @@ defmodule SurfaceBulma.MixProject do
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      compilers: [:phoenix] ++ Mix.compilers() ++ [:surface],
+      compilers: [:phoenix] ++ Mix.compilers(),
       deps: deps(),
       aliases: aliases(),
       package: package(),
@@ -65,7 +65,7 @@ defmodule SurfaceBulma.MixProject do
 
   defp package() do
     [
-      files: ["lib", "mix.exs", "README*", "priv", "assets/js"],
+      files: ["lib", "mix.exs", "README*", "priv"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
     ]
