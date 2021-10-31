@@ -57,13 +57,17 @@ defmodule SurfaceBulma.TabUtils do
         {:ok, socket}
       end
 
-      def update(assigns, socket) do
+      def update(%{tabs: tabs} = assigns, socket) do
         socket =
           socket
           |> assign(assigns)
-          |> assign(:active_tab, Enum.find_index(assigns.tabs, & &1.visible))
+          |> assign(:active_tab, Enum.find_index(tabs, & &1.visible))
 
         {:ok, socket}
+      end
+
+      def update(assigns, socket) do
+        {:ok, assign(socket, assigns)}
       end
 
       def set_tab(id, index) do

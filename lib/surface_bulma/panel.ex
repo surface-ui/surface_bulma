@@ -23,9 +23,11 @@ defmodule SurfaceBulma.Panel do
       <p class="panel-heading">
         <#slot name="title" />
       </p>
-      {#for {_, index} <- Enum.with_index(@header)}
-        <#slot name="header" index={index} />
-      {/for}
+      {#if slot_assigned?(:header)}
+        {#for {_, index} <- Enum.with_index(@header)}
+          <#slot name="header" index={index} />
+        {/for}
+      {/if}
       <p :if={slot_assigned?(:tabs)} class="panel-tabs">
         {#for {tab, index} <- Enum.with_index(@tabs)}
           <a class={"is-active": index == @active_tab}
@@ -34,11 +36,13 @@ defmodule SurfaceBulma.Panel do
           </a>
         {/for}
       </p>
-      {#for {tab, index} <- Enum.with_index(@tabs)}
-        {#if tab.visible && @active_tab == index}
-          <#slot name="tabs" index={index} />
-        {/if}
-      {/for}
+      {#if slot_assigned?(:tabs) }
+        {#for {tab, index} <- Enum.with_index(@tabs)}
+          {#if tab.visible && @active_tab == index}
+            <#slot name="tabs" index={index} />
+          {/if}
+        {/for}
+      {/if}
     </nav>
     """
   end
