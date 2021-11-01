@@ -1,5 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.SampleModel do
-  @moduledoc false
+  @moduledoc ""
   use Ecto.Schema
   import Ecto.Changeset
 

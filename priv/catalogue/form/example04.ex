@@ -1,5 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example04 do
-  @moduledoc false
+  @moduledoc ""
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -37,7 +37,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
     submit={"submit"}
     opts={autocomplete: "off"}>
     <ColorInput
-      field="example_04_color"
+      field={:example_04_color}
       label="Color"
       placeholder="Text input"
       value="#c33c3c">
@@ -46,15 +46,15 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
       </:right_addon>
     </ColorInput>
     <DateInput
-      field="example_04_date"
+      field={:example_04_date}
       label="Datetime local"/>
     <DateTimeLocalInput
-      field="example_04_datetime_local"
+      field={:example_04_datetime_local}
       label="Date"
       step="3600"
       />
     <Select
-      field="example_04_multiple_select"
+      field={:example_04_multiple_select}
       options={
         [
           "Option 1",
@@ -66,14 +66,14 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
       expanded
       rounded/>
       <NumberInput
-        field="example_04_number"
+        field={:example_04_number}
         step="5"/>
       <PasswordInput
-        field="example_04_password"
+        field={:example_04_password}
         placeholder="Your password"
         icon_left="key"/>
       <RangeInput
-        field="example_04_range"
+        field={:example_04_range}
         min="0"
         max="10"
         value="7"

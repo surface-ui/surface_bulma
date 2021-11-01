@@ -1,5 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example03 do
-  @moduledoc false
+  @moduledoc ""
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -38,12 +38,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         submit={"submit"}
         opts={autocomplete: "off"}>
         <HorizontalControlGroup label="From">
-        <TextInput field="example_03_name" placeholder="Name" icon_left="user" expanded/>
-        <TextInput field="example_03_email" icon_left="envelope" expanded value="alex@smith.com" />
+        <TextInput field={:example_03_name} placeholder="Name" icon_left="user" expanded/>
+        <TextInput field={:example_03_email} icon_left="envelope" expanded value="alex@smith.com" />
         </HorizontalControlGroup>
         <HorizontalControlGroup>
         <FieldWrapper help_text="Do not enter the first zero">
-          <TextInput field="example_03_phone" placeholder="Your phone number" expanded>
+          <TextInput field={:example_03_phone} placeholder="Your phone number" expanded>
             <:left_addon>
             <Button static>+44</Button>
             </:left_addon>
@@ -51,7 +51,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         </FieldWrapper>
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Department">
-        <Select field="example_03_department" options={[
+        <Select field={:example_03_department} options={[
           "Business development",
           "Marketing",
           "Sales"
@@ -66,10 +66,10 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
         />
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Subject">
-        <TextInput field="example_03_subject" placeholder="e.g. Partnership opportunity" expanded/>
+        <TextInput field={:example_03_subject} placeholder="e.g. Partnership opportunity" expanded/>
         </HorizontalControlGroup>
         <HorizontalControlGroup label="Question">
-        <TextArea field="example_03_question" placeholder="Explain how we can help you" expanded/>
+        <TextArea field={:example_03_question} placeholder="Explain how we can help you" expanded/>
         </HorizontalControlGroup>
       </Form>
     """

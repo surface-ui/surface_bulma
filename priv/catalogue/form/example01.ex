@@ -1,5 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example01 do
-  @moduledoc false
+  @moduledoc ""
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -31,7 +31,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
           label="Name"
            placeholder="Text input"/>
         <TextInput
-          field="username"
+          field={:username}
           label="Username"/>
         <TextInput
           field={:email}
@@ -47,7 +47,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
           label="Message"
           placeholder="Textarea"
           size="normal"/>
-        <Checkbox field="checkbox">
+        <Checkbox field={:checkbox}>
         I agree to the
         <Link to="#">terms and conditions</Link>
         </Checkbox>

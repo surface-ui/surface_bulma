@@ -1,5 +1,5 @@
 defmodule SurfaceBulma.Catalogue.Form.Example02 do
-  @moduledoc false
+  @moduledoc ""
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Form,
     catalogue: SurfaceBulma.Catalogue,
@@ -32,7 +32,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
         opts={autocomplete: "off"}>
       <Title size="4">Some simple addon fields</Title>
       <TextInput
-        field="example_02_addon_dummy1"
+        field={:example_02_addon_dummy1}
         placeholder="Find a repository">
         <:right_addon>
         <Button color="info">Search</Button>
@@ -40,7 +40,7 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       </TextInput>
 
       <TextInput
-        field="example_02_addon_dummy2"
+        field={:example_02_addon_dummy2}
         placeholder="Your email">
         <:right_addon>
         <Button static>@gmail.com</Button>
@@ -50,12 +50,12 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
       <Title size="4">..with dropdowns</Title>
 
       <TextInput
-        field="example_02_addon_dummy3"
+        field={:example_02_addon_dummy3}
         placeholder="Amount of money"
         >
         <:left_addon>
         <Select
-          field="example_02_select_dummy1"
+          field={:example_02_select_dummy1}
           options={[
             "$",
             "£",
@@ -71,13 +71,13 @@ defmodule SurfaceBulma.Catalogue.Form.Example02 do
         ..with dropdowns and expanded
       </Title>
       <TextInput
-      field="example_02_addon_dummy4"
+      field={:example_02_addon_dummy4}
       placeholder="Amount of money"
       expanded
       >
       <:left_addon>
       <Select
-        field="example_02_select_dummy2"
+        field={:example_02_select_dummy2}
         options={[
           "$",
           "£",
