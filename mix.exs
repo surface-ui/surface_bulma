@@ -52,7 +52,7 @@ defmodule SurfaceBulma.MixProject do
       {:surface_font_awesome, "~> 0.2.0"},
       {:credo, "~> 1.5.6", only: :dev},
       {:surface, "~> 0.6.0"},
-      {:phoenix_ecto, "~> 4.0", only: :test},
+      {:phoenix_ecto, "~> 4.0", only: [:test, :dev]},
       {:ecto, "~> 3.4.2", only: [:test, :dev]}
     ]
   end
