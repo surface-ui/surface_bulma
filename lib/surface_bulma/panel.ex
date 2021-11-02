@@ -2,6 +2,8 @@ defmodule SurfaceBulma.Panel do
   use SurfaceBulma.TabUtils, doc: """
   The panel for compact controls and tabs
   """
+  alias SurfaceBulma.Icon.FontAwesome, as: FA
+
   use SurfaceBulma.ColorProp
 
   @doc """
@@ -32,7 +34,7 @@ defmodule SurfaceBulma.Panel do
         {#for {tab, index} <- Enum.with_index(@tabs)}
           <a class={"is-active": index == @active_tab}
             :on-click={tab.click || "tab_click"} phx-value-index={index}>
-            {tab.title}
+            <FA :if={tab.icon} icon={tab.icon} />{tab.title}
           </a>
         {/for}
       </p>
