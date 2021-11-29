@@ -8,12 +8,15 @@ defmodule SurfaceBulma.Dropdown.LinkItem do
   @doc "Link target"
   prop to, :string, required: true
 
+  @doc "Whether or not the item is active"
+  prop active, :boolean
+
   @doc "Content of the list item"
   slot default, required: true
 
   def render(assigns) do
     ~F"""
-    <a href="#" class="dropdown-item">
+    <a href="#" class={"dropdown-item", "is-active": @active}>
       <#slot />
     </a>
     """
