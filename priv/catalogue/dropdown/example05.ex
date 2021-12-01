@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Catalogue.Dropdown.Example05 do
 
   def render(assigns) do
     ~F"""
-    <Dropdown id="example05" is_up>
+    <Dropdown id="example05" drop_up>
       <Dropdown.CurrentItem>Current Item</Dropdown.CurrentItem>
       <Dropdown.LinkItem to="#hi"><Icon.FontAwesome icon="camera" />Item 1</Dropdown.LinkItem>
       <Dropdown.LinkItem to="#there"><Icon.FontAwesome icon="fingerprint" />Item 2</Dropdown.LinkItem>

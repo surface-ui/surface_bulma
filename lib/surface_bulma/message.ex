@@ -8,8 +8,7 @@ defmodule SurfaceBulma.Message do
   [Bulma Docs - Card](https://bulma.io/documentation/components/message/)
   """
 
-  @doc "Bulma theme colors"
-  prop color, :string, values: ~w/dark primary link info success warning danger/
+  use SurfaceBulma.ColorProp
 
   @doc "Unset is between small and medium (per Bulma)"
   prop size, :string, values: ~w/small medium large/

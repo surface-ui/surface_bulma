@@ -8,18 +8,18 @@ defmodule SurfaceBulma.Dropdown do
   """
 
   @doc "Is always open"
-  prop is_active, :boolean
+  prop active, :boolean
 
   @doc "Activates on hover"
-  prop is_hoverable, :boolean
+  prop hoverable, :boolean
 
   @doc "Left/Right aligned (left by default)"
-  prop is_right, :boolean, default: false
+  prop right_aligned, :boolean, default: false
 
   @doc "Menu appears above/below (below by default)"
-  prop is_up, :boolean, default: false
+  prop drop_up, :boolean, default: false
 
-  slot current_item, required: true
+  slot trigger, required: true
 
   slot menu_items, required: true
 
@@ -30,16 +30,16 @@ defmodule SurfaceBulma.Dropdown do
     <div
       class={
         "dropdown",
-        "is-right": @is_right,
-        "is-up": @is_up,
-        "is-active": @is_active || @open,
-        "is-hoverable": @is_hoverable
+        "is-right": @right_aligned,
+        "is-up": @drop_up,
+        "is-active": @active || @open,
+        "is-hoverable": @hoverable
       }
       :on-click="toggle"
     >
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span><#slot name="current_item" /></span>
+          <span><#slot name="trigger" /></span>
           <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true" />
           </span>
