@@ -1,4 +1,4 @@
-defmodule Surface.Components.CardTest do
+defmodule Surface.Components.DropdownTest do
   use SurfaceBulma.ConnCase, async: true
   alias SurfaceBulma.Dropdown
 

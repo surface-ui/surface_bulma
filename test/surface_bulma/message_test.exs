@@ -1,4 +1,4 @@
-defmodule Surface.Components.CardTest do
+defmodule Surface.Components.MessageTest do
   use SurfaceBulma.ConnCase, async: true
   alias SurfaceBulma.Message
 
