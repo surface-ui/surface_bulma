@@ -82,13 +82,15 @@ defmodule SurfaceBulma.Button do
 
   def render(assigns) do
     ~F"""
-    {#if @addon }
+    <Context get={SurfaceBulma.Form, is_addon: is_addon}>
+    {#if is_addon }
       <div class="control">
         {render_button(assigns)}
       </div>
     {#else}
       {render_button(assigns)}
     {/if}
+    </Context>
     """
   end
 

@@ -143,4 +143,17 @@ defmodule Surface.Components.ButtonTest do
     html = render_surface(do: ~F(<Button selected>Ok</Button>))
     assert html =~ ~r/class="(.*)is-selected(.*)"/
   end
+  
+  alias Surface.Components.Context
+  test "is wrapped in a control when the SurfaceBulma.Form.is_addon is set" do
+    html = render_surface do
+      ~F"""
+      <Context put={SurfaceBulma.Form, is_addon: true}>
+        <Button />
+      </Context>
+      """
+    end
+
+    assert html =~ ~r/class="control"/
+  end
 end
