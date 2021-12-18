@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Catalogue.Navbar.Example01 do
   @moduledoc """
-  
+
   """
 
   use Surface.Catalogue.Example,
@@ -10,20 +10,20 @@ defmodule SurfaceBulma.Catalogue.Navbar.Example01 do
     height: "700px",
     direction: "vertical"
 
-
+  alias SurfaceBulma.Link
   alias SurfaceBulma.Navbar
-  alias SurfaceBulma.Navbar.{Start, End, Item}
+  alias SurfaceBulma.Navbar.{Start, End}
 
   def render(assigns) do
     ~F"""
     <Navbar id="main-menu">
       <Start>
-        <Item>Home</Item>
-        <Item>
-          More
-          <Item>Contact</Item>
-          <Item>Legal</Item>
-        </Item>
+        <Link>Home</Link>
+        <Navbar.Dropdown>
+          <:label>More</:label>
+          <Link>Contact</Link>
+          <Link>Legal</Link>
+        </Navbar.Dropdown>
       </Start>
     </Navbar>
     """

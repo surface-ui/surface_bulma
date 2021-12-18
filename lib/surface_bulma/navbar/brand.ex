@@ -1,16 +1,16 @@
 defmodule SurfaceBulma.Navbar.Brand do
   use Surface.Component, slot: "brand"
 
-  prop path, :string
-
-  @doc "The brand image or text you want displayed."
+  @doc "Can contain `SurfaceBulma.Item` or a SurfaceBulma.Link."
   slot default
 
   def render(assigns) do
     ~F"""
-    <a class="navbar-item" href={@path}>
+    <Context
+      put={SurfaceBulma.Link, link_class: "navbar-item"}
+      put={SurfaceBulma.Item, item_class: "navbar-item"}>
       <#slot />
-    </a>
+    </Context>
     """
   end
 end

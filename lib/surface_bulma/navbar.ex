@@ -13,24 +13,31 @@ defmodule SurfaceBulma.Navbar do
 
   def render(assigns) do
     ~F"""
-    <nav class={"navbar", "is-#{@color}": @color} role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <#slot name="brand" />
-        <a role="button" :on-click="toggle-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class={"navbar-menu", "is-active": @menu_visible}>
-        <div class="navbar-start">
-          <#slot name="nav_start" />
+    <Context
+      put={SurfaceBulma.Item, item_class: "navbar-item"}
+      put={SurfaceBulma.Link, link_class: "navbar-item"}
+      put={SurfaceBulma.Divider, divider_class: "navbar-divider"}>
+      <nav class={"navbar", "is-#{@color}": @color} role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <#slot name="brand" />
+          <a role="button" :on-click="toggle-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div class="navbar-end">
-          <#slot name="nav_end" />
+        <div class={"navbar-menu", "is-active": @menu_visible}>
+          <div class="navbar-start">
+            <#slot name="nav_start" />
+          </div>
+          <div class="navbar-end">
+
+            <#slot name="nav_end" />
+
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </Context>
     """
   end
 

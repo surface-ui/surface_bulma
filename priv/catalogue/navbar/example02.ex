@@ -12,29 +12,33 @@ defmodule SurfaceBulma.Catalogue.Navbar.Example02 do
 
   alias SurfaceBulma.Button
   alias SurfaceBulma.Navbar
-  alias SurfaceBulma.Navbar.{Brand, Buttons, Start, End, Item}
+  alias SurfaceBulma.Navbar.{Brand, Buttons, Start, End}
+  alias SurfaceBulma.Link
+  alias SurfaceBulma.Divider
 
   def render(assigns) do
     ~F"""
     <Navbar id="main-menu" color="primary">
-      <Brand path="https://h">
-        <img src="https://www.phoenixframework.org/images/phoenix-78c0fd3233522383ea9093ef877c8851.png?vsn=d" />
+      <Brand>
+        <Link to="http://www.phoenixframework.org">
+          <img src="https://www.phoenixframework.org/images/phoenix-78c0fd3233522383ea9093ef877c8851.png?vsn=d" />
+        </Link>
       </Brand>
       <Start>
-        <Item color="info">Home</Item>
-        <Item redirect path="http://elixir-lang.org">Elixir</Item>
-        <Item>
-          More
-          <Item>Legal</Item>
-        </Item>
+        <Link to="/">Home</Link>
+        <Link to="http://elixir-lang.org">Elixir</Link>
+        <Navbar.Dropdown>
+          <:label>More</:label>
+          <Link to="/legal">Legal</Link>
+          <Divider />
+          <Link to="/legal">Legal</Link>
+        </Navbar.Dropdown>
       </Start>
       <End>
-        <Item>
-          <Buttons>
-            <Button color="info">Account</Button>
-            <Button color="light">Logout</Button>
-          </Buttons>
-        </Item>
+        <Buttons>
+          <Button color="info">Account</Button>
+          <Button color="light">Logout</Button>
+        </Buttons>
       </End>
     </Navbar>
     """
