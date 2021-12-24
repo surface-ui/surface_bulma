@@ -1,7 +1,6 @@
 defmodule SurfaceBulma.Message do
   use Surface.LiveComponent
 
-
   @moduledoc """
   Colored message blocks, to emphasize part of your page.
 
@@ -40,8 +39,6 @@ defmodule SurfaceBulma.Message do
   @doc "Message header that can hold a title and a delete element"
   slot header_content
 
-
-
   def render(assigns) do
     ~F"""
     <div>
@@ -55,7 +52,6 @@ defmodule SurfaceBulma.Message do
             aria-label={@aria_close_label}
           />
         </header>
-
         <div class={"message-body", @body_class}>
           <#slot />
         </div>
@@ -65,6 +61,6 @@ defmodule SurfaceBulma.Message do
   end
 
   def handle_event("close", _value, socket) do
-      {:noreply, assign(socket, :show, false)}
+    {:noreply, assign(socket, :show, false)}
   end
 end

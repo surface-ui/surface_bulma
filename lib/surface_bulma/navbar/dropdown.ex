@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Navbar.Dropdown do
   use Surface.Component
-  
+
   slot label
   slot default
 

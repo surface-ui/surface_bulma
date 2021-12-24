@@ -16,6 +16,7 @@ defmodule SurfaceBulma.Form.EmailInput do
 
   def render(assigns) do
     input_classes = input_classes(assigns)
+
     ~F"""
       <InputWrapper :let={form: form}
         field={@field}

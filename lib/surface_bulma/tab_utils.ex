@@ -4,7 +4,7 @@ defmodule SurfaceBulma.TabUtils do
   # TODO make this dependent on the version of LiveView used. It would be preferable to use JS commands instead of a LiveComponent.
   defmacro __using__(opts \\ []) do
     moduledoc =
-      (Keyword.get(opts, :doc, "") <>
+      Keyword.get(opts, :doc, "") <>
         """
 
         Tab selection is handled by an internal event when Phoenix LiveView version < 0.17.* is used.
@@ -35,7 +35,7 @@ defmodule SurfaceBulma.TabUtils do
           Panel.set_tab("mypanel", String.to_integer(index_str))
         end
 
-        """)
+        """
 
     quote do
       @moduledoc unquote(moduledoc)

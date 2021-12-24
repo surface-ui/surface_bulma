@@ -1,5 +1,6 @@
 defmodule SurfaceBulma.Card.Header do
   use Surface.Component
+
   @moduledoc """
   A horizontal bar with a shadow
   """

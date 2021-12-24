@@ -55,5 +55,5 @@ defmodule SurfaceBulma.Tag do
       <#slot>{@label}</#slot>
     </span>
     """
-    end
+  end
 end

@@ -14,12 +14,10 @@ defmodule SurfaceBulma.Catalogue.Message.Example03 do
 
   def render(assigns) do
     ~F"""
-    <Message id="example03" closable>
+    <Message id="example03" aria_close_label="override" closable>
       <Message.Header>
         This is the header
       </Message.Header>
-      <Message.Header.CloseButton aria_label="override" />
-
       <p>This is the message body</p>
     </Message>
     """

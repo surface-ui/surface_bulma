@@ -1,5 +1,6 @@
 defmodule SurfaceBulma.Card.Footer do
   use Surface.Component
+
   @moduledoc """
   The Card.Footer component acts as a list of for several Card.FooterItem elements
 

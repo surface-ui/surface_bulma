@@ -6,5 +6,4 @@ defmodule SurfaceBulma.Dropdown.Trigger do
   """
 
   slot default, required: true
-
 end

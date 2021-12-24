@@ -1,5 +1,6 @@
 defmodule SurfaceBulma.Card.Image do
   use Surface.Component
+
   @moduledoc """
   A fullwidth container for a responsive image
   """

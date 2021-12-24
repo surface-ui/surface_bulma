@@ -9,9 +9,10 @@ defmodule SurfaceBulma.Panel.Tab.TabItem do
   prop type, :string
 
   slot default
-  
+
   def render(assigns) do
     block_classes = ["panel-block", "is-active": assigns[:is_active]]
+
     ~F"""
       {#case @type }
         {#match "link"}

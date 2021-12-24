@@ -8,7 +8,7 @@ defmodule SurfaceBulma.Navbar do
   slot nav_start
 
   slot nav_end
-  
+
   data menu_visible, :boolean, default: false
 
   def render(assigns) do

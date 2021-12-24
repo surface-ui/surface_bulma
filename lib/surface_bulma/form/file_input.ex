@@ -41,6 +41,7 @@ defmodule SurfaceBulma.Form.FileInput do
 
   def render(assigns) do
     props = included_props(assigns)
+
     ~F"""
     <InputWrapper :let={form: form}
         field={@field}
@@ -87,4 +88,4 @@ defmodule SurfaceBulma.Form.FileInput do
     </InputWrapper>
     """
   end
-end 
+end

@@ -1,7 +1,9 @@
 defmodule SurfaceBulma.Panel do
-  use SurfaceBulma.TabUtils, doc: """
-  The panel for compact controls and tabs
-  """
+  use SurfaceBulma.TabUtils,
+    doc: """
+    The panel for compact controls and tabs
+    """
+
   alias SurfaceBulma.Icon.FontAwesome, as: FA
 
   use SurfaceBulma.ColorProp
