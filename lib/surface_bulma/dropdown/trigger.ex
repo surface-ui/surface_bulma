@@ -1,4 +1,4 @@
-defmodule SurfaceBulma.Dropdown.CurrentItem do
+defmodule SurfaceBulma.Dropdown.Trigger do
   use Surface.Component, slot: "trigger"
 
   @moduledoc """

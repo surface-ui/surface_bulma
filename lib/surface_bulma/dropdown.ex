@@ -21,7 +21,7 @@ defmodule SurfaceBulma.Dropdown do
 
   slot trigger, required: true
 
-  slot menu_items, required: true
+  slot default, required: true
 
   data open, :boolean, default: false
 
@@ -47,9 +47,11 @@ defmodule SurfaceBulma.Dropdown do
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          {#for {_, index} <- Enum.with_index(@menu_items)}
-            <#slot name="menu_items" index={index} />
-          {/for}
+          <Context put={SurfaceBulma.Link, link_class: "dropdown-item"}
+            put={SurfaceBulma.Item, item_class: "dropdown-item"}
+            put={SurfaceBulma.Divider, divider_class: "dropdown-divider"}>
+            <#slot />
+          </Context>
         </div>
       </div>
     </div>

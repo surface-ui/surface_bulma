@@ -1,6 +1,6 @@
 defmodule Surface.Components.DropdownTest do
   use SurfaceBulma.ConnCase, async: true
-  alias SurfaceBulma.Dropdown
+  alias SurfaceBulma.{Dropdown, Link}
 
   @bulma_container_class "dropdown"
   @bulma_trigger_class "dropdown-trigger"
@@ -13,7 +13,6 @@ defmodule Surface.Components.DropdownTest do
   @bulma_up_class "is-up"
   @bulma_right_class "is-right"
 
-
   test "renders the menu" do
     current_item = "current item"
     link_item = "link item"
@@ -22,8 +21,8 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <Dropdown.LinkItem to="#">{link_item}</Dropdown.LinkItem>
+          <:trigger>{current_item}</:trigger>
+          <Link href="#">{link_item}</Link>
         </Dropdown>
         """
       end
@@ -43,8 +42,8 @@ defmodule Surface.Components.DropdownTest do
       |> Floki.find("." <> @bulma_item_class)
       |> Floki.raw_html()
 
-      assert current_item_contents =~ current_item
-      assert dropdown_item_contents =~ link_item
+    assert current_item_contents =~ current_item
+    assert dropdown_item_contents =~ link_item
   end
 
   test "menu is hidden by default" do
@@ -55,8 +54,8 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <Dropdown.LinkItem to="#">{link_item}</Dropdown.LinkItem>
+          <:trigger>{current_item}</:trigger>
+          <Link href="#">{link_item}</Link>
         </Dropdown>
         """
       end
@@ -72,12 +71,10 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <:menu_items>
+          <:trigger>{current_item}</:trigger>
           {#for item <- link_items}
-            <Dropdown.LinkItem to="#">{item}</Dropdown.LinkItem>
+            <Link href="#">{item}</Link>
           {/for}
-          </:menu_items>
         </Dropdown>
         """
       end
@@ -100,19 +97,19 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <Dropdown.LinkItem to="#">{link_item}</Dropdown.LinkItem>
+          <:trigger>{current_item}</:trigger>
+          <Link href="#">{link_item}</Link>
         </Dropdown>
         """
       end
 
-      link =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("a." <> @bulma_item_class)
-        |> Floki.raw_html()
+    link =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("a." <> @bulma_item_class)
+      |> Floki.raw_html()
 
-      assert link =~ link_item
+    assert link =~ link_item
   end
 
   test "item can be a div with arbitrary content" do
@@ -123,27 +120,27 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <Dropdown.ContentItem>
+          <:trigger>{current_item}</:trigger>
+          <SurfaceBulma.Item>
             <dl>
               <dt>Arbitrary Term</dt>
               <dd>{div_item}</dd>
             </dl>
-          </Dropdown.ContentItem>
+          </SurfaceBulma.Item>
 
         </Dropdown>
         """
       end
 
-      div_content =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("div." <> @bulma_item_class)
-        |> Floki.find("dl")
-        |> Floki.find("dd")
-        |> Floki.raw_html()
+    div_content =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("div." <> @bulma_item_class)
+      |> Floki.find("dl")
+      |> Floki.find("dd")
+      |> Floki.raw_html()
 
-      assert div_content =~ div_item
+    assert div_content =~ div_item
   end
 
   test "dropdown can contain dividers" do
@@ -153,14 +150,14 @@ defmodule Surface.Components.DropdownTest do
       render_surface do
         ~F"""
         <Dropdown id="test_id">
-          <Dropdown.CurrentItem>{current_item}</Dropdown.CurrentItem>
-          <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
-          <Dropdown.Divider />
-          <Dropdown.ContentItem>
+          <:trigger>{current_item}</:trigger>
+          <Link href="#">Link</Link>
+          <SurfaceBulma.Divider />
+          <SurfaceBulma.Item>
             <p>Arbitrary Term</p>
-          </Dropdown.ContentItem>
-          <Dropdown.Divider />
-          <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
+          </SurfaceBulma.Item>
+          <SurfaceBulma.Divider />
+          <Link href="#">Link</Link>
         </Dropdown>
         """
       end
@@ -172,12 +169,14 @@ defmodule Surface.Components.DropdownTest do
 
     assert length(dividers) == 2
   end
+
   test "dropdown can be made hoverable" do
     html =
       render_surface do
         ~F"""
-        <Dropdown id="test_id" is_hoverable>
-          <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
+        <Dropdown id="test_id" hoverable>
+          <:trigger>current_item</:trigger>
+          <Link href="#">Link</Link>
         </Dropdown>
         """
       end
@@ -189,33 +188,37 @@ defmodule Surface.Components.DropdownTest do
     html =
       render_surface do
         ~F"""
-        <Dropdown id="test_id" is_active>
-        <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
+        <Dropdown id="test_id" active>
+          <:trigger>current_item</:trigger>
+          <Link href="#">Link</Link>
         </Dropdown>
         """
       end
 
     assert html =~ @bulma_active_class
-
   end
+
   test "dropdown can be right-aligned" do
     html =
       render_surface do
         ~F"""
-        <Dropdown id="test_id" is_right>
-        <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
+        <Dropdown id="test_id" right_aligned>
+          <:trigger>current_item</:trigger>
+          <Link href="#">Link</Link>
         </Dropdown>
         """
       end
 
     assert html =~ @bulma_right_class
   end
+
   test "dropdown can be drop-up" do
     html =
       render_surface do
         ~F"""
-        <Dropdown id="test_id" is_up>
-        <Dropdown.LinkItem to="#">Link</Dropdown.LinkItem>
+        <Dropdown id="test_id" drop_up>
+          <:trigger>current_item</:trigger>
+          <Link href="#">Link</Link>
         </Dropdown>
         """
       end
