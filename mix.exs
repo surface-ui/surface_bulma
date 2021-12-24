@@ -2,7 +2,7 @@ defmodule SurfaceBulma.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/surface-ui/surface_bulma"
-  @version "0.3.0"
+  @version "0.3.1"
 
   def project do
     [
@@ -16,12 +16,18 @@ defmodule SurfaceBulma.MixProject do
       deps: deps(),
       aliases: aliases(),
       package: package(),
-      docs: [groups_for_modules: [
-        "Elements": [~r/SurfaceBulma.(Block|Box|Button|Content|Delete|Image|Notification|ProgressBars|Table|Tag|Title|SubTitle).*/],
-        "Components": [~r/SurfaceBulma.(BreadCrumb|Card|Dropdown|Menu|Message|Modal|Navbar|Pagination|Panel|Tabs).*/],
-        "Form": [~r/SurfaceBulma.Form.*/],
-        "Icons": [~r/SurfaceBulma.Icon.*/],
-      ], nest_modules_by_prefix: [SurfaceBulma.Form, SurfaceBulma.Icon]
+      docs: [
+        groups_for_modules: [
+          Elements: [
+            ~r/SurfaceBulma.(Block|Box|Button|Content|Delete|Image|Notification|ProgressBars|Table|Tag|Title|SubTitle).*/
+          ],
+          Components: [
+            ~r/SurfaceBulma.(BreadCrumb|Card|Dropdown|Menu|Message|Modal|Navbar|Pagination|Panel|Tabs).*/
+          ],
+          Form: [~r/SurfaceBulma.Form.*/],
+          Icons: [~r/SurfaceBulma.Icon.*/]
+        ],
+        nest_modules_by_prefix: [SurfaceBulma.Form, SurfaceBulma.Icon]
       ]
     ]
   end
@@ -34,8 +40,8 @@ defmodule SurfaceBulma.MixProject do
 
   def catalogues do
     [
-      "priv/catalogue",
-      #"deps/surface/priv/catalogue"
+      "priv/catalogue"
+      # "deps/surface/priv/catalogue"
     ]
   end
 
