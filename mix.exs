@@ -2,7 +2,7 @@ defmodule SurfaceBulma.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/surface-ui/surface_bulma"
-  @version "0.3.3"
+  @version "0.4.0"
 
   def project do
     [
@@ -54,10 +54,10 @@ defmodule SurfaceBulma.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
       {:jason, "~> 1.0"},
-      {:surface_catalogue, "~> 0.2.0", only: [:dev, :test]},
+      {:surface_catalogue, "~> 0.3.0", only: [:dev, :test]},
       {:surface_font_awesome, "~> 0.2.0"},
       {:credo, "~> 1.5.6", only: :dev},
-      {:surface, "~> 0.6.0"},
+      {:surface, "~> 0.7.0"},
       {:phoenix_ecto, "~> 4.0", only: [:test, :dev]},
       {:ecto, "~> 3.4.2", only: [:test, :dev]}
     ]
