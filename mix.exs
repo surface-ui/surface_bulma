@@ -2,7 +2,7 @@ defmodule SurfaceBulma.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/surface-ui/surface_bulma"
-  @version "0.3.1"
+  @version "0.3.3"
 
   def project do
     [
