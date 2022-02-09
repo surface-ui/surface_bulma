@@ -53,7 +53,7 @@ Add `surface_bulma` to the list of dependencies in `mix.exs`:
 def deps do
   [
     ...
-    {:surface_bulma, "~> 0.7.0"}
+    {:surface_bulma, "~> 0.4.0"}
   ]
 end
 ```
