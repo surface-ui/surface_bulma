@@ -1,4 +1,4 @@
-# SurfaceBulma (WIP)
+# SurfaceBulma
 
 A set of simple [Surface](https://github.com/msaraiva/surface/) components
 based on [Bulma](https://bulma.io/).
@@ -21,9 +21,11 @@ based on [Bulma](https://bulma.io/).
   * Form inputs
     Most of the Form inputs that exist in Surface are now available.
   * Panel component
-  * Navbar (Soon!)
+  * Navbar
   * Dialog (Soon!)
-  * Card (Soon!)
+  * Card (Thanks [Justin M Morgan](https://github.com/justin-m-morgan))
+  * Dropdown (Thanks [Justin M Morgan](https://github.com/justin-m-morgan))
+  * Message (Thanks [Justin M Morgan](https://github.com/justin-m-morgan))
 
 More components will be added soon. Contributions are welcome!
 
