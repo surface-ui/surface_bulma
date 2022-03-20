@@ -99,47 +99,47 @@ defmodule Surface.Components.ButtonTest do
     assert html =~ ~r/class="(.*)is-small(.*)"/
   end
 
-  test "propety value" do
+  test "property value" do
     html = render_surface(do: ~F(<Button value="123">Ok</Button>))
     assert html =~ ~r/value="123"/
   end
 
-  test "propety expand" do
+  test "property expand" do
     html = render_surface(do: ~F(<Button expand>Ok</Button>))
     assert html =~ ~r/class="(.*)is-fullwidth(.*)"/
   end
 
-  test "propety outlined" do
+  test "property outlined" do
     html = render_surface(do: ~F(<Button outlined>Ok</Button>))
     assert html =~ ~r/class="(.*)is-outlined(.*)"/
   end
 
-  test "propety rounded" do
+  test "property rounded" do
     html = render_surface(do: ~F(<Button rounded>Ok</Button>))
     assert html =~ ~r/class="(.*)is-rounded(.*)"/
   end
 
-  test "propety hovered" do
+  test "property hovered" do
     html = render_surface(do: ~F(<Button hovered>Ok</Button>))
     assert html =~ ~r/class="(.*)is-hovered(.*)"/
   end
 
-  test "propety focused" do
+  test "property focused" do
     html = render_surface(do: ~F(<Button focused>Ok</Button>))
     assert html =~ ~r/class="(.*)is-focused(.*)"/
   end
 
-  test "propety active" do
+  test "property active" do
     html = render_surface(do: ~F(<Button active>Ok</Button>))
     assert html =~ ~r/class="(.*)is-active(.*)"/
   end
 
-  test "propety loading" do
+  test "property loading" do
     html = render_surface(do: ~F(<Button loading>Ok</Button>))
     assert html =~ ~r/class="(.*)is-loading(.*)"/
   end
 
-  test "propety selected" do
+  test "property selected" do
     html = render_surface(do: ~F(<Button selected>Ok</Button>))
     assert html =~ ~r/class="(.*)is-selected(.*)"/
   end
