@@ -6,7 +6,7 @@ defmodule SurfaceBulma.ButtonGroup do
   """
   use Surface.Component
 
-  @doc "Are buttons attached to eachother?"
+  @doc "Are buttons attached to each other?"
   prop attached, :boolean
 
   @doc "Aligned left, right or center"

@@ -6,7 +6,7 @@ defmodule SurfaceBulma.Form.FieldWrapper do
   """
   use SurfaceBulma.Component
 
-  @doc "Are buttons attached to eachother?"
+  @doc "Are buttons attached to each other?"
   prop expanded, :boolean
 
   @doc "Help text, will wrap outside internal field and not be removed by error text"
