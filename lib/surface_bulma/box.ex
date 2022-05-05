@@ -4,11 +4,13 @@ defmodule SurfaceBulma.Box do
   """
 
   use Surface.Component
+  prop class, :css_class
+
   slot default, required: true
 
   def render(assigns) do
     ~F"""
-      <div class="box">
+      <div class={"box", @class}>
         <#slot />
       </div>
     """
