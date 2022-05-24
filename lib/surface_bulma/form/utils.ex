@@ -9,7 +9,7 @@ defmodule SurfaceBulma.Form.Utils do
     ["input"] ++
       other_classes ++
       [
-        "is-danger": has_error?(assigns),
+        "is-danger": has_change?(assigns) && has_error?(assigns),
         "is-success": has_change?(assigns) && !has_error?(assigns),
         "is-#{assigns[:size]}": assigns[:size] != "normal",
         "is-static": assigns[:static]
