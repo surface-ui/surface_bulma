@@ -13,7 +13,7 @@ defmodule SurfaceBulma.ModalCard do
   prop(close_button_event, :event)
 
   slot(default, required: true)
-  slot(footer, required: true)
+  slot(footer, required: false)
 
   def render(assigns) do
     ~F"""
@@ -28,7 +28,7 @@ defmodule SurfaceBulma.ModalCard do
           <section class="modal-card-body">
             <#slot/>
           </section>
-          <footer class="modal-card-foot is-justify-content-flex-end">
+          <footer :if={slot_assigned?(:footer)} class="modal-card-foot is-justify-content-flex-end">
             <#slot name="footer" />
           </footer>
         </div>

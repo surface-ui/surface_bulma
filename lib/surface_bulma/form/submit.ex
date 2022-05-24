@@ -19,7 +19,7 @@ defmodule SurfaceBulma.Form.Submit do
     ~F"""
       <InputWrapper field_class={@field_class}>
         <Button
-        {...props} 
+        {...props}
         class={
           [button: @class == [],
           "is-#{@color}": @color,
@@ -37,7 +37,7 @@ defmodule SurfaceBulma.Form.Submit do
         ] ++ (@class || [])
         }
         opts={@opts}>
-        <slot />
+        <#slot />
         </Button>
       </InputWrapper>
     """
