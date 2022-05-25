@@ -1,6 +1,6 @@
-defmodule SurfaceBulma.Box do
+defmodule SurfaceBulma.Block do
   @moduledoc """
-  A simple container with a white background, some padding, and a box shadow.
+  A simple spacer tool. It allows sibling HTML elements to have a consistent margin between them.
   """
 
   use Surface.Component
@@ -10,7 +10,7 @@ defmodule SurfaceBulma.Box do
 
   def render(assigns) do
     ~F"""
-      <div class={"box", @class}>
+      <div class={"block", @class}>
         <#slot />
       </div>
     """

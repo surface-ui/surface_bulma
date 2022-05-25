@@ -1,6 +1,6 @@
-defmodule SurfaceBulma.Box do
+defmodule SurfaceBulma.Content do
   @moduledoc """
-  A simple container with a white background, some padding, and a box shadow.
+  A single class to handle WYSIWYG generated content, where only HTML tags are available.
   """
 
   use Surface.Component
@@ -10,7 +10,7 @@ defmodule SurfaceBulma.Box do
 
   def render(assigns) do
     ~F"""
-      <div class={"box", @class}>
+      <div class={"content", @class}>
         <#slot />
       </div>
     """
