@@ -9,6 +9,7 @@ defmodule SurfaceBulma.Form.Checkbox do
 
   @doc "Disable selection"
   prop disabled, :boolean, default: false
+  prop label, :string
 
   @doc "The text / label of the checkbox"
   slot default
@@ -22,7 +23,11 @@ defmodule SurfaceBulma.Form.Checkbox do
               opts={[disabled: @disabled] ++ @opts }
               {...included_props(assigns)}
               />
-            <#slot/>
+            {#if slot_assigned?(:default)}
+              <#slot/>
+            {#else}
+              {@label}
+            {/if}
           </label>
         </div>
       </Field>
