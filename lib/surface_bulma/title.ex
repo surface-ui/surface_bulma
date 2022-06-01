@@ -7,6 +7,8 @@ defmodule SurfaceBulma.Title do
 
   @doc "Size of the title"
   prop size, :string, values: ["1", "2", "3", "4", "5", "6"], default: "3"
+
+  @doc "Additional CSS classes"
   prop class, :css_class
 
   @doc "If placed above a subtitle it will be pulled together unless this prop is set"

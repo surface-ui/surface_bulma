@@ -1,6 +1,6 @@
 defmodule SurfaceBulma.Notification do
   @moduledoc """
-  A single class to handle WYSIWYG generated content, where only HTML tags are available.
+  The notification is a simple colored block meant to draw the attention to the user about something.
   """
 
   use Surface.Component
