@@ -13,11 +13,7 @@ defmodule SurfaceBulma.Footer do
   def render(assigns) do
     ~F"""
       <footer class={"footer", @class}>
-        <div class="content has-text-centered">
-          <p>
-           <#slot />
-          </p>
-        </div>
+        <#slot />
       </footer>
     """
   end
