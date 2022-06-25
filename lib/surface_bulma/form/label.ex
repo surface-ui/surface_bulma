@@ -1,7 +1,7 @@
 defmodule SurfaceBulma.Form.Label do
   use SurfaceBulma.Component
   alias Surface.Components.Form.Label
-  alias Surface.Components.Form.Input.InputContext
+
   include(Label, except: [:class])
 
   prop class, :css_class, default: "label"

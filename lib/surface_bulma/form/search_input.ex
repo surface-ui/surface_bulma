@@ -34,7 +34,7 @@ defmodule SurfaceBulma.Form.SearchInput do
         has_addons={true}>
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
         <SearchInput
-        {...included_props(assigns)} 
+        {...included_props(assigns)}
         class={input_classes}
         field={@field}
         form={@form || form}

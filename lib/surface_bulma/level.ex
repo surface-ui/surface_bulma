@@ -7,13 +7,16 @@ defmodule SurfaceBulma.Level do
   @doc "Whether or not the items are centered"
   prop centered, :boolean
 
+  @doc "Additional CSS classes"
+  prop class, :css_class
+
   slot default
   slot left
   slot right
 
   def render(assigns) do
     ~F"""
-    <div class="level">
+    <div class={"level", @class}>
       {#if slot_assigned?(:left)}
       <div class="level-left">
         {#for {_, index} <- Enum.with_index(@left)}

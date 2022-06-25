@@ -24,3 +24,4 @@ surface_bulma-*.tar
 
 #vscode settings
 /.vscode/
+.DS_Store

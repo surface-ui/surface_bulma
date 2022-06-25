@@ -13,16 +13,17 @@ defmodule SurfaceBulma.Form.Submit do
   prop field_class, :css_class, default: []
 
   @impl true
+
   def render(assigns) do
     props = included_props(assigns)
 
     ~F"""
       <InputWrapper field_class={@field_class}>
         <Button
-        {...props} 
+        {...%{props | type: "submit"}}
         class={
           [button: @class == [],
-          "is-#{@color}": @color,
+          "is-#{@color || "primary"}": true,
           "is-#{@size}": @size,
           "is-fullwidth": @expand,
           "is-outlined": @outlined,
@@ -37,7 +38,7 @@ defmodule SurfaceBulma.Form.Submit do
         ] ++ (@class || [])
         }
         opts={@opts}>
-        <slot />
+        <#slot />
         </Button>
       </InputWrapper>
     """
