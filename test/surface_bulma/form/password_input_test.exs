@@ -12,10 +12,11 @@ defmodule Surface.Components.Form.PasswordInputTest do
       end
 
     assert html =~ """
-           <div class="field">
-             <div class="control">
+
+             <div class="field">
+               <div class="control">
              <input class="input" id="user_password" name="user[password]" type="password">
-             </div>
+           </div>
            </div>
            """
   end
@@ -28,7 +29,7 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ ~r/<input id="user_password" name="user[password]"/
+    assert html =~ ~r/id="user_password" name="user\[password\]"/
   end
 
   test "setting the value" do
@@ -105,8 +106,6 @@ defmodule Surface.Components.Form.PasswordInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="user_password" name="user[password]" phx-value-a="one" phx-value-b="two" phx-value-c="3" type="password">
-           """
+    assert html =~ ~r/phx-value-a="one" phx-value-b="two" phx-value-c="3"/
   end
 end

@@ -68,6 +68,7 @@ defmodule Surface.Components.MessageTest do
         </Message>
         """
       end
+
     closable_html =
       render_surface do
         ~F"""
@@ -149,92 +150,91 @@ defmodule Surface.Components.MessageTest do
   end
 
   test "applies additional classes to container" do
-    test_class="test_class"
+    test_class = "test_class"
 
-      html =
-        render_surface do
-          ~F"""
-          <Message id="test_id" container_class={test_class}>
-            <Message.Header>header</Message.Header>
-            content
-          </Message>
-          """
-        end
+    html =
+      render_surface do
+        ~F"""
+        <Message id="test_id" container_class={test_class}>
+          <Message.Header>header</Message.Header>
+          content
+        </Message>
+        """
+      end
 
-      container_classes =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("." <> @bulma_container_class)
-        |> extract_attribute("class")
+    container_classes =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("." <> @bulma_container_class)
+      |> extract_attribute("class")
 
-      assert test_class in container_classes
-
+    assert test_class in container_classes
   end
+
   test "applies additional classes to header" do
-    test_class="test_class"
+    test_class = "test_class"
 
-      html =
-        render_surface do
-          ~F"""
-          <Message id="test_id" header_class={test_class}>
-            <Message.Header>header</Message.Header>
-            content
-          </Message>
-          """
-        end
+    html =
+      render_surface do
+        ~F"""
+        <Message id="test_id" header_class={test_class}>
+          <Message.Header>header</Message.Header>
+          content
+        </Message>
+        """
+      end
 
-      header_classes =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("." <> @bulma_header_class)
-        |> extract_attribute("class")
+    header_classes =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("." <> @bulma_header_class)
+      |> extract_attribute("class")
 
-      assert test_class in header_classes
-
+    assert test_class in header_classes
   end
+
   test "applies additional classes to close_button" do
-    test_class="test_class"
+    test_class = "test_class"
 
-      html =
-        render_surface do
-          ~F"""
-          <Message id="test_id" closable close_class={test_class}>
-            <Message.Header>header</Message.Header>
-            content
-          </Message>
-          """
-        end
+    html =
+      render_surface do
+        ~F"""
+        <Message id="test_id" closable close_class={test_class}>
+          <Message.Header>header</Message.Header>
+          content
+        </Message>
+        """
+      end
 
-      close_classes =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("." <> @bulma_close_button_class)
-        |> extract_attribute("class")
+    close_classes =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("." <> @bulma_close_button_class)
+      |> extract_attribute("class")
 
-      assert test_class in close_classes
-
+    assert test_class in close_classes
   end
+
   test "applies additional classes to body" do
-    test_class="test_class"
+    test_class = "test_class"
 
-      html =
-        render_surface do
-          ~F"""
-          <Message id="test_id" body_class={test_class}>
-            <Message.Header>header</Message.Header>
-            content
-          </Message>
-          """
-        end
+    html =
+      render_surface do
+        ~F"""
+        <Message id="test_id" body_class={test_class}>
+          <Message.Header>header</Message.Header>
+          content
+        </Message>
+        """
+      end
 
-      body_classes =
-        html
-        |> Floki.parse_document!()
-        |> Floki.find("." <> @bulma_body_class)
-        |> extract_attribute("class")
+    body_classes =
+      html
+      |> Floki.parse_document!()
+      |> Floki.find("." <> @bulma_body_class)
+      |> extract_attribute("class")
 
-      assert test_class in body_classes
-
+    assert test_class in body_classes
   end
 
   test "aria close label can be set from parent component" do

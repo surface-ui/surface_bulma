@@ -17,10 +17,11 @@ defmodule SurfaceBulma.Icon.FontAwesome do
 
   def render(assigns) do
     ~F"""
-      <span class={["icon", "has-text-#{@color}": @color, "is-#{@container_size}": @container_size] ++ @container_class}>
-        {Icon.render(assigns)}
-        <span :if={slot_assigned?(:default)}><#slot name="default" /></span>
-      </span>
+    <span class={["icon", "has-text-#{@color}": @color, "is-#{@container_size}": @container_size] ++
+      @container_class}>
+      {Icon.render(assigns)}
+      <span :if={slot_assigned?(:default)}><#slot /></span>
+    </span>
     """
   end
 end
@@ -69,7 +70,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIcon do
   def render(assigns) do
     ~F"""
     <span class="icon-text">
-      <#slot/>
+      <#slot />
     </span>
     """
   end
@@ -86,7 +87,7 @@ defmodule SurfaceBulma.Icon.FontAwesome.TextIconText do
   def render(assigns) do
     ~F"""
     <span>
-      <#slot/>
+      <#slot />
     </span>
     """
   end

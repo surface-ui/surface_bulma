@@ -1,26 +1,25 @@
 defmodule SurfaceBulma.Catalogue.Level.Example01 do
   @moduledoc """
-  
+
   """
 
   use Surface.Catalogue.Example,
     subject: SurfaceBulma.Level,
     catalogue: SurfaceBulma.Catalogue,
     title: "Sample level",
-    height: "700px",
+    height: "100px",
     direction: "vertical"
-
 
   alias SurfaceBulma.Level
   alias SurfaceBulma.{SubTitle, Form.TextInput, Button}
 
   def render(assigns) do
     ~F"""
-    <Level id="main-menu">
+    <Level>
       <:left><SubTitle size="5"><strong>123</strong> posts</SubTitle></:left>
       <:left>
         <TextInput field={:level_input} placeholder="Find a post">
-          <:right_addon><Button>Search</Button></:right_addon>
+          <:right_addon><Button color="primary">Search</Button></:right_addon>
         </TextInput>
       </:left>
       <:right><p><strong>All</strong></p></:right>

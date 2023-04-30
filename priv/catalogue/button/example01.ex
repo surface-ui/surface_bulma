@@ -10,7 +10,7 @@ defmodule SurfaceBulma.Catalogue.Button.Example01 do
 
   def render(assigns) do
     ~F"""
-    <Button label="Label"/>
+    <Button label="Label" />
     <Button>Slot</Button>
     """
   end

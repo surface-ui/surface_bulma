@@ -14,14 +14,14 @@ defmodule SurfaceBulma.Form.Submit do
 
   @impl true
   def render(assigns) do
-    props = included_props(assigns)
+    props = included_props(assigns, Button)
 
     ~F"""
-      <InputWrapper field_class={@field_class}>
-        <Button
-        {...props} 
-        class={
-          [button: @class == [],
+    <InputWrapper field_class={@field_class}>
+      <Button
+        {...props}
+        class={[
+          button: @class == [],
           "is-#{@color}": @color,
           "is-#{@size}": @size,
           "is-fullwidth": @expand,
@@ -34,12 +34,12 @@ defmodule SurfaceBulma.Form.Submit do
           "is-selected": @selected,
           "is-link": @link,
           "is-static": @static
-        ] ++ (@class || [])
-        }
-        opts={@opts}>
+        ] ++ (@class || [])}
+        opts={@opts}
+      >
         <slot />
-        </Button>
-      </InputWrapper>
+      </Button>
+    </InputWrapper>
     """
   end
 end

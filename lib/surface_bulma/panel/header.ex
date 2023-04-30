@@ -5,5 +5,7 @@ defmodule SurfaceBulma.Panel.Header do
 
   Component.include(SurfaceBulma.Panel.Tab.TabItem)
 
+  slot default
+
   defdelegate render(assigns), to: SurfaceBulma.Panel.Tab.TabItem
 end

@@ -17,7 +17,7 @@ defmodule SurfaceBulma.ButtonGroup do
   def render(assigns) do
     ~F"""
     <div class={"buttons", "has-addons": @attached, "is-#{@aligned}": @aligned}>
-    <#slot/>
+      <#slot />
     </div>
     """
   end

@@ -8,18 +8,16 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
     direction: "vertical"
 
   alias SurfaceBulma.Form.{
-    EmailInput,
     FieldWrapper,
     HorizontalControlGroup,
     RadioButton,
     Select,
-    # TelephoneInput,
     TextArea,
     TextInput
   }
 
-  alias SurfaceBulma.{Button, ButtonGroup, Title}
-  alias Surface.Components.{Link, Form}
+  alias SurfaceBulma.Button
+  alias Surface.Components.Form
   alias SurfaceBulma.Catalogue.Form.SampleModel
 
   data changeset, :map,
@@ -32,46 +30,40 @@ defmodule SurfaceBulma.Catalogue.Form.Example03 do
 
   def render(assigns) do
     ~F"""
-      <Form
-        for={@changeset}
-        change={"change"}
-        submit={"submit"}
-        opts={autocomplete: "off"}>
-        <HorizontalControlGroup label="From">
-        <TextInput field={:example_03_name} placeholder="Name" icon_left="user" expanded/>
+    <Form for={@changeset} change="change" submit="submit" opts={autocomplete: "off"}>
+      <HorizontalControlGroup label="From">
+        <TextInput field={:example_03_name} placeholder="Name" icon_left="user" expanded />
         <TextInput field={:example_03_email} icon_left="envelope" expanded value="alex@smith.com" />
-        </HorizontalControlGroup>
-        <HorizontalControlGroup>
+      </HorizontalControlGroup>
+      <HorizontalControlGroup>
         <FieldWrapper help_text="Do not enter the first zero">
           <TextInput field={:example_03_phone} placeholder="Your phone number" expanded>
             <:left_addon>
-            <Button static>+44</Button>
+              <Button static>+44</Button>
             </:left_addon>
           </TextInput>
         </FieldWrapper>
-        </HorizontalControlGroup>
-        <HorizontalControlGroup label="Department">
-        <Select field={:example_03_department} options={[
-          "Business development",
-          "Marketing",
-          "Sales"
-        ]}/>
-        </HorizontalControlGroup>
-        <HorizontalControlGroup label="Already a member?">
-        <RadioButton
-        field={:example_03_member}
-        options={
-          ["yes", "no"]
-        }
+      </HorizontalControlGroup>
+      <HorizontalControlGroup label="Department">
+        <Select
+          field={:example_03_department}
+          options={[
+            "Business development",
+            "Marketing",
+            "Sales"
+          ]}
         />
-        </HorizontalControlGroup>
-        <HorizontalControlGroup label="Subject">
-        <TextInput field={:example_03_subject} placeholder="e.g. Partnership opportunity" expanded/>
-        </HorizontalControlGroup>
-        <HorizontalControlGroup label="Question">
-        <TextArea field={:example_03_question} placeholder="Explain how we can help you" expanded/>
-        </HorizontalControlGroup>
-      </Form>
+      </HorizontalControlGroup>
+      <HorizontalControlGroup label="Already a member?">
+        <RadioButton field={:example_03_member} options={["yes", "no"]} />
+      </HorizontalControlGroup>
+      <HorizontalControlGroup label="Subject">
+        <TextInput field={:example_03_subject} placeholder="e.g. Partnership opportunity" expanded />
+      </HorizontalControlGroup>
+      <HorizontalControlGroup label="Question">
+        <TextArea field={:example_03_question} placeholder="Explain how we can help you" expanded />
+      </HorizontalControlGroup>
+    </Form>
     """
   end
 

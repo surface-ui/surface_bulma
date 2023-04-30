@@ -17,7 +17,7 @@ defmodule SurfaceBulma.Catalogue.Dropdown.Example04 do
   def render(assigns) do
     ~F"""
     <Dropdown id="example04" right_aligned>
-    <:trigger>Current Item</:trigger>
+      <:trigger>Current Item</:trigger>
       <Link href="#hi"><Icon.FontAwesome icon="camera" />Item 1</Link>
       <Link href="#there"><Icon.FontAwesome icon="fingerprint" />Item 2</Link>
       <Link href="#from"><Icon.FontAwesome icon="flag" />Item 3</Link>

@@ -25,12 +25,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
         """
       end
 
-    assert html =~
-             wrap_in_field("""
-             <div class="select">
-               <select id="user_role" name="user[role]"></select>
-                     </div>
-             """)
+    assert html =~ ~s{<select id="user_role" name="user[role]"></select>}
   end
 
   test "select with atom field" do
@@ -50,7 +45,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} />
+        <Select form="user" field="role" options={[Admin: "admin", User: "user"]} />
         """
       end
 
@@ -66,7 +61,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} class="select" />
+        <Select form="user" field="role" options={[Admin: "admin", User: "user"]} class="select" />
         """
       end
 
@@ -77,7 +72,12 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} class="select primary" />
+        <Select
+          form="user"
+          field="role"
+          options={[Admin: "admin", User: "user"]}
+          class="select primary"
+        />
         """
       end
 
@@ -88,7 +88,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} prompt="Pick a role"/>
+        <Select form="user" field="role" options={[Admin: "admin", User: "user"]} prompt="Pick a role" />
         """
       end
 
@@ -105,7 +105,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} selected="user"/>
+        <Select form="user" field="role" options={[Admin: "admin", User: "user"]} selected="user" />
         """
       end
 
@@ -121,7 +121,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" options={["Admin": "admin", "User": "user"]} opts={disabled: true}/>
+        <Select form="user" field="role" options={[Admin: "admin", User: "user"]} opts={disabled: true} />
         """
       end
 
@@ -137,7 +137,7 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Select form="user" field="role" id="role" name="role" options={["Admin": "admin", "User": "user"]}/>
+        <Select form="user" field="role" id="role" name="role" options={[Admin: "admin", User: "user"]} />
         """
       end
 
@@ -153,8 +153,8 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
     html =
       render_surface do
         ~F"""
-        <Form for={:user} csrf_token="test">
-          <Select form="user" field="role" id="role" name="role" options={["Admin": "admin", "User": "user"]}>
+        <Form for={%{}} as={:user} csrf_token="test">
+          <Select form="user" field="role" id="role" name="role" options={[Admin: "admin", User: "user"]}>
             <:left_addon>BLABLABLA</:left_addon>
           </Select>
         </Form>
@@ -162,14 +162,15 @@ defmodule SurfaceBulma.Components.Form.SelectTest do
       end
 
     assert html =~ """
-             <form action="#" method="post"><input name="_csrf_token" type="hidden" value="test">
-               <div class="field">
+           <form action="#" method="post">
+               <input name="_csrf_token" type="hidden" hidden value="test">
+             <div class="field has-addons">
+               BLABLABLA
                <div class="control">
-                <select id="role" name="role">\
-                <option value="admin">Admin</option>\
-                <option value="user">User</option>\
-                </select>
-               </div>
+             <div class="select">
+                 <select id="role" name="role"><option value="admin">Admin</option><option value="user">User</option></select>
+             </div>
+           </div>
            </div>
            </form>
            """

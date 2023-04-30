@@ -4,9 +4,12 @@ defmodule SurfaceBulma.Panel do
     The panel for compact controls and tabs
     """
 
-  alias SurfaceBulma.Icon.FontAwesome, as: FA
-
   use SurfaceBulma.ColorProp
+
+  include(TabsRow, only: [:expanded, style: [as: :tabs_style]])
+
+  @doc "A class to set on the tabs container"
+  prop tabs_class, :css_class, default: []
 
   @doc """
   This slot will be used as the title of the panel.
@@ -25,27 +28,34 @@ defmodule SurfaceBulma.Panel do
     ~F"""
     <nav class={"panel", "is-#{@color}": @color}>
       <p class="panel-heading">
-        <#slot name="title" />
+        <#slot {@title} />
       </p>
       {#if slot_assigned?(:header)}
-        {#for {_, index} <- Enum.with_index(@header)}
-          <#slot name="header" index={index} />
+        {#for item <- @header}
+          <#slot {item} />
         {/for}
       {/if}
-      <p :if={slot_assigned?(:tabs)} class="panel-tabs">
-        {#for {tab, index} <- Enum.with_index(@tabs)}
-          <a class={"is-active": index == @active_tab}
-            :on-click={tab.click || "tab_click"} phx-value-index={index}>
-            <FA :if={tab.icon} icon={tab.icon} />{tab.title}
-          </a>
-        {/for}
-      </p>
-      {#if slot_assigned?(:tabs) }
-        {#for {tab, index} <- Enum.with_index(@tabs)}
-          {#if tab.visible && @active_tab == index}
-            <#slot name="tabs" index={index} />
-          {/if}
-        {/for}
+      <TabsRow
+        :if={slot_assigned?(:tabs)}
+        tabs={@tabs}
+        class={@tabs_class}
+        {...included_props(assigns, TabsRow)}
+        inside_panel
+        {=@active_tab_index}
+        target={@myself}
+      />
+      {#if slot_assigned?(:tabs)}
+        <Context
+          put={SurfaceBulma.Link, context_class: "panel-block"}
+          put={SurfaceBulma.Item, context_class: "panel-block"}
+          put={SurfaceBulma.Button, is_addon: true}
+        >
+          {#for {tab, index} <- Enum.with_index(@tabs)}
+            {#if tab.visible && @active_tab_index == index}
+              <#slot {tab} />
+            {/if}
+          {/for}
+        </Context>
       {/if}
     </nav>
     """

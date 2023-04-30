@@ -12,7 +12,7 @@ defmodule SurfaceBulma.MixProject do
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      compilers: [:phoenix] ++ Mix.compilers(),
+      compilers: Mix.compilers() ++ [:surface],
       deps: deps(),
       aliases: aliases(),
       package: package(),
@@ -40,8 +40,8 @@ defmodule SurfaceBulma.MixProject do
 
   def catalogues do
     [
-      "priv/catalogue"
-      # "deps/surface/priv/catalogue"
+      "priv/catalogue",
+      "deps/surface/priv/catalogue"
     ]
   end
 
@@ -54,12 +54,15 @@ defmodule SurfaceBulma.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, "~> 0.25.0", only: :test},
       {:jason, "~> 1.0"},
-      {:surface_catalogue, "~> 0.3.0", only: [:dev, :test]},
+      {:surface_catalogue, "~> 0.6.0", only: [:dev, :test]},
+      {:phoenix_live_reload, "~> 1.3", only: [:dev]},
       {:surface_font_awesome, "~> 0.2.0"},
+      {:surface_formatter, "~> 0.7.5"},
       {:credo, "~> 1.5.6", only: :dev},
-      {:surface, "~> 0.7.0"},
+      {:surface, "~> 0.10.0"},
       {:phoenix_ecto, "~> 4.0", only: [:test, :dev]},
-      {:ecto, "~> 3.4.2", only: [:test, :dev]}
+      {:ecto, "~> 3.4.2", only: [:test, :dev]},
+      {:ex_fixer, "~> 1.0.0", only: [:test, :dev]}
     ]
   end
 

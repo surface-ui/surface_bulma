@@ -37,9 +37,9 @@ defmodule SurfaceBulma.Dropdown do
       }
       :on-click="toggle"
     >
-        <div class="dropdown-trigger">
+      <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span><#slot name="trigger" /></span>
+          <span><#slot {@trigger} /></span>
           <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true" />
           </span>
@@ -47,9 +47,11 @@ defmodule SurfaceBulma.Dropdown do
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <Context put={SurfaceBulma.Link, link_class: "dropdown-item"}
-            put={SurfaceBulma.Item, item_class: "dropdown-item"}
-            put={SurfaceBulma.Divider, divider_class: "dropdown-divider"}>
+          <Context
+            put={SurfaceBulma.Link, context_class: "dropdown-item"}
+            put={SurfaceBulma.Item, context_class: "dropdown-item"}
+            put={SurfaceBulma.Divider, context_class: "dropdown-divider"}
+          >
             <#slot />
           </Context>
         </div>

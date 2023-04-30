@@ -31,53 +31,28 @@ defmodule SurfaceBulma.Catalogue.Form.Example04 do
 
   def render(assigns) do
     ~F"""
-    <Form
-    for={@changeset}
-    change={"change"}
-    submit={"submit"}
-    opts={autocomplete: "off"}>
-    <ColorInput
-      field={:example_04_color}
-      label="Color"
-      placeholder="Text input"
-      value="#c33c3c">
-      <:right_addon>
-      <Button color="primary" >Select</Button>
-      </:right_addon>
-    </ColorInput>
-    <DateInput
-      field={:example_04_date}
-      label="Datetime local"/>
-    <DateTimeLocalInput
-      field={:example_04_datetime_local}
-      label="Date"
-      step="3600"
-      />
-    <Select
-      field={:example_04_multiple_select}
-      options={
-        [
+    <Form for={@changeset} change="change" submit="submit" opts={autocomplete: "off"}>
+      <ColorInput field={:example_04_color} label="Color" placeholder="Text input" value="#c33c3c">
+        <:right_addon>
+          <Button color="primary">Select</Button>
+        </:right_addon>
+      </ColorInput>
+      <DateInput field={:example_04_date} label="Datetime local" />
+      <DateTimeLocalInput field={:example_04_datetime_local} label="Date" step="3600" />
+      <Select
+        field={:example_04_multiple_select}
+        options={[
           "Option 1",
           "Option 2",
           "Option 3"
-        ]
-      }
-      multiple
-      expanded
-      rounded/>
-      <NumberInput
-        field={:example_04_number}
-        step="5"/>
-      <PasswordInput
-        field={:example_04_password}
-        placeholder="Your password"
-        icon_left="key"/>
-      <RangeInput
-        field={:example_04_range}
-        min="0"
-        max="10"
-        value="7"
-        label="Range"/>
+        ]}
+        multiple
+        expanded
+        rounded
+      />
+      <NumberInput field={:example_04_number} step="5" />
+      <PasswordInput field={:example_04_password} placeholder="Your password" icon_left="key" />
+      <RangeInput field={:example_04_range} min="0" max="10" value="7" label="Range" />
     </Form>
     """
   end

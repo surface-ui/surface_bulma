@@ -8,13 +8,16 @@ defmodule SurfaceBulma.Panel.Tab.TabItem do
 
   prop type, :string
 
+  # put={SurfaceBulma.Item, item_class: "navbar-item"}
+  # put={SurfaceBulma.Link, context_class: "navbar-item"}
   slot default
 
   def render(assigns) do
     block_classes = ["panel-block", "is-active": assigns[:is_active]]
 
     ~F"""
-      {#case @type }
+    <Context put={SurfaceBulma.Divider, context_class: "navbar-divider"}>
+      {#case @type}
         {#match "link"}
           <a class={block_classes}>
             {render_icon(assigns)}
@@ -33,6 +36,7 @@ defmodule SurfaceBulma.Panel.Tab.TabItem do
             <#slot />
           </div>
       {/case}
+    </Context>
     """
   end
 

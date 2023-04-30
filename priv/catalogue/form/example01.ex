@@ -21,54 +21,31 @@ defmodule SurfaceBulma.Catalogue.Form.Example01 do
 
   def render(assigns) do
     ~F"""
-    <Form
-      for={@changeset}
-      change={"change"}
-      submit={"submit"}
-      opts={autocomplete: "off"}>
-        <TextInput
-          field={:name}
-          label="Name"
-           placeholder="Text input"/>
-        <TextInput
-          field={:username}
-          label="Username"/>
-        <TextInput
-          field={:email}
-          label="Email" />
-        <Select
-          field={:select}
-          options={[
-            "Select dropdown",
-            "with options"
-            ]}/>
-        <TextArea
-          field={:message}
-          label="Message"
-          placeholder="Textarea"
-          size="normal"/>
-        <Checkbox field={:checkbox}>
+    <Form for={@changeset} change="change" submit="submit" opts={autocomplete: "off"}>
+      <TextInput field={:name} label="Name" placeholder="Text input" />
+      <TextInput field={:username} label="Username" />
+      <TextInput field={:email} label="Email" />
+      <Select
+        field={:select}
+        options={[
+          "Select dropdown",
+          "with options"
+        ]}
+      />
+      <TextArea field={:message} label="Message" placeholder="Textarea" size="normal" />
+      <Checkbox field={:checkbox}>
         I agree to the
         <Link to="#">terms and conditions</Link>
-        </Checkbox>
-        <RadioButton
-            field={:radio}
-            options={
-              ["yes", "no"]
-            }/>
-        <ButtonGroup>
-          <Button
-            type="submit"
-            link>
-            Submit
-          </Button>
-          <Button
-            type="submit"
-            color="light"
-            link>
-            Submit
-          </Button>
-        </ButtonGroup>
+      </Checkbox>
+      <RadioButton field={:radio} options={["yes", "no"]} />
+      <ButtonGroup>
+        <Button type="submit" link>
+          Submit
+        </Button>
+        <Button type="submit" color="light" link>
+          Submit
+        </Button>
+      </ButtonGroup>
     </Form>
     """
   end

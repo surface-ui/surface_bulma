@@ -15,17 +15,14 @@ defmodule SurfaceBulma.Form.Checkbox do
 
   def render(assigns) do
     ~F"""
-      <Field name={@field} class="field">
-        <div class="control">
-          <label class="checkbox" disabled={@disabled}>
-            <Checkbox
-              opts={[disabled: @disabled] ++ @opts }
-              {...included_props(assigns)}
-              />
-            <#slot/>
-          </label>
-        </div>
-      </Field>
+    <Field name={@field} class="field">
+      <div class="control">
+        <label class="checkbox" disabled={@disabled}>
+          <Checkbox opts={[disabled: @disabled] ++ @opts} {...included_props(assigns, Checkbox)} />
+          <#slot />
+        </label>
+      </div>
+    </Field>
     """
   end
 end

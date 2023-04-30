@@ -40,24 +40,35 @@ defmodule SurfaceBulma.Form.FileInput do
   use SurfaceBulma.ColorProp
 
   def render(assigns) do
-    props = included_props(assigns)
+    props = included_props(assigns, FileInput)
 
     ~F"""
-    <InputWrapper :let={form: form}
-        field={@field}
-        label={@label}
-        expanded={@expanded}
-        help_text={@help_text}
-        field_class={@field_class}
-        has_addons={has_addons?(assigns)}>
-        <:left_addon><#slot name="left_addon" /></:left_addon>
-      <div class={"file", "is-#{@size}",
-      "has-name": @file_name,
-      "is-right": @button_right,
-      "is-boxed": @boxed,
-      "is-fullwidth": @expanded}>
+    <InputWrapper
+      :let={form: form}
+      field={@field}
+      label={@label}
+      expanded={@expanded}
+      help_text={@help_text}
+      field_class={@field_class}
+      has_addons={has_addons?(assigns)}
+    >
+      <:left_addon><#slot {@left_addon} /></:left_addon>
+      <div class={
+        "file",
+        "is-#{@size}",
+        "has-name": @file_name,
+        "is-right": @button_right,
+        "is-boxed": @boxed,
+        "is-fullwidth": @expanded
+      }>
         <label class="file-label">
-          <FileInput {...props} class="file-input" form={@form} field={@field} opts={onchange: "setFile('#{@form || form}_#{@field}')"}/>
+          <FileInput
+            {...props}
+            class="file-input"
+            form={@form}
+            field={@field}
+            opts={onchange: "setFile('#{@form || form}_#{@field}')"}
+          />
           <span class="file-cta">
             <span :if={@icon} class="file-icon">
               <FA icon={@icon} />
@@ -70,7 +81,7 @@ defmodule SurfaceBulma.Form.FileInput do
           </span>
         </label>
       </div>
-        <:right_addon><#slot name="right_addon" /></:right_addon>
+      <:right_addon><#slot {@right_addon} /></:right_addon>
       <script>
       if (setFile === undefined){
         function setFile(id) {

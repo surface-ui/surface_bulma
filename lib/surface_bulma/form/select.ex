@@ -32,7 +32,7 @@ defmodule SurfaceBulma.Form.Select do
 
   def render(assigns) do
     props =
-      included_props(assigns)
+      included_props(assigns, Select)
       |> Map.update(:class, [], fn
         nil ->
           get_config(Select, :default_class)
@@ -42,40 +42,43 @@ defmodule SurfaceBulma.Form.Select do
       end)
 
     ~F"""
-      <InputWrapper :let={form: form}
-        field={@field}
-        expanded={@expanded}
-        icon_left={@icon_left}
-        has_addons={has_addons?(assigns)}>
-        <:left_addon>{render_left_addon(assigns)}</:left_addon>
-        <div class={
-          "select",
-          "is-#{@size}": @size,
-          "is-#{@color}": @color,
-          "is-multiple": @multiple,
-          "is-fullwidth": @expanded}>
+    <InputWrapper
+      :let={form: form}
+      field={@field}
+      expanded={@expanded}
+      icon_left={@icon_left}
+      has_addons={has_addons?(assigns)}
+      disable_icons_if_addon
+    >
+      <:left_addon>{render_left_addon(assigns)}</:left_addon>
+      <div class={
+        "select",
+        "is-#{@size}": @size,
+        "is-#{@color}": @color,
+        "is-multiple": @multiple,
+        "is-fullwidth": @expanded
+      }>
         {#if @multiple}
           <MultipleSelect
             {...props}
             form={@form || form}
-            opts={[disabled: @disabled] ++ @opts }
+            opts={[disabled: @disabled] ++ @opts}
             class={["is-fullwidth": @expanded, rounded: @rounded] ++ (@class || [])}
-            />
+          />
         {#else}
           <Select
             {...props}
             form={@form || form}
-            opts={[disabled: @disabled] ++ @opts }
-            class={
-              [
-                "is-fullwidth": @expanded,
-                rounded: @rounded
-              ] ++ (@class || [])}
-            />
+            opts={[disabled: @disabled] ++ @opts}
+            class={[
+              "is-fullwidth": @expanded,
+              rounded: @rounded
+            ] ++ (@class || [])}
+          />
         {/if}
-        </div>
-        <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </InputWrapper>
+      </div>
+      <:right_addon>{render_right_addon(assigns)}</:right_addon>
+    </InputWrapper>
     """
   end
 end

@@ -6,9 +6,9 @@ defmodule SurfaceBulma.Navbar.Buttons do
   def render(assigns) do
     ~F"""
     <div class="buttons">
-    {#for {_, index} <- Enum.with_index(@default)}
-      <#slot name="default" index={index} />
-    {/for}
+      {#for item <- @default}
+        <#slot {item} />
+      {/for}
     </div>
     """
   end

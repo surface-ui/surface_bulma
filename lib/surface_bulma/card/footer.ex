@@ -19,9 +19,9 @@ defmodule SurfaceBulma.Card.Footer do
   def render(assigns) do
     ~F"""
     <footer class="card-footer">
-      {#for {_, index} <- Enum.with_index(@footer_items)}
+      {#for item <- @footer_items}
         <span class="card-footer-item">
-          <#slot name="footer_items" index={index} />
+          <#slot {item} />
         </span>
       {/for}
     </footer>

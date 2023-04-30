@@ -6,8 +6,7 @@ defmodule SurfaceBulma.Delete do
 
   use Surface.Component
 
-  @doc "The size of the delete"
-  prop size, :string, values: ~w(small medium large)
+  use SurfaceBulma.SizeProp
 
   @doc "Triggered on click"
   prop click, :event
@@ -19,7 +18,8 @@ defmodule SurfaceBulma.Delete do
       class={
         "delete",
         "is-#{@size}": @size
-      }>
+      }
+    >
     </a>
     """
   end

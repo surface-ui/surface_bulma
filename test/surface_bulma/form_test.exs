@@ -38,14 +38,14 @@ defmodule SurfaceBulma.Components.FormTest do
     html =
       render_surface do
         ~F"""
-        <Form for={:user} action="#" csrf_token="test">
+        <Form for={%{}} as={:test} action="#" csrf_token="test">
         </Form>
         """
       end
 
     assert html =~ """
-           <form action="#" method="post">\
-           <input name="_csrf_token" type="hidden" value="test">
+           <form action="#" method="post">
+               <input name="_csrf_token" type="hidden" hidden value="test">
            </form>
            """
   end

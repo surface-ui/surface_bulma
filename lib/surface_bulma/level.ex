@@ -15,29 +15,29 @@ defmodule SurfaceBulma.Level do
     ~F"""
     <div class="level">
       {#if slot_assigned?(:left)}
-      <div class="level-left">
-        {#for {_, index} <- Enum.with_index(@left)}
-          <div class="level-item">
-            <#slot name="left" index={index} />
-          </div>
-        {/for}
-      </div>
+        <div class="level-left">
+          {#for item <- @left}
+            <div class="level-item">
+              <#slot {item} />
+            </div>
+          {/for}
+        </div>
       {/if}
       {#if slot_assigned?(:default)}
-        {#for {_, index} <- Enum.with_index(@default)}
+        {#for item <- @default}
           <div class={"level-item", "has-text-centered": @centered}>
-            <#slot name="default" index={index} />
+            <#slot {item} />
           </div>
         {/for}
       {/if}
       {#if slot_assigned?(:right)}
-      <div class="level-right">
-        {#for {_, index} <- Enum.with_index(@right)}
-          <div class="level-item">
-            <#slot name="right" index={index} />
-          </div>
-        {/for}
-      </div>
+        <div class="level-right">
+          {#for item <- @right}
+            <div class="level-item">
+              <#slot {item} />
+            </div>
+          {/for}
+        </div>
       {/if}
     </div>
     """

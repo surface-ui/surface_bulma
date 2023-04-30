@@ -33,20 +33,25 @@ defmodule SurfaceBulma.Modal.Card do
   def render(assigns) do
     ~F"""
     <div class={"modal", "is-active": @show} phx-window-keyup={@close_event.name} phx-key="Esc">
-      <div class="modal-background"></div>
+      <div class="modal-background" />
       <div class="modal-card">
-        <header :if={@show_close_button || slot_assigned?(:header)} 
-          class={"modal-card-head", "is-flex-direction-column": (!slot_assigned?(:header) && @show_close_button)} >
-          <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot name="header"/></p>
-          <a :if={@show_close_button} :on-click={@close_event} 
-            class={"delete", "is-align-self-flex-end": (!slot_assigned?(:header) && @show_close_button)}
-            aria-label="close"></a>
+        <header
+          :if={@show_close_button || slot_assigned?(:header)}
+          class={"modal-card-head", "is-flex-direction-column": !slot_assigned?(:header) && @show_close_button}
+        >
+          <p :if={slot_assigned?(:header)} class="modal-card-title"><#slot {@header} /></p>
+          <a
+            :if={@show_close_button}
+            :on-click={@close_event}
+            class={"delete", "is-align-self-flex-end": !slot_assigned?(:header) && @show_close_button}
+            aria-label="close"
+          />
         </header>
         <section class="modal-card-body">
-          <#slot/>
+          <#slot />
         </section>
         <footer :if={slot_assigned?(:footer)} class="modal-card-foot" style="justify-content: flex-end">
-        <#slot name="footer"/>
+          <#slot {@footer} />
         </footer>
       </div>
     </div>

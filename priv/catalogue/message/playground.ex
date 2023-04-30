@@ -5,12 +5,12 @@ defmodule SurfaceBulma.Catalogue.Message.Playground do
     height: "600px",
     body: [style: "padding: 1.5rem;"]
 
-  data props, :map, default: %{
-    id: "playground_message",
-    closable: false,
-    color: "dark",
-    size: "medium",
-  }
+  @props [
+      id: "playground_message",
+      closable: false,
+      color: "dark",
+      size: "medium"
+    ]
 
   def render(assigns) do
     ~F"""

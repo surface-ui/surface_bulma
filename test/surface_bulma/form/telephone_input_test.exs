@@ -4,11 +4,12 @@ defmodule SurfaceBulma.Components.Form.TelephoneInputTest do
   alias SurfaceBulma.Form.TelephoneInput
 
   test "should use the correct type" do
-    html = render_surface do
-      ~F"""
+    html =
+      render_surface do
+        ~F"""
         <TelephoneInput form="user" field="tel" />
-      """
-    end
+        """
+      end
 
     assert html =~ ~r/input .* type="tel"/
   end

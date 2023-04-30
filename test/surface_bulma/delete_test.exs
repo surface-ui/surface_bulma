@@ -21,7 +21,7 @@ defmodule Surface.Components.DeleteTest do
     html =
       render_surface do
         ~F"""
-        <Delete size="small"/>
+        <Delete size="small" />
         """
       end
 

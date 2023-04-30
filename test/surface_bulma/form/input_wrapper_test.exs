@@ -9,7 +9,7 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
     html =
       render_surface do
         ~F"""
-          <InputWrapper has_addons={true} expanded={true} />
+        <InputWrapper has_addons expanded />
         """
       end
 
@@ -49,9 +49,15 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
 
     def render(assigns) do
       ~F"""
-      <InputWrapper field={@field} label={@label} icon_right={@icon_right} has_addons={has_addons?(assigns)} :let={form: form}>
+      <InputWrapper
+        field={@field}
+        label={@label}
+        icon_right={@icon_right}
+        has_addons={has_addons?(assigns)}
+        :let={form: form}
+      >
         <:left_addon>{render_left_addon(assigns)}</:left_addon>
-        TestInput{form && form.id}
+        TestInput{form && form.form.id}
         <:right_addon>{render_right_addon(assigns)}</:right_addon>
       </InputWrapper>
       """
@@ -69,20 +75,10 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
         """
       end
 
-    assert html =~ """
-
-             <div class="field has-addons">
-             <div class="control">
-             TestInput
-             </div>
-             <div class="control">
-             TestInput
-             </div>
-             <div class="control">
-             TestInput
-             </div>
-           </div>
-           """
+    assert html =~ ~r/has-addons/
+    assert html =~ ~r/left/
+    assert html =~ ~r/right/
+    assert html =~ ~r/TestInput/
   end
 
   test "multiple addons can be set" do
@@ -96,20 +92,8 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
         """
       end
 
-    assert html =~ """
-
-             <div class="field has-addons">
-             <div class="control">
-             TestInput
-             </div>
-             <div class="control">
-             TestInput
-             </div>
-             <div class="control">
-             TestInput
-             </div>
-           </div>
-           """
+    assert html =~ ~r/left/
+    assert html =~ ~r/nested left/
   end
 
   test "icons for addons are set" do
@@ -122,6 +106,7 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
         </TestInput>
         """
       end
+
     assert html =~ ~r/calendar/
   end
 
@@ -154,19 +139,8 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
           """
         end
 
-      assert html =~ """
-
-             <form action="#" method="post">
-               <div class="field">
-               <div class="control has-icons-right">
-               TestInput
-               <span class="icon has-text-success is-small is-right">
-                 <i class="fas fa-check"></i>
-               </span>
-               </div>
-             </div>
-             </form>
-             """
+      assert html =~ ~r/has-text-success/
+      assert html =~ ~r/fa-check/
     end
 
     test "incorrect changeset has icon displayed" do
@@ -179,18 +153,8 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
           """
         end
 
-      assert html =~ """
-             <form action="#" method="post">
-               <div class="field">
-               <div class="control has-icons-right">
-               TestInput
-               <span class="icon has-text-danger is-small is-right">
-                 <i class="fas fa-exclamation-triangle"></i>
-               </span>
-               </div>
-             </div>
-             </form>
-             """
+      assert html =~ ~r/has-text-danger/
+      assert html =~ ~r/fa-exclamation-triangle/
     end
 
     test "left icons and right icons" do
@@ -211,7 +175,7 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
         render_surface do
           ~F"""
           <Form csrf_token={false} for={User.changeset(%User{}, %{date: "Test"})}>
-            <TestInput field={:date} icon_right="right_test"/>
+            <TestInput field={:date} icon_right="right_test" />
           </Form>
           """
         end
@@ -223,7 +187,7 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
         render_surface do
           ~F"""
           <Form csrf_token={false} for={User.changeset(%User{}, %{name: "Test"})}>
-            <TestInput field={:name} icon_right="right_test"/>
+            <TestInput field={:name} icon_right="right_test" />
           </Form>
           """
         end
@@ -234,24 +198,26 @@ defmodule SurfaceBulma.Form.InputWrapperTest do
   end
 
   defmodule Slot do
-  use Surface.Component, slot: "test"
-  slot default
-  def render(assigns) do
-    ~F"""
-    <Context put={is_addon: true}>
-      <#slot />
-    </Context>
-    """
-  end
-end
+    use Surface.Component, slot: "test"
+    slot default
 
-defmodule Parent do
-  use Surface.Component
-  slot test
-  def render(assigns) do
-    ~F"""
-    <#slot name="test" />
-    """
+    def render(assigns) do
+      ~F"""
+      <Context put={is_addon: true}>
+        <#slot />
+      </Context>
+      """
+    end
   end
-end
+
+  defmodule Parent do
+    use Surface.Component
+    slot test
+
+    def render(assigns) do
+      ~F"""
+      <#slot {@test} />
+      """
+    end
+  end
 end

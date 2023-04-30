@@ -187,7 +187,7 @@ defmodule Surface.Components.CardTest do
         ~F"""
         <Card>
           <Card.Image>
-            <img src={arbitrary_image_url} />
+            <img src={arbitrary_image_url}>
           </Card.Image>
         </Card>
         """
@@ -198,7 +198,6 @@ defmodule Surface.Components.CardTest do
       |> Floki.parse_document!()
       |> Floki.find("." <> @bulma_container_class)
       |> Floki.find("." <> @bulma_image_class)
-
 
     image_classes = extract_attribute(image_html_tree, "class")
 
@@ -224,11 +223,11 @@ defmodule Surface.Components.CardTest do
       |> Floki.find("." <> @bulma_container_class)
       |> Floki.find("." <> @bulma_footer_class)
 
-
     footer_classes = extract_attribute(footer_html_tree, "class")
 
     assert @bulma_footer_class in footer_classes
   end
+
   test "renders footer items" do
     html =
       render_surface do
@@ -251,13 +250,12 @@ defmodule Surface.Components.CardTest do
       |> Floki.find("." <> @bulma_footer_item_class)
 
     assert length(footer_items) == 3
+
     assert Enum.each(footer_items, fn item ->
-      classes = extract_attribute(item, "class")
-      assert @bulma_footer_item_class in classes
-    end)
+             classes = extract_attribute(item, "class")
+             assert @bulma_footer_item_class in classes
+           end)
   end
-
-
 
   defp extract_attribute(html_tree, attribute) do
     html_tree

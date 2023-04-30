@@ -22,37 +22,39 @@ defmodule SurfaceBulma.Form.SearchInput do
     input_classes = input_classes(assigns)
 
     ~F"""
-      <InputWrapper :let={form: form}
-        field={@field}
-        expanded={@expanded}
-        help_text={@help_text}
-        disable_icons={@disable_icons}
-        icon_left={@icon_left}
-        icon_right={@icon_right}
-        field_class={@field_class}
-        control_attrs={class: "is-flex-grow-1"}
-        has_addons={true}>
-        <:left_addon>{render_left_addon(assigns)}</:left_addon>
-        <SearchInput
-        {...included_props(assigns)} 
+    <InputWrapper
+      :let={form: form}
+      field={@field}
+      expanded={@expanded}
+      help_text={@help_text}
+      disable_icons={@disable_icons}
+      icon_left={@icon_left}
+      icon_right={@icon_right}
+      field_class={@field_class}
+      control_attrs={class: "is-flex-grow-1"}
+      has_addons
+    >
+      <:left_addon>{render_left_addon(assigns)}</:left_addon>
+      <SearchInput
+        {...included_props(assigns, SearchInput)}
         class={input_classes}
         field={@field}
         form={@form || form}
         value={@value}
-        opts={
-          [
-            placeholder: @placeholder,
-            disabled: @disabled,
-          ] ++ @opts}/>
-        <:right_addon>
-          {#if !slot_assigned?(:right_addon) || !@hide_button}
-            <Context put={SurfaceBulma.Form, is_addon: true}>
-              <Submit color="primary" {...@button_props}>{@label || "Search"}</Submit>
-            </Context>
-          {/if}
-          {render_right_addon(assigns)}
-        </:right_addon>
-      </InputWrapper>
+        opts={[
+          placeholder: @placeholder,
+          disabled: @disabled
+        ] ++ @opts}
+      />
+      <:right_addon>
+        {#if !slot_assigned?(:right_addon) || !@hide_button}
+          <Context put={SurfaceBulma.Form, is_addon: true}>
+            <Submit color="primary" {...@button_props}>{@label || "Search"}</Submit>
+          </Context>
+        {/if}
+        {render_right_addon(assigns)}
+      </:right_addon>
+    </InputWrapper>
     """
   end
 end
