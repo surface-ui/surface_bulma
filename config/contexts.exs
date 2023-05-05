@@ -21,7 +21,5 @@ config :surface,
     {SurfaceBulma.Form.Select, propagate_context_to_slots: true},
     {SurfaceBulma.Panel, propagate_context_to_slots: true},
     {SurfaceBulma.Panel.Tab, propagate_context_to_slots: true},
-    {SurfaceBulma.Panel.Tab.TabItem, propagate_context_to_slots: true},
-    {SurfaceBulma.Form, propagate_context_to_slots: true},
-    {SurfaceBulma.Form, propagate_context_to_slots: true}
+    {SurfaceBulma.Panel.Tab.TabItem, propagate_context_to_slots: true}
   ]
