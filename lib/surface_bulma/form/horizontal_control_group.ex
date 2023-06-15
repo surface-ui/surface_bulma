@@ -10,8 +10,7 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
 
   alias Surface.Components.Form.{Label}
 
-  @doc "Size of the label in css sense"
-  prop size, :string, values: ["small", "normal", "medium", "large"]
+  use SurfaceBulma.SizeProp
 
   @doc "The string label of the control group"
   prop label, :string
@@ -21,16 +20,14 @@ defmodule SurfaceBulma.Form.HorizontalControlGroup do
   def render(assigns) do
     ~F"""
     <div class="field is-horizontal">
-      <div class={
-        [
-          "field-label",
-          "is-#{@size}": @size
-        ]
-      }>
+      <div class={[
+        "field-label",
+        "is-#{@size}": @size
+      ]}>
         <Label :if={@label} class="label">{@label}</Label>
       </div>
       <div class="field-body">
-      <#slot/>
+        <#slot />
       </div>
     </div>
     """

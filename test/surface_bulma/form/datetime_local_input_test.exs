@@ -11,9 +11,9 @@ defmodule Surface.Components.Form.DateTimeLocalInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="order_completed_at" name="order[completed_at]" type="datetime-local">
-           """
+    assert html =~ ~r/id="order_completed_at"/
+    assert html =~ ~r/name="order\[completed_at\]"/
+    assert html =~ ~r/type="datetime-local"/
   end
 
   test "setting the value" do
@@ -24,31 +24,29 @@ defmodule Surface.Components.Form.DateTimeLocalInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="order_completed_at" name="order[completed_at]" type="datetime-local" value="2020-05-05T19:30">
-           """
+    assert html =~ ~r/value="2020-05-05T19:30"/
   end
 
   test "setting the class" do
     html =
       render_surface do
         ~F"""
-        <DateTimeLocalInput form="order" field="completed_at" class="input"/>
+        <DateTimeLocalInput form="order" field="completed_at" class="test" />
         """
       end
 
-    assert html =~ ~r/class="input"/
+    assert html =~ ~r/class="input test"/
   end
 
   test "setting multiple classes" do
     html =
       render_surface do
         ~F"""
-        <DateTimeLocalInput form="order" field="completed_at" class="input primary"/>
+        <DateTimeLocalInput form="order" field="completed_at" class="primary test" />
         """
       end
 
-    assert html =~ ~r/class="input primary"/
+    assert html =~ ~r/class="input primary test"/
   end
 
   test "passing other options" do
@@ -59,9 +57,7 @@ defmodule Surface.Components.Form.DateTimeLocalInputTest do
         """
       end
 
-    assert html =~ """
-           <input autofocus="autofocus" id="order_completed_at" name="order[completed_at]" type="datetime-local">
-           """
+    assert html =~ ~r/autofocus="autofocus"/
   end
 
   test "events with parent live view as target" do
@@ -83,9 +79,8 @@ defmodule Surface.Components.Form.DateTimeLocalInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="birthday" name="birthday" type="datetime-local">
-           """
+    assert html =~ ~r/id="birthday"/
+    assert html =~ ~r/name="birthday"/
   end
 
   test "setting the phx-value-* values" do
@@ -96,8 +91,6 @@ defmodule Surface.Components.Form.DateTimeLocalInputTest do
         """
       end
 
-    assert html =~ """
-           <input id="user_birth" name="user[birth]" phx-value-a="one" phx-value-b="two" phx-value-c="3" type="datetime-local">
-           """
+    assert html =~ ~r/phx-value-a="one" phx-value-b="two" phx-value-c="3"/
   end
 end

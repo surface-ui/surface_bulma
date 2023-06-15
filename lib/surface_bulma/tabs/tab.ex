@@ -1,4 +1,4 @@
-defmodule SurfaceBulma.Tabs.TabItem do
+defmodule SurfaceBulma.Tab do
   @moduledoc """
   Defines a tab item for the parent tabs component.
 
@@ -19,4 +19,6 @@ defmodule SurfaceBulma.Tabs.TabItem do
 
   @doc "Item is visible"
   prop visible, :boolean, default: true
+
+  slot default
 end

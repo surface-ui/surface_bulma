@@ -3,7 +3,7 @@ defmodule SurfaceBulma.Panel.Header do
   require SurfaceBulma.Component
   alias SurfaceBulma.Component
 
-  Component.include(SurfaceBulma.Panel.Tab.TabItem)
 
-  defdelegate render(assigns), to: SurfaceBulma.Panel.Tab.TabItem
+  slot default
+
 end

@@ -7,16 +7,7 @@ defmodule SurfaceBulma.Form do
 
   include(Form)
 
-  slot default, args: [:form]
+  slot default, arg: %{form: :form}
 
-  def render(assigns) do
-    ~F"""
-
-    <Form {...included_props(assigns)} :let={form: form}>
-      <Context put={__MODULE__, form: form}>
-        <#slot :args={form: form} />
-      </Context>
-    </Form>
-    """
-  end
+  defdelegate render(assigns), to: Surface.Components.Form
 end

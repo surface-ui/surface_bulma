@@ -1,21 +1,22 @@
 defmodule SurfaceBulma.Navbar.Dropdown do
   use Surface.Component
 
+  @doc "Whether to display the arrow next to the dropdown"
+  prop arrowless?, :boolean, default: false
+
   slot label
   slot default
 
   def render(assigns) do
     ~F"""
-    <div class="navbar-item has-dropdown is-hoverable">
-      <Context put={SurfaceBulma.Link, link_class: "navbar-link"}>
-        <div class="navbar-link"><#slot name="label" /></div>
-      </Context>
-      <div class="navbar-dropdown">
-      <Context put={SurfaceBulma.Link, link_class: "navbar-item"}>
-        <#slot name="default" />
-      </Context>
+    <Context put={SurfaceBulma.Link, context_class: "navbar-item"}>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class={"navbar-link", "is-arrowless": @arrowless?}><#slot {@label} /></div>
+        <div class="navbar-dropdown">
+          <#slot />
+        </div>
       </div>
-    </div>
+    </Context>
     """
   end
 end

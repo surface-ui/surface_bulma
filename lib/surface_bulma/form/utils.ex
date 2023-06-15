@@ -11,7 +11,7 @@ defmodule SurfaceBulma.Form.Utils do
       [
         "is-danger": has_error?(assigns),
         "is-success": has_change?(assigns) && !has_error?(assigns),
-        "is-#{assigns[:size]}": assigns[:size] != "normal",
+        "is-#{assigns[:size]}": assigns[:size] && assigns[:size] != "normal",
         "is-static": assigns[:static]
       ] ++ (assigns[:class] || [])
   end
@@ -30,15 +30,21 @@ defmodule SurfaceBulma.Form.Utils do
 
   def display_error_icon?(assigns) do
     !Map.get(assigns, :disable_icons) && !Map.get(assigns, :icon_right) && has_error?(assigns) &&
-      display_right_icon?(assigns)
+      display_right_icon?(assigns) && !(assigns[:is_addon] && assigns[:disable_icons_if_addon])
   end
 
   def display_valid_icon?(assigns) do
     !Map.get(assigns, :disable_icons) &&
       !Map.get(assigns, :icon_right) &&
       has_change?(assigns) &&
-      !has_error?(assigns) && display_right_icon?(assigns)
+      !has_error?(assigns) && display_right_icon?(assigns) &&
+      !(assigns[:is_addon] && assigns[:disable_icons_if_addon])
   end
+
+  def context_blocks_icons?(%{__context__: %{{SurfaceBulma.InputWrapper, :hide_icons} => true}}),
+    do: true
+
+  def context_blocks_icons?(_), do: false
 
   def has_error?(assigns) do
     get_form(assigns)
@@ -60,7 +66,7 @@ defmodule SurfaceBulma.Form.Utils do
   def field_has_error?(_not_form, _field), do: false
 
   @doc "Helper function used by the form controls"
-  def field_has_change?(%{source: source}, field) when is_map(source) do
+  def field_has_change?(%{source: source}, field) when is_map(source) and map_size(source) != 0 do
     Ecto.Changeset.get_change(source, field, false)
   end
 
@@ -69,8 +75,8 @@ defmodule SurfaceBulma.Form.Utils do
   @doc "Gets the form from the context. Works with a `Surface.Components.Form` and `SurfaceBulma.Form`."
   def get_form(%{__context__: context}) do
     case context do
-      %{{Surface.Components.Form, :form} => form} -> form
-      %{{SurfaceBulma.Form, :form} => form} -> form
+      %{{Surface.Components.Form, :form} => form} when is_struct(form) -> form
+      %{{SurfaceBulma.Form, :form} => form} when is_struct(form) -> form
       _ -> nil
     end
   end

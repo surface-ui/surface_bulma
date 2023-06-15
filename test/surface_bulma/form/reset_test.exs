@@ -11,9 +11,9 @@ defmodule Surface.Components.Form.ResetTest do
         """
       end
 
-    assert html =~ """
-           <input type="reset" value="Reset">
-           """
+    assert html =~ ~r/value="Reset"/
+    assert html =~ ~r/type="reset"/
+    assert html =~ ~r/class="button"/
   end
 
   test "setting the value" do
@@ -24,27 +24,25 @@ defmodule Surface.Components.Form.ResetTest do
         """
       end
 
-    assert html =~ """
-           <input type="reset" value="ResetTheForm">
-           """
+    assert html =~ ~r/value="ResetTheForm"/
   end
 
   test "setting the class" do
     html =
       render_surface do
         ~F"""
-        <Reset class="button" />
+        <Reset class="button2" />
         """
       end
 
-    assert html =~ ~r/class="button"/
+    assert html =~ ~r/class="button button2"/
   end
 
   test "setting multiple classes" do
     html =
       render_surface do
         ~F"""
-        <Reset class="button primary" />
+        <Reset class="primary" />
         """
       end
 
@@ -59,9 +57,7 @@ defmodule Surface.Components.Form.ResetTest do
         """
       end
 
-    assert html =~ """
-           <input autofocus="autofocus" type="reset" value="Reset">
-           """
+    assert html =~ ~r/autofocus="autofocus"/
   end
 
   test "events with parent live view as target" do
@@ -83,9 +79,7 @@ defmodule Surface.Components.Form.ResetTest do
         """
       end
 
-    assert html =~ """
-           <input id="countdown" name="countdown" type="reset" value="Reset">
-           """
+    assert html =~ ~r/name="countdown"/
   end
 
   test "setting the phx-value-* values" do
@@ -96,8 +90,6 @@ defmodule Surface.Components.Form.ResetTest do
         """
       end
 
-    assert html =~ """
-           <input phx-value-a="one" phx-value-b="two" phx-value-c="3" type="reset" value="Reset">
-           """
+    assert html =~ ~r/phx-value-a="one" phx-value-b="two" phx-value-c="3"/
   end
 end

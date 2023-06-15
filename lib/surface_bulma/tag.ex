@@ -11,8 +11,7 @@ defmodule SurfaceBulma.Tag do
 
   use SurfaceBulma.ColorProp
 
-  @doc "The size of the delete"
-  prop size, :string, values: ~w(normal medium large)
+  use SurfaceBulma.SizeProp
 
   @doc "Light style"
   prop light, :boolean
@@ -31,11 +30,11 @@ defmodule SurfaceBulma.Tag do
 
   def render(assigns) do
     ~F"""
-    {#if slot_assigned?(:addons) }
-    <div class="tags has-addons">
-      {render_tag(assigns)}
-      <#slot name="addons" />
-    </div>
+    {#if slot_assigned?(:addons)}
+      <div class="tags has-addons">
+        {render_tag(assigns)}
+        <#slot {@addons} />
+      </div>
     {#else}
       {render_tag(assigns)}
     {/if}
@@ -44,14 +43,13 @@ defmodule SurfaceBulma.Tag do
 
   defp render_tag(assigns) do
     ~F"""
-    <span
-      class={
-        "tag",
-        "is-#{@color}": @color,
-        "is-#{@size}": @size,
-        "is-light": @light,
-        "is-rounded": @rounded
-      }>
+    <span class={
+      "tag",
+      "is-#{@color}": @color,
+      "is-#{@size}": @size,
+      "is-light": @light,
+      "is-rounded": @rounded
+    }>
       <#slot>{@label}</#slot>
     </span>
     """

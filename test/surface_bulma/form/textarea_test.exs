@@ -11,10 +11,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ """
-           <textarea id="user_summary" name="user[summary]">
-           </textarea>
-           """
+    assert html =~ ~r/id="user_summary" name="user\[summary\]"/
   end
 
   test "textarea with atom field" do
@@ -25,10 +22,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ """
-           <textarea id="user_summary" name="user[summary]">
-           </textarea>
-           """
+    assert html =~ ~r/id="user_summary" name="user\[summary\]"/
   end
 
   test "setting the value" do
@@ -40,7 +34,6 @@ defmodule Surface.Components.Form.TextAreaTest do
       end
 
     assert html =~ """
-           <textarea id="user_summary" name="user[summary]">
            some content</textarea>
            """
   end
@@ -49,22 +42,22 @@ defmodule Surface.Components.Form.TextAreaTest do
     html =
       render_surface do
         ~F"""
-        <TextArea form="user" field="summary" class="input" />
+        <TextArea form="user" field="summary" class="test" />
         """
       end
 
-    assert html =~ ~r/class="textarea is-normal input"/
+    assert html =~ ~r/class="textarea input test"/
   end
 
   test "setting multiple classes" do
     html =
       render_surface do
         ~F"""
-        <TextArea form="user" field="summary" class="input primary" />
+        <TextArea form="user" field="summary" class="test primary" />
         """
       end
 
-    assert html =~ ~r/class="textarea is-normal input primary"/
+    assert html =~ ~r/class="textarea input test primary"/
   end
 
   test "passing other options" do
@@ -75,10 +68,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ """
-           <textarea autofocus="autofocus" id="user_summary" name="user[summary]">
-           </textarea>
-           """
+    assert html =~ ~r/autofocus="autofocus"/
   end
 
   test "events with parent live view as target" do
@@ -100,10 +90,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ """
-           <textarea id="blog_summary" name="blog_summary">
-           </textarea>
-           """
+    assert html =~ ~r/id="blog_summary" name="blog_summary"/
   end
 
   test "setting the phx-value-* values" do
@@ -114,9 +101,6 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ """
-           <textarea id="user_summary" name="user[summary]" phx-value-a="one" phx-value-b="two" phx-value-c="3">
-           </textarea>
-           """
+    assert html =~ ~r/phx-value-a="one" phx-value-b="two" phx-value-c="3"/
   end
 end

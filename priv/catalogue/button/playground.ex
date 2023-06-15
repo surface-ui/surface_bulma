@@ -8,15 +8,16 @@ defmodule SurfaceBulma.Catalogue.Button.Playground do
     container: {:div, class: "buttons is-centered"},
     head_js: ""
 
-  data props, :map,
-    default: %{
-      label: "My Button",
-      color: "success"
-    }
+  @props [
+    label: "My Button",
+    color: "warning"
+  ]
+  @slots []
+  alias SurfaceBulma.Button
 
   def render(assigns) do
     ~F"""
-    <Button :props={ @props } />
+    <Button {...@props} />
     """
   end
 end

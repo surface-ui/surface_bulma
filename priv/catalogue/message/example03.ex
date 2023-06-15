@@ -10,7 +10,6 @@ defmodule SurfaceBulma.Catalogue.Message.Example03 do
     title: "Message component (close button override)"
 
   alias SurfaceBulma.Message
-  alias SurfaceBulma.Icon
 
   def render(assigns) do
     ~F"""

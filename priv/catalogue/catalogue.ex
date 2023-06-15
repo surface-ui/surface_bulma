@@ -20,7 +20,7 @@ defmodule SurfaceBulma.Catalogue do
       """,
       playground: [
         body: [
-          style: "padding: 1.5rem; height: 100%;",
+          style: "padding: 1.4rem; height: 100%;",
           class: "has-background-light"
         ]
       ]

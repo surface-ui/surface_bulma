@@ -9,7 +9,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Modal show={true}>hello</Modal>
+        <Modal show>hello</Modal>
         """
       end
 
@@ -23,7 +23,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Modal show={true}>hello</Modal>
+        <Modal show>hello</Modal>
         """
       end
 
@@ -45,7 +45,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Modal show={true}><Button>ok</Button></Modal>
+        <Modal show><Button>ok</Button></Modal>
         """
       end
 
@@ -57,7 +57,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Modal show={true} show_close_button={true}>hello</Modal>
+        <Modal show show_close_button>hello</Modal>
         """
       end
 
@@ -67,7 +67,7 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Modal show={true} show_close_button={false}>hello</Modal>
+        <Modal show show_close_button={false}>hello</Modal>
         """
       end
 
@@ -79,14 +79,14 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Card show={true} show_close_button={true}>
-        <Header>
-        headertext
-        </Header>
-        hello
-        <Footer>
-        footertext
-        </Footer>
+        <Card show show_close_button>
+          <Header>
+            headertext
+          </Header>
+          hello
+          <Footer>
+            footertext
+          </Footer>
         </Card>
         """
       end
@@ -97,15 +97,15 @@ defmodule Surface.Components.ModalTest do
              <div class="modal-card">
                <header class="modal-card-head">
                  <p class="modal-card-title">
-           headertext
-           </p>
+               headertext
+             </p>
                  <a phx-click="modal_close" class="delete" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
-           hello
+             hello
                </section>
                <footer class="modal-card-foot" style="justify-content: flex-end">
-           footertext
+               footertext
                </footer>
              </div>
            </div>
@@ -116,14 +116,14 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Card show={false} show_close_button={true}>
-        <Header>
-        headertext
-        </Header>
-        hello
-        <Footer>
-        footertext
-        </Footer>
+        <Card show={false} show_close_button>
+          <Header>
+            headertext
+          </Header>
+          hello
+          <Footer>
+            footertext
+          </Footer>
         </Card>
         """
       end
@@ -134,15 +134,15 @@ defmodule Surface.Components.ModalTest do
              <div class="modal-card">
                <header class="modal-card-head">
                  <p class="modal-card-title">
-           headertext
-           </p>
+               headertext
+             </p>
                  <a phx-click="modal_close" class="delete" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
-           hello
+             hello
                </section>
                <footer class="modal-card-foot" style="justify-content: flex-end">
-           footertext
+               footertext
                </footer>
              </div>
            </div>
@@ -153,8 +153,8 @@ defmodule Surface.Components.ModalTest do
     html =
       render_surface do
         ~F"""
-        <Card show={false} show_close_button={true}>
-        hello
+        <Card show={false} show_close_button>
+          hello
         </Card>
         """
       end
@@ -167,7 +167,7 @@ defmodule Surface.Components.ModalTest do
                  <a phx-click="modal_close" class="delete is-align-self-flex-end" aria-label="close"></a>
                </header>
                <section class="modal-card-body">
-           hello
+             hello
                </section>
              </div>
            </div>
@@ -179,7 +179,7 @@ defmodule Surface.Components.ModalTest do
       render_surface do
         ~F"""
         <Card show={false} show_close_button={false}>
-        hello
+          hello
         </Card>
         """
       end
@@ -189,7 +189,7 @@ defmodule Surface.Components.ModalTest do
              <div class="modal-background"></div>
              <div class="modal-card">
                <section class="modal-card-body">
-           hello
+             hello
                </section>
              </div>
            </div>
@@ -231,7 +231,7 @@ defmodule Surface.Components.ModalTest do
     @impl true
     def render(assigns) do
       ~F"""
-        <Card show={@show_modal}>Modal content</Card>
+      <Card show={@show_modal}>Modal content</Card>
       """
     end
 

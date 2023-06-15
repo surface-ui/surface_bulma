@@ -14,9 +14,9 @@ defmodule Surface.Components.IconTest do
 
     assert html =~
              """
-               <span class="icon">
-                 <i class="fab fa-500px"></i>
-               </span>
+             <span class="icon">
+               <i class="fab fa-500px"></i>
+             </span>
              """
   end
 
@@ -30,9 +30,9 @@ defmodule Surface.Components.IconTest do
 
     assert html =~
              """
-               <span class="icon is-small">
-                 <i class="fab fa-500px"></i>
-               </span>
+             <span class="icon is-small">
+               <i class="fab fa-500px"></i>
+             </span>
              """
   end
 
@@ -46,9 +46,9 @@ defmodule Surface.Components.IconTest do
 
     assert html =~
              """
-               <span class="icon is-small">
-                 <i class="fab fa-500px fa-4x"></i>
-               </span>
+             <span class="icon is-small">
+               <i class="fab fa-500px fa-4x"></i>
+             </span>
              """
   end
 
@@ -56,9 +56,9 @@ defmodule Surface.Components.IconTest do
     html =
       render_surface do
         ~F"""
-        <Layers container_size="large" >
-          <FA icon="camera" size="1x"/>
-          <FA icon="ban" size="2x"/>
+        <Layers container_size="large">
+          <FA icon="camera" size="1x" />
+          <FA icon="ban" size="2x" />
         </Layers>
         """
       end
@@ -67,12 +67,12 @@ defmodule Surface.Components.IconTest do
              """
              <span class="icon is-large">
                <span class="fa-layers fa-fw">
-                 <span class="icon">
-                 <i class="fas fa-camera fa-1x"></i>
-               </span>
-                 <span class="icon">
-                 <i class="fas fa-ban fa-2x"></i>
-               </span>
+               <span class="icon">
+               <i class="fas fa-camera fa-1x"></i>
+             </span>
+               <span class="icon">
+               <i class="fas fa-ban fa-2x"></i>
+             </span>
              </span>
              </span>
              """
@@ -82,8 +82,8 @@ defmodule Surface.Components.IconTest do
     html =
       render_surface do
         ~F"""
-        <Layers container_size="large" >
-          <FA icon="camera" size="1x"/>
+        <Layers container_size="large">
+          <FA icon="camera" size="1x" />
           <TextLayer>Something</TextLayer>
         </Layers>
         """
@@ -93,10 +93,11 @@ defmodule Surface.Components.IconTest do
              """
              <span class="icon is-large">
                <span class="fa-layers fa-fw">
-                 <span class="icon">
-                 <i class="fas fa-camera fa-1x"></i>
-               </span>
+               <span class="icon">
+               <i class="fas fa-camera fa-1x"></i>
+             </span>
                <span class="fa-layers-text">Something</span>
+             </span>
              </span>
              """
   end
@@ -105,8 +106,8 @@ defmodule Surface.Components.IconTest do
     html =
       render_surface do
         ~F"""
-        <Layers container_size="large" >
-          <FA icon="camera" size="1x"/>
+        <Layers container_size="large">
+          <FA icon="camera" size="1x" />
           <CounterLayer>10</CounterLayer>
         </Layers>
         """
@@ -116,10 +117,11 @@ defmodule Surface.Components.IconTest do
              """
              <span class="icon is-large">
                <span class="fa-layers fa-fw">
-                 <span class="icon">
-                 <i class="fas fa-camera fa-1x"></i>
-               </span>
+               <span class="icon">
+               <i class="fas fa-camera fa-1x"></i>
+             </span>
                <span class="fa-layers-counter">10</span>
+             </span>
              </span>
              """
   end
@@ -128,15 +130,15 @@ defmodule Surface.Components.IconTest do
     html =
       render_surface do
         ~F"""
-        <FA icon="500px" transform="grow-10 left-20"/>
+        <FA icon="500px" transform="grow-10 left-20" />
         """
       end
 
     assert html =~
              """
-               <span class="icon">
-                 <i data-fa-transform="grow-10 left-20" class="fab fa-500px"></i>
-               </span>
+             <span class="icon">
+               <i data-fa-transform="grow-10 left-20" class="fab fa-500px"></i>
+             </span>
              """
   end
 
@@ -150,9 +152,9 @@ defmodule Surface.Components.IconTest do
 
     assert html =~
              """
-               <span class="icon">
-                 <i class="fad fa-camera" style="--fa-primary-color: blue"></i>
-               </span>
+             <span class="icon">
+               <i class="fad fa-camera" style="--fa-primary-color: blue"></i>
+             </span>
              """
   end
 
@@ -166,9 +168,9 @@ defmodule Surface.Components.IconTest do
 
     assert html =~
              """
-               <span class="icon">
-                 <i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i>
-               </span>
+             <span class="icon">
+               <i class="fad fa-camera" style="--fa-secondary-color: blue; --fa-primary-opacity: 0.6"></i>
+             </span>
              """
   end
 
@@ -177,8 +179,8 @@ defmodule Surface.Components.IconTest do
       render_surface do
         ~F"""
         <TextIcon>
-        <FA icon="camera"/>
-        <TextIconText>Hello</TextIconText>
+          <FA icon="camera" />
+          <TextIconText>Hello</TextIconText>
         </TextIcon>
         """
       end

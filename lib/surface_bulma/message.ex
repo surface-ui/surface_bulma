@@ -9,8 +9,7 @@ defmodule SurfaceBulma.Message do
 
   use SurfaceBulma.ColorProp
 
-  @doc "Unset is between small and medium (per Bulma)"
-  prop size, :string, values: ~w/small medium large/
+  use SurfaceBulma.SizeProp
 
   @doc "When used with a header, close button embedded in header"
   prop closable, :boolean, default: false
@@ -42,9 +41,12 @@ defmodule SurfaceBulma.Message do
   def render(assigns) do
     ~F"""
     <div>
-      <article :if={@show} class={"message", @container_class, "is-#{@color}": @color, "is-#{@size}": @size}>
+      <article
+        :if={@show}
+        class={"message", @container_class, "is-#{@color}": @color, "is-#{@size}": @size}
+      >
         <header :if={slot_assigned?(:header_content)} class={"message-header", @header_class}>
-          <#slot name="header_content" />
+          <#slot {@header_content} />
           <button
             :if={@closable}
             :on-click="close"

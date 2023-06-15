@@ -25,12 +25,12 @@ defmodule Surface.Components.TableTest do
 
     def render(assigns) do
       ~F"""
-      <Table id="foo" data={person <- @props.data} :props={@props}>
+      <Table id="foo" data={person <- @props.data} {...@props}>
         <Column label="Id" sort_by="id">
           {person.id}
         </Column>
         <Column label="Name" sort_by="name">
-        {person.name}
+          {person.name}
         </Column>
         <Column label="Street" sort_by={[:address, :street]}>
           {person.address.street}
@@ -199,8 +199,8 @@ defmodule Surface.Components.TableTest do
       def render(assigns) do
         ~F"""
         <Table data={user <- @users} id="1">
-            <Table.Column label="name">{ user.name }</Table.Column>
-            <Table.Column label="age" sort_by="age">{ user.age }</Table.Column>
+          <Table.Column label="name">{user.name}</Table.Column>
+          <Table.Column label="age" sort_by="age">{user.age}</Table.Column>
         </Table>
         """
       end

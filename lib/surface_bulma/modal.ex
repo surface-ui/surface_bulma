@@ -25,11 +25,17 @@ defmodule SurfaceBulma.Modal do
   def render(assigns) do
     ~F"""
     <div class={"modal", "is-active": @show}>
-      <div class="modal-background"></div>
-        <div class="modal-content">
-          <#slot/>
-        </div>
-      <Button type={nil} :if={@show_close_button} click={@close_button_event} class="modal-close is-large" aria_label="close"></Button>
+      <div class="modal-background" />
+      <div class="modal-content">
+        <#slot />
+      </div>
+      <Button
+        type={nil}
+        :if={@show_close_button}
+        click={@close_button_event}
+        class="modal-close is-large"
+        aria_label="close"
+      />
     </div>
     """
   end

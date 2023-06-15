@@ -1,14 +1,15 @@
 defmodule SurfaceBulma.PanelTest do
   use SurfaceBulma.ConnCase
 
-  alias SurfaceBulma.Panel
-  alias SurfaceBulma.Panel.{Header, Tab}
+  alias SurfaceBulma.{Item, Panel}
+  alias SurfaceBulma.Panel.Header
+  alias SurfaceBulma.Tab
 
   test "panel title can be set" do
     html =
       render_surface do
         ~F"""
-          <Panel id="panel"><:title>Title</:title></Panel>
+        <Panel id="panel"><:title>Title</:title></Panel>
         """
       end
 
@@ -25,15 +26,15 @@ defmodule SurfaceBulma.PanelTest do
     html =
       render_surface do
         ~F"""
-          <Panel id="panel">
-            <:title>Title</:title>
-            <Header>A header</Header>
-          </Panel>
+        <Panel id="panel">
+          <:title>Title</:title>
+          <Header>A header</Header>
+        </Panel>
         """
       end
 
     assert html =~ """
-             <nav class="panel">
+           <nav class="panel">
              <p class="panel-heading">
                Title
              </p>
@@ -44,61 +45,21 @@ defmodule SurfaceBulma.PanelTest do
            """
   end
 
-  test "tabs can be set" do
-    html =
-      render_surface do
-        ~F"""
-          <Panel id="panel">
-            <Tab title="Tab 1">
-              <Tab.TabItem type="input"><input /></Tab.TabItem>
-              <Tab.TabItem type="link" href="example.com">a link</Tab.TabItem>
-              <Tab.TabItem>Tabitem 1.3</Tab.TabItem>
-            </Tab>
-          </Panel>
-        """
-      end
-
-    assert html =~ """
-           <nav class="panel">
-             <p class="panel-heading">
-             </p>
-             <p class="panel-tabs">
-                 <a phx-click="tab_click" phx-target="1" class="is-active" phx-value-index="0">
-                   Tab 1
-                 </a>
-             </p>
-                 <div class="panel-block">
-                   <div class="control">
-                     <input>
-                   </div>
-                 </div>
-                 <a class="panel-block">
-                   a link
-                 </a>
-                 <div class="panel-block">
-                   Tabitem 1.3
-                 </div>
-           </nav>
-           """
-  end
-
   defmodule View do
     use Surface.LiveView
-    alias SurfaceBulma.Panel
-    alias SurfaceBulma.Panel.Tab
+    alias SurfaceBulma.{Item, Panel, Tab}
 
     def render(assigns) do
       ~F"""
-        <Panel id="panel">
-          <Tab title="Tab 1">
-            <Tab.TabItem type="input"><input /></Tab.TabItem>
-            <Tab.TabItem type="link" href="example.com">a link</Tab.TabItem>
-            <Tab.TabItem>Tabitem 1.3</Tab.TabItem>
-          </Tab>
-          <Tab title="Tab 2">
-            <Tab.TabItem>Tabitem 2</Tab.TabItem>
-          </Tab>
-        </Panel>
+      <Panel id="panel">
+        <:title>A panel</:title>
+        <Tab label="Tab 1">
+          <Item>Tabitem 1</Item>
+        </Tab>
+        <Tab label="Tab 2">
+          <Item>Tabitem 2</Item>
+        </Tab>
+      </Panel>
       """
     end
   end
@@ -107,19 +68,21 @@ defmodule SurfaceBulma.PanelTest do
     {:ok, view, _html} = live_isolated(build_conn(), View)
 
     assert view
-           |> element(".panel-tabs a:nth-child(1)")
+           |> element(".panel-tabs li:nth-child(1) a")
            |> render() =~ "Tab 1"
 
     view
-    |> element(".panel-tabs a:nth-child(2)")
+    |> element(".panel-tabs li:nth-child(2) a")
     |> render_click()
 
     assert view
-           |> element(".panel-tabs a:nth-child(2).is-active")
+           |> element(".panel-tabs li:nth-child(2).is-active a")
            |> render() =~ "Tab 2"
 
     assert view
-           |> element(".panel-block")
            |> render() =~ "Tabitem 2"
+
+    refute view
+           |> render() =~ "Tabitem 1"
   end
 end

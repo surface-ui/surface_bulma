@@ -10,7 +10,6 @@ defmodule SurfaceBulma.Catalogue.Message.Example01 do
     title: "Basic message component (non-closable)"
 
   alias SurfaceBulma.Message
-  alias SurfaceBulma.Icon
 
   def render(assigns) do
     ~F"""

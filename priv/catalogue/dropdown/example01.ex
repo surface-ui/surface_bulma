@@ -14,7 +14,7 @@ defmodule SurfaceBulma.Catalogue.Dropdown.Example01 do
   alias SurfaceBulma.Link
 
   def render(assigns) do
-      ~F"""
+    ~F"""
     <Dropdown id="example01">
       <:trigger>Current Item</:trigger>
       <Link href="#hi"><Icon.FontAwesome icon="camera" />Item 1</Link>

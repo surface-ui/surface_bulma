@@ -15,11 +15,11 @@ defmodule SurfaceBulma.Card.Header do
     ~F"""
     <header class="card-header">
       <p :if={slot_assigned?(:title)} class="card-header-title">
-        <#slot name="title" />
+        <#slot {@title} />
       </p>
 
       <span :if={slot_assigned?(:icon)} class="card-header-icon">
-        <#slot name="icon" />
+        <#slot {@icon} />
       </span>
     </header>
     """

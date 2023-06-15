@@ -24,7 +24,7 @@ defmodule Surface.Components.ButtonTest do
     html =
       render_surface do
         ~F"""
-        <Button class={"custom","custom2"}>
+        <Button class={"custom", "custom2"}>
           Ok
         </Button>
         """
@@ -80,7 +80,7 @@ defmodule Surface.Components.ButtonTest do
   end
 
   test "prop label" do
-    html = render_surface(do: ~F(<Button label="Ok"/>))
+    html = render_surface(do: ~F(<Button label="Ok" />))
 
     assert html =~ """
            <button type="button" class="button">
@@ -143,16 +143,18 @@ defmodule Surface.Components.ButtonTest do
     html = render_surface(do: ~F(<Button selected>Ok</Button>))
     assert html =~ ~r/class="(.*)is-selected(.*)"/
   end
-  
+
   alias Surface.Components.Context
+
   test "is wrapped in a control when the SurfaceBulma.Form.is_addon is set" do
-    html = render_surface do
-      ~F"""
-      <Context put={SurfaceBulma.Form, is_addon: true}>
-        <Button />
-      </Context>
-      """
-    end
+    html =
+      render_surface do
+        ~F"""
+        <Context put={SurfaceBulma.Form, is_addon: true}>
+          <Button />
+        </Context>
+        """
+      end
 
     assert html =~ ~r/class="control"/
   end

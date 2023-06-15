@@ -17,35 +17,37 @@ defmodule SurfaceBulma.Form.DateInput do
   prop min, :integer
 
   def render(assigns) do
-    props = included_props(assigns)
+    props = included_props(assigns, DateInput)
     input_classes = input_classes(assigns)
 
     ~F"""
-      <InputWrapper :let={form: form}
-        label={@label}
-        expanded={@expanded}
-        field={@field}
-        help_text={@help_text}
-        disable_icons={@disable_icons}
-        icon_left={@icon_left}
-        icon_right={@icon_right}
-        has_addons={has_addons?(assigns)}>
-        <:left_addon>{render_left_addon(assigns)}</:left_addon>
-        <DateInput
-        {...props} 
+    <InputWrapper
+      :let={form: form}
+      label={@label}
+      expanded={@expanded}
+      field={@field}
+      help_text={@help_text}
+      disable_icons={@disable_icons}
+      icon_left={@icon_left}
+      icon_right={@icon_right}
+      has_addons={has_addons?(assigns)}
+    >
+      <:left_addon>{render_left_addon(assigns)}</:left_addon>
+      <DateInput
+        {...props}
         class={input_classes}
         form={@form || form}
         field={@field}
         value={@value}
-        opts={
-          [
-            disabled: @disabled,
-            readonly: @readonly,
-            max: @max,
-            min: @min,
-          ] ++ @opts}/>
-        <:right_addon>{render_right_addon(assigns)}</:right_addon>
-      </InputWrapper>
+        opts={[
+          disabled: @disabled,
+          readonly: @readonly,
+          max: @max,
+          min: @min
+        ] ++ @opts}
+      />
+      <:right_addon>{render_right_addon(assigns)}</:right_addon>
+    </InputWrapper>
     """
   end
 end

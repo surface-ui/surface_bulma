@@ -37,22 +37,21 @@ defmodule SurfaceBulma.Form.RadioButton do
 
   def render(assigns) do
     ~F"""
-      <Field class="field" name={@field}>
+    <Field class="field" name={@field}>
       <div class="control">
         {#for entry <- @options}
           <label class="radio">
             <RadioButton
               field={@field}
-              opts={[disabled: get_disabled(entry)] ++ @opts }
+              opts={[disabled: get_disabled(entry)] ++ @opts}
               class={@class}
               value={get_key(entry)}
-
-              />
+            />
             {get_value(entry)}
           </label>
         {/for}
       </div>
-      </Field>
+    </Field>
     """
   end
 

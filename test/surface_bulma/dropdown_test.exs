@@ -4,7 +4,6 @@ defmodule Surface.Components.DropdownTest do
 
   @bulma_container_class "dropdown"
   @bulma_trigger_class "dropdown-trigger"
-  @bulma_menu_class "dropdown-menu"
   @bulma_content_class "dropdown-content"
   @bulma_item_class "dropdown-item"
   @bulma_divider_class "dropdown-divider"
@@ -127,7 +126,6 @@ defmodule Surface.Components.DropdownTest do
               <dd>{div_item}</dd>
             </dl>
           </SurfaceBulma.Item>
-
         </Dropdown>
         """
       end

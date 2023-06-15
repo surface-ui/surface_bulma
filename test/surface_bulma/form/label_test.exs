@@ -9,7 +9,7 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Label opts={id: "my_id"}/>
+        <Label opts={id: "my_id"} />
         """
       end
 
@@ -20,7 +20,7 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Label class={:label}/>
+        <Label class={:label} />
         """
       end
 
@@ -31,7 +31,7 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Label class={:label, :primary}/>
+        <Label class={:label, :primary} />
         """
       end
 
@@ -42,7 +42,7 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Label form="user" field="name"/>
+        <Label form="user" field="name" />
         """
       end
 
@@ -53,7 +53,7 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Label form={:user} field={:name}/>
+        <Label form={:user} field={:name} />
         """
       end
 
@@ -64,9 +64,9 @@ defmodule Surface.Components.Form.LabelTest do
     html =
       render_surface do
         ~F"""
-        <Form for={:user}>
+        <Form for={%{}} as={:user}>
           <Field name="name">
-            <Label/>
+            <Label />
           </Field>
         </Form>
         """
@@ -125,7 +125,7 @@ defmodule Surface.Components.Form.LabelTest do
       html =
         render_surface do
           ~F"""
-          <Form for={:search}>
+          <Form as={:search} for={%{}}>
             <Field name="key">
               <Label text="Search" />
             </Field>
@@ -138,7 +138,7 @@ defmodule Surface.Components.Form.LabelTest do
       html =
         render_surface do
           ~F"""
-          <Form for={:search}>
+          <Form as={:search} for={%{}}>
             <Field name="key">
               <Label text="Search" opts={for: "test_key"} />
             </Field>
@@ -151,7 +151,7 @@ defmodule Surface.Components.Form.LabelTest do
       html =
         render_surface do
           ~F"""
-          <Form for={:search}>
+          <Form as={:search} for={%{}}>
             <Field name="key">
               <Label text="Search" class="foo" opts={for: "test_key"} />
             </Field>
@@ -175,7 +175,7 @@ defmodule Surface.Components.Form.LabelTest do
       html =
         render_surface do
           ~F"""
-          <Form for={:search}>
+          <Form for={%{}} as={:search}>
             <Field name="key">
               <Label>Hello</Label>
             </Field>
@@ -188,7 +188,7 @@ defmodule Surface.Components.Form.LabelTest do
       html =
         render_surface do
           ~F"""
-          <Form for={:search}>
+          <Form for={%{}} as={:search}>
             <Field name="key">
               <Label class="label test-label">Hello</Label>
             </Field>

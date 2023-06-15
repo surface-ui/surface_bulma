@@ -19,8 +19,7 @@ defmodule SurfaceBulma.Button do
 
   use SurfaceBulma.ColorProp
 
-  @doc "The vertical size of button"
-  prop size, :string, values: ~w(small normal medium large)
+  use SurfaceBulma.SizeProp
 
   @doc "Is link?"
   prop link, :boolean
@@ -80,47 +79,47 @@ defmodule SurfaceBulma.Button do
   """
   slot default
 
+  data is_addon, :boolean, from_context: {SurfaceBulma.Form, :is_addon}
+
   def render(assigns) do
     ~F"""
-    <Context get={SurfaceBulma.Form, is_addon: is_addon}>
-    {#if is_addon }
+    {#if @is_addon}
       <div class="control">
         {render_button(assigns)}
       </div>
     {#else}
       {render_button(assigns)}
     {/if}
-    </Context>
     """
   end
 
   def render_button(assigns) do
     ~F"""
-      <button
-        type={@type}
-        aria-label={@aria_label}
-        :on-click={@click}
-        disabled={@disabled}
-        value={@value}
-        class={
-          [button: @class == [],
-          "is-#{@color}": @color,
-          "is-#{@size}": @size,
-          "is-fullwidth": @expand,
-          "is-outlined": @outlined,
-          "is-rounded": @rounded,
-          "is-hovered": @hovered,
-          "is-focused": @focused,
-          "is-active": @active,
-          "is-loading": @loading,
-          "is-selected": @selected,
-          "is-link": @link,
-          "is-static": @static
-        ] ++ @class
-        }
-        :attrs={@opts}>
-        <#slot>{@label}</#slot>
-      </button>
+    <button
+      type={@type}
+      aria-label={@aria_label}
+      :on-click={@click}
+      disabled={@disabled}
+      value={@value}
+      class={[
+        button: @class == [],
+        "is-#{@color}": @color,
+        "is-#{@size}": @size,
+        "is-fullwidth": @expand,
+        "is-outlined": @outlined,
+        "is-rounded": @rounded,
+        "is-hovered": @hovered,
+        "is-focused": @focused,
+        "is-active": @active,
+        "is-loading": @loading,
+        "is-selected": @selected,
+        "is-link": @link,
+        "is-static": @static
+      ] ++ @class}
+      {...@opts}
+    >
+      <#slot>{@label}</#slot>
+    </button>
     """
   end
 end

@@ -4,12 +4,12 @@ defmodule SurfaceBulma.Divider do
   @moduledoc """
   A divider that can be used in a `Dropdown` or a `Navbar`. It will adapt based on the context.
   """
+  use SurfaceBulma.ContextClass
+  prop class, :css_class, default: []
 
   def render(assigns) do
     ~F"""
-      <Context get={SurfaceBulma.Divider, divider_class: class}>
-        <hr class={class || "divider" } />
-      </Context>
+    <hr class={@class ++ @context_class}>
     """
   end
 end

@@ -29,16 +29,16 @@ defmodule SurfaceBulma.Card do
     ~F"""
     <div class={"card", @class} {...@attrs}>
       <div :if={slot_assigned?(:header)} class="card-header">
-        <#slot name="header" />
+        <#slot {@header} />
       </div>
       <div :if={slot_assigned?(:image)} class="card-image">
-        <#slot name="image" />
+        <#slot {@image} />
       </div>
       <div class="card-content">
         <#slot />
       </div>
       <div :if={slot_assigned?(:footer)} class="card-footer">
-        <#slot name="footer" />
+        <#slot {@footer} />
       </div>
     </div>
     """

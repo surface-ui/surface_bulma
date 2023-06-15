@@ -13,7 +13,7 @@ defmodule SurfaceBulma.Table do
   alias SurfaceBulma.Icon.FontAwesome.{TextIcon, TextIconText}
 
   @doc "The data that populates the table internal"
-  prop data, :list, required: true
+  prop data, :generator, required: true, root: true
 
   @doc "The table is expanded (full-width)"
   prop expanded, :boolean, default: true
@@ -35,10 +35,10 @@ defmodule SurfaceBulma.Table do
   prop row_class, :fun
 
   @doc "The columns of the table"
-  slot cols, args: [item: ^data], required: true
+  slot cols, generator_prop: :data, required: true
 
   @doc "Internal holder of sorted data"
-  data sorted_data, :list, default: nil
+  data sorted_data, :generator, default: nil
 
   @doc "Holder of what we're sorting by"
   data sorted_by, :any, default: nil
@@ -71,24 +71,24 @@ defmodule SurfaceBulma.Table do
           <tr>
             {#for col <- @cols}
               <th>
-              {#if !is_nil(col.sort_by) && assigns.sorted_by == col.label}
-              <a :on-click="sorted_click" phx-value-value={col.label} href="#">
-                <TextIcon>
-                <TextIconText>
-                {col.label}
-                </TextIconText>
-                <FA icon={if assigns.sort_reverse, do: "caret-up", else: "caret-down"}/>
-                </TextIcon>
-              </a>
-              {/if}
-              {#if !is_nil(col.sort_by) && assigns.sorted_by != col.label}
-              <a :on-click="sorted_click" phx-value-value={col.label} href="#">
-              {col.label}
-              </a>
-              {/if}
-              {#if is_nil(col.sort_by)}
-              {col.label}
-              {/if}
+                {#if !is_nil(col.sort_by) && assigns.sorted_by == col.label}
+                  <a :on-click="sorted_click" phx-value-value={col.label} href="#">
+                    <TextIcon>
+                      <TextIconText>
+                        {col.label}
+                      </TextIconText>
+                      <FA icon={if assigns.sort_reverse, do: "caret-up", else: "caret-down"} />
+                    </TextIcon>
+                  </a>
+                {/if}
+                {#if !is_nil(col.sort_by) && assigns.sorted_by != col.label}
+                  <a :on-click="sorted_click" phx-value-value={col.label} href="#">
+                    {col.label}
+                  </a>
+                {/if}
+                {#if is_nil(col.sort_by)}
+                  {col.label}
+                {/if}
               </th>
             {/for}
           </tr>
@@ -96,9 +96,10 @@ defmodule SurfaceBulma.Table do
         <tbody>
           <tr
             :for={{item, index} <- Enum.with_index(@sorted_data)}
-            class={row_class_fun(@row_class).(item, index)}>
-            <td :for.index={index <- @cols}>
-              <span><#slot name="cols" index={index} :args={item: item}/></span>
+            class={row_class_fun(@row_class).(item, index)}
+          >
+            <td :for={col <- @cols}>
+              <span><#slot {col} generator_value={item} /></span>
             </td>
           </tr>
         </tbody>

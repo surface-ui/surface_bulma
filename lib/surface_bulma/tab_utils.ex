@@ -40,8 +40,10 @@ defmodule SurfaceBulma.TabUtils do
     quote do
       @moduledoc unquote(moduledoc)
       use Surface.LiveComponent
+      alias SurfaceBulma.TabsRow
+      import SurfaceBulma.Component
 
-      data active_tab, :integer
+      data active_tab_index, :integer
 
       data set_active_tab, :integer
 
@@ -51,7 +53,7 @@ defmodule SurfaceBulma.TabUtils do
         socket =
           socket
           |> assign(assigns)
-          |> assign(:active_tab, set_active_tab)
+          |> assign(:active_tab_index, set_active_tab)
           |> assign(:set_active_tab, nil)
 
         {:ok, socket}
@@ -61,7 +63,7 @@ defmodule SurfaceBulma.TabUtils do
         socket =
           socket
           |> assign(assigns)
-          |> assign(:active_tab, Enum.find_index(tabs, & &1.visible))
+          |> assign(:active_tab_index, Enum.find_index(tabs, & &1.visible))
 
         {:ok, socket}
       end
@@ -77,17 +79,17 @@ defmodule SurfaceBulma.TabUtils do
       def handle_event("tab_click", %{"index" => index_str}, socket) do
         index = String.to_integer(index_str)
         animation = next_animation(socket.assigns, index)
-        {:noreply, assign(socket, active_tab: index, animation: animation)}
+        {:noreply, assign(socket, active_tab_index: index, animation: animation)}
       end
 
       defp next_animation(assigns, clicked_index) do
-        %{animation: animation, active_tab: active_tab} = assigns
+        %{animation: animation, active_tab_index: active_tab_index} = assigns
 
         cond do
-          clicked_index > active_tab ->
+          clicked_index > active_tab_index ->
             "slideInRight"
 
-          clicked_index < active_tab ->
+          clicked_index < active_tab_index ->
             "slideInLeft"
 
           true ->

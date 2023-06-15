@@ -7,8 +7,7 @@ defmodule SurfaceBulma.Form.FieldBase do
       @doc "The string label of the field"
       prop(label, :string)
 
-      @doc "Size of the input"
-      prop size, :string, default: "normal", values: ["small", "normal", "medium", "large"]
+      use SurfaceBulma.SizeProp, "input"
 
       @doc "Should input fill entire width of form?"
       prop(expanded, :boolean)
