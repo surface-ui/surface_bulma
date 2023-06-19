@@ -1,4 +1,7 @@
 defmodule SurfaceBulma.Panel do
+  @moduledoc """
+   Test
+  """
   use SurfaceBulma.TabUtils,
     doc: """
     The panel for compact controls and tabs
@@ -27,36 +30,36 @@ defmodule SurfaceBulma.Panel do
   def render(assigns) do
     ~F"""
     <nav class={"panel", "is-#{@color}": @color}>
-      <p class="panel-heading">
-        <#slot {@title} />
-      </p>
-      {#if slot_assigned?(:header)}
-        {#for item <- @header}
-          <#slot {item} />
-        {/for}
-      {/if}
-      <TabsRow
-        :if={slot_assigned?(:tabs)}
-        tabs={@tabs}
-        class={@tabs_class}
-        {...included_props(assigns, TabsRow)}
-        inside_panel
-        {=@active_tab_index}
-        target={@myself}
-      />
-      {#if slot_assigned?(:tabs)}
-        <Context
-          put={SurfaceBulma.Link, context_class: "panel-block"}
-          put={SurfaceBulma.Item, context_class: "panel-block"}
-          put={SurfaceBulma.Button, is_addon: true}
-        >
+      <Context
+        put={SurfaceBulma.Link, context_class: "panel-block"}
+        put={SurfaceBulma.Item, context_class: "panel-block"}
+        put={SurfaceBulma.Button, is_addon: true}
+      >
+        <p class="panel-heading">
+          <#slot {@title} />
+        </p>
+        {#if slot_assigned?(:header)}
+          {#for item <- @header}
+            <#slot {item} />
+          {/for}
+        {/if}
+        <TabsRow
+          :if={slot_assigned?(:tabs)}
+          tabs={@tabs}
+          class={@tabs_class}
+          {...included_props(assigns, TabsRow)}
+          inside_panel
+          {=@active_tab_index}
+          target={@myself}
+        />
+        {#if slot_assigned?(:tabs)}
           {#for {tab, index} <- Enum.with_index(@tabs)}
             {#if tab.visible && @active_tab_index == index}
               <#slot {tab} />
             {/if}
           {/for}
-        </Context>
-      {/if}
+        {/if}
+      </Context>
     </nav>
     """
   end

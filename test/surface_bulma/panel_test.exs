@@ -15,9 +15,9 @@ defmodule SurfaceBulma.PanelTest do
 
     assert html =~ """
            <nav class="panel">
-             <p class="panel-heading">
-               Title
-             </p>
+               <p class="panel-heading">
+                 Title
+               </p>
            </nav>
            """
   end
@@ -28,19 +28,21 @@ defmodule SurfaceBulma.PanelTest do
         ~F"""
         <Panel id="panel">
           <:title>Title</:title>
-          <Header>A header</Header>
+          <Header>
+            <Item>A header</Item>
+          </Header>
         </Panel>
         """
       end
 
     assert html =~ """
            <nav class="panel">
-             <p class="panel-heading">
-               Title
-             </p>
-                 <div class="panel-block">
-                   A header
-                 </div>
+               <p class="panel-heading">
+                 Title
+               </p>
+               <div class="panel-block">
+           A header
+           </div>
            </nav>
            """
   end
