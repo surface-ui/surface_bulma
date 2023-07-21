@@ -4,6 +4,7 @@ config :surface,
   components: [
     {Surface.Components.Form.Field, [default_class: "field"]},
     {Surface.Components.Form.Label, [default_class: "label"]},
+    {SurfaceBulma.Collapsible, propagate_context_to_slots: true},
     {SurfaceBulma.Dropdown, propagate_context_to_slots: true},
     {SurfaceBulma.Navbar, propagate_context_to_slots: true},
     {SurfaceBulma.Navbar.Brand, propagate_context_to_slots: true},
