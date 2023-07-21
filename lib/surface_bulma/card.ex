@@ -7,8 +7,7 @@ defmodule SurfaceBulma.Card do
   [Bulma Docs - Card](https://bulma.io/documentation/components/card/)
   """
 
-  @doc "Additional CSS classes"
-  prop class, :css_class
+  use SurfaceBulma.ClassProp
 
   @doc "Custom options forwarded to container element"
   prop attrs, :map, default: %{}
@@ -27,7 +26,7 @@ defmodule SurfaceBulma.Card do
 
   def render(assigns) do
     ~F"""
-    <div class={"card", @class} {...@attrs}>
+    <div class={classes(assigns, "card")} {...@attrs}>
       <div :if={slot_assigned?(:header)} class="card-header">
         <#slot {@header} />
       </div>

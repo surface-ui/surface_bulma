@@ -4,6 +4,7 @@ defmodule SurfaceBulma.Title do
   """
 
   use Surface.Component
+  use SurfaceBulma.ClassProp
 
   @doc "Size of the title"
   prop size, :string, values: ["1", "2", "3", "4", "5", "6"]

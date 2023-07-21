@@ -9,6 +9,7 @@ defmodule SurfaceBulma.Link do
   prop navigate, :string
   prop href, :string
 
+  use SurfaceBulma.ColorProp
   use SurfaceBulma.ContextClass
   data context_opts, :any, from_context: {SurfaceBulma.Link, :opts}
   slot default
@@ -16,7 +17,9 @@ defmodule SurfaceBulma.Link do
   def render(assigns) do
     props = included_props(assigns, LivePatch)
     {opts, props} = Map.pop(props, :opts, [])
-    assigns = set_classes(assigns)
+
+    assigns =
+      assign(assigns, :class, classes(assigns, "has-text-#{assigns[:color]}": assigns[:color]))
 
     ~F"""
     {#case {@patch, @navigate}}
@@ -32,25 +35,5 @@ defmodule SurfaceBulma.Link do
         <a {=@href} {=@class}><#slot /></a>
     {/case}
     """
-  end
-
-  defp set_classes(assigns) do
-    context_class =
-      case assigns[:context_class] do
-        class when is_binary(class) ->
-          [{class, true}]
-
-        classes when is_list(classes) ->
-          classes
-
-        nil ->
-          []
-      end
-
-    assign(
-      assigns,
-      :class,
-      [assigns[:class], "has-text-#{assigns[:color]}": assigns[:color]] ++ context_class
-    )
   end
 end

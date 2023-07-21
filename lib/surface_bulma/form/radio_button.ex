@@ -16,8 +16,7 @@ defmodule SurfaceBulma.Form.RadioButton do
   @doc "Any opts you want to pass on to internal `Surface.RadioButton` and `Phoenix.HTML.Form.radio_button/3`"
   prop opts, :keyword, default: []
 
-  @doc "Class to apply to input"
-  prop class, :css_class, default: []
+  use SurfaceBulma.ClassProp
 
   @doc """
   `options` are expected to be an enumerable which will be used to
@@ -44,7 +43,7 @@ defmodule SurfaceBulma.Form.RadioButton do
             <RadioButton
               field={@field}
               opts={[disabled: get_disabled(entry)] ++ @opts}
-              class={@class}
+              class={classes(assigns, get_class(entry))}
               value={get_key(entry)}
             />
             {get_value(entry)}
@@ -63,6 +62,9 @@ defmodule SurfaceBulma.Form.RadioButton do
 
   defp get_disabled(list) when is_list(list), do: Keyword.get(list, :disabled, false)
   defp get_disabled(_), do: false
+
+  defp get_class(list) when is_list(list), do: Keyword.get(list, :class)
+  defp get_class(_), do: []
 
   defp get_value({_key, value}), do: value
   defp get_value(list) when is_list(list), do: Keyword.get(list, :value)

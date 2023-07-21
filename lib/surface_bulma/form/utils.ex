@@ -85,9 +85,9 @@ defmodule SurfaceBulma.Form.Utils do
     size =
       case size do
         "small" -> 7
-        "normal" -> 5
         "medium" -> 4
         "large" -> 3
+        _ -> 5
       end
 
     "is-size-#{size}"

@@ -24,8 +24,7 @@ defmodule SurfaceBulma.Table do
   @doc "Add stripes to the table"
   prop striped, :boolean, default: false
 
-  @doc "The CSS class for the wrapping `<div>` element"
-  prop class, :css_class
+  use SurfaceBulma.ClassProp, doc: "The CSS class for the wrapping `<div>` element"
 
   @doc """
   A function that returns a class for the item's underlying `<tr>`
@@ -61,12 +60,12 @@ defmodule SurfaceBulma.Table do
   def render(assigns) do
     ~F"""
     <div class={@class}>
-      <table class={
-        :table,
+      <table class={classes(assigns, [
+        "table",
         "is-fullwidth": @expanded,
         "is-bordered": @bordered,
         "is-striped": @striped
-      }>
+      ])}>
         <thead>
           <tr>
             {#for col <- @cols}

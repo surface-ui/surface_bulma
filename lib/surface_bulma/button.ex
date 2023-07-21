@@ -2,7 +2,7 @@ defmodule SurfaceBulma.Button do
   @moduledoc """
   The classic **button**, in different colors, sizes, and states
   """
-
+  alias SurfaceBulma.{ClassProp, ColorProp, SizeProp}
   use Surface.Component
 
   @doc """
@@ -17,9 +17,9 @@ defmodule SurfaceBulma.Button do
   @doc "The aria label for the button"
   prop aria_label, :string
 
-  use SurfaceBulma.ColorProp
+  use ColorProp
 
-  use SurfaceBulma.SizeProp
+  use SizeProp
 
   @doc "Is link?"
   prop link, :boolean
@@ -35,6 +35,9 @@ defmodule SurfaceBulma.Button do
 
   @doc "Outlined style"
   prop outlined, :boolean
+
+  @doc "Inverted style"
+  prop inverted, :boolean
 
   @doc "Rounded style"
   prop rounded, :boolean
@@ -60,8 +63,7 @@ defmodule SurfaceBulma.Button do
   @doc "Triggered on click"
   prop click, :event
 
-  @doc "Css classes to propagate down to button. Default class if no class supplied is simply _button_"
-  prop class, :css_class, default: []
+  use ClassProp, default: "button"
 
   @doc """
   Additional attributes to add onto the generated element
@@ -79,11 +81,13 @@ defmodule SurfaceBulma.Button do
   """
   slot default
 
+  use SurfaceBulma.ContextClass
+
   data is_addon, :boolean, from_context: {SurfaceBulma.Form, :is_addon}
 
   def render(assigns) do
     ~F"""
-    {#if @is_addon}
+    {#if @is_addon || @addon}
       <div class="control">
         {render_button(assigns)}
       </div>
@@ -101,12 +105,13 @@ defmodule SurfaceBulma.Button do
       :on-click={@click}
       disabled={@disabled}
       value={@value}
-      class={[
+      class={classes(assigns,
         button: @class == [],
         "is-#{@color}": @color,
         "is-#{@size}": @size,
         "is-fullwidth": @expand,
         "is-outlined": @outlined,
+        "is-inverted": @inverted,
         "is-rounded": @rounded,
         "is-hovered": @hovered,
         "is-focused": @focused,
@@ -115,7 +120,7 @@ defmodule SurfaceBulma.Button do
         "is-selected": @selected,
         "is-link": @link,
         "is-static": @static
-      ] ++ @class}
+      )}
       {...@opts}
     >
       <#slot>{@label}</#slot>
