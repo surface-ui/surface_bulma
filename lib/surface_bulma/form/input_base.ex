@@ -7,16 +7,16 @@ defmodule SurfaceBulma.Form.InputBase do
       alias SurfaceBulma.Form.InputWrapper
 
       @doc "Static input"
-      prop(static, :boolean)
+      prop static, :boolean
 
       @doc "Disable input"
-      prop(disabled, :boolean)
+      prop disabled, :boolean
 
       @doc "Read only"
-      prop(readonly, :boolean)
+      prop readonly, :boolean
 
       @doc "Disable default fontawesome icons tied to validation"
-      prop(disable_icons, :boolean, default: false)
+      prop disable_icons, :boolean, default: false
     end
   end
 end

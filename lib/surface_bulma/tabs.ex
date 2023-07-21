@@ -1,8 +1,12 @@
 defmodule SurfaceBulma.Tabs do
   @moduledoc """
-  A simple horizontal navigation **tabs** component
+  Test  tab
   """
-  use SurfaceBulma.TabUtils
+  use SurfaceBulma.TabUtils,
+    doc: """
+    A simple horizontal navigation **tabs** component.
+    """
+
   include(TabsRow, only: [:expanded, :style])
 
   @doc "The tabs to display"
@@ -17,6 +21,7 @@ defmodule SurfaceBulma.Tabs do
         {=@style}
         {=@expanded}
         {=@active_tab_index}
+        target={@myself}
       />
 
       <section class="tab-content" style="overflow: hidden;">

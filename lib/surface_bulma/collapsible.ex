@@ -3,23 +3,23 @@ defmodule SurfaceBulma.Collapsible do
   alias Phoenix.LiveView.JS
   alias SurfaceBulma.Icon.FontAwesome, as: FA
 
-  prop(id, :string, required: true)
-  prop(class, :css_class, default: [])
-  prop(header_class, :css_class)
-  prop(collapsed, :boolean, default: true)
-  prop(collapsible?, :boolean, default: true)
-  prop(shadow, :boolean, default: false)
-  prop(body_class, :css_class, default: [])
-  prop(remove, :event)
-  prop(title, :string)
-  prop(icon, :string)
-  prop(toggle_icon, :any)
-  prop(sortable?, :boolean, default: false)
-  prop(is_collapsed?, :boolean)
+  prop id, :string, required: true
+  prop class, :css_class, default: []
+  prop header_class, :css_class
+  prop collapsed, :boolean, default: true
+  prop collapsible?, :boolean, default: true
+  prop shadow, :boolean, default: false
+  prop body_class, :css_class, default: []
+  prop remove, :event
+  prop title, :string
+  prop icon, :string
+  prop toggle_icon, :any
+  prop sortable?, :boolean, default: false
+  prop is_collapsed?, :boolean
 
-  slot(default, required: true)
-  slot(header)
-  slot(header_icon)
+  slot default, required: true
+  slot header
+  slot header_icon
 
   def update(assigns, socket) do
     {:ok,

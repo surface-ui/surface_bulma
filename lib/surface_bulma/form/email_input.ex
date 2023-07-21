@@ -9,10 +9,10 @@ defmodule SurfaceBulma.Form.EmailInput do
 
   include(EmailInput)
   @doc "Max length of field, as enforced by client browser. Not validated by Elixir."
-  prop(maxlength, :integer)
+  prop maxlength, :integer
 
   @doc "Minimum length of field, as enforced by client browser. Not validated by Elixir."
-  prop(minlength, :integer)
+  prop minlength, :integer
 
   def render(assigns) do
     input_classes = input_classes(assigns)

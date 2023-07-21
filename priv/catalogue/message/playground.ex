@@ -6,11 +6,11 @@ defmodule SurfaceBulma.Catalogue.Message.Playground do
     body: [style: "padding: 1.5rem;"]
 
   @props [
-      id: "playground_message",
-      closable: false,
-      color: "dark",
-      size: "medium"
-    ]
+    id: "playground_message",
+    closable: false,
+    color: "dark",
+    size: "medium"
+  ]
 
   def render(assigns) do
     ~F"""

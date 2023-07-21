@@ -11,9 +11,10 @@ defmodule SurfaceBulma.Catalogue.Navbar.Playground do
 
   alias SurfaceBulma.Button
   alias SurfaceBulma.Navbar
-  alias SurfaceBulma.Navbar.{Brand, Buttons}
+  alias SurfaceBulma.Navbar.Brand
   alias SurfaceBulma.Link
   alias SurfaceBulma.Divider
+  alias SurfaceBulma.Buttons
 
   @props [
     color: "primary"

@@ -6,15 +6,15 @@ defmodule SurfaceBulma.TabsRow do
   alias SurfaceBulma.Icon.FontAwesome, as: Icon
 
   use SurfaceBulma.ClassProp
-  prop(tabs, :list, required: true)
-  prop(active_tab_index, :integer, required: true)
-  prop(inside_panel, :boolean, default: false)
-  prop(alignment, :string, values: ~w/centered right/, default: "centered")
-  prop(style, :string, values: ~w/boxed toggle rounded/)
-  prop(target, :any, required: true)
+  prop tabs, :list, required: true
+  prop active_tab_index, :integer, required: true
+  prop inside_panel, :boolean, default: false
+  prop alignment, :string, values: ~w/centered right/, default: "centered"
+  prop style, :string, values: ~w/boxed toggle rounded/
+  prop target, :any, required: true
 
   @doc "Make tab full width"
-  prop(expanded, :boolean)
+  prop expanded, :boolean
 
   def render(assigns) do
     ~F"""

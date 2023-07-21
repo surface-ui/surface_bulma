@@ -1,7 +1,7 @@
 defmodule SurfaceBulma.NavbarTest do
   use SurfaceBulma.ConnCase, async: true
 
-  alias SurfaceBulma.Link
+  alias SurfaceBulma.{Link, Item}
   alias SurfaceBulma.Navbar
   alias SurfaceBulma.Navbar.Brand
 
@@ -48,6 +48,21 @@ defmodule SurfaceBulma.NavbarTest do
         <Navbar id="main">
           <Brand>
             <Link href="test.com" />
+          </Brand>
+        </Navbar>
+        """
+      end
+
+    assert html =~ ~r/navbar-item/
+  end
+
+  test "navbar brand sets SurfacBulma.Item context" do
+    html =
+      render_surface do
+        ~F"""
+        <Navbar id="main">
+          <Brand>
+            <Item>Item</Item>
           </Brand>
         </Navbar>
         """

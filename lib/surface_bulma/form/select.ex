@@ -5,7 +5,6 @@ defmodule SurfaceBulma.Form.Select do
   - https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#select/4
   - https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html#multiple_select/4
   """
-
   use SurfaceBulma.Form.FieldBase
   use SurfaceBulma.Form.InputIconBase, :left
   use SurfaceBulma.Form.InputAddonBase
@@ -22,7 +21,7 @@ defmodule SurfaceBulma.Form.Select do
   use SurfaceBulma.ColorProp
 
   @doc "Disable the select"
-  prop(disabled, :boolean)
+  prop disabled, :boolean
 
   @doc "Will show rounded dropdown, ignored for multiple select"
   prop rounded, :boolean
