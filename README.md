@@ -58,6 +58,13 @@ def deps do
 end
 ```
 
+Add the following line to your `config/config.exs`:
+```elixir
+...
+import_config "../deps/surface_bulma/config/contexts.exs"
+...
+```
+
 To use bulma's CSS styles, choose one of the following methods:
 
 ### 1. Using CDN or downloading files
