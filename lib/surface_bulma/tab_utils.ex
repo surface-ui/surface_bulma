@@ -63,7 +63,7 @@ defmodule SurfaceBulma.TabUtils do
         socket =
           socket
           |> assign(assigns)
-          |> assign(:active_tab_index, Enum.find_index(tabs, & &1.visible))
+          |> assign_new(:active_tab_index, fn -> Enum.find_index(tabs, & &1.visible) end)
 
         {:ok, socket}
       end
