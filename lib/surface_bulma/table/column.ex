@@ -11,6 +11,8 @@ defmodule SurfaceBulma.Table.Column do
   @doc "Column header text"
   prop label, :string, required: true
 
+  prop show, :boolean, default: true
+
   @doc """
   This prop takes a sort field, the following values are valid:
   - A string that is a valid field on the table, or a list of selectors to access nested data. If element of list is binary or atom, `Map.get` is used, if it is an integer, `Enum.at` is used.

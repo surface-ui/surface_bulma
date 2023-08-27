@@ -44,7 +44,7 @@ defmodule SurfaceBulma.StaticTable do
       }>
         <thead>
           <tr>
-            {#for col <- @cols}
+            {#for col <- @cols, col.show == true}
               <th>
                 {col.label}
               </th>
@@ -56,7 +56,7 @@ defmodule SurfaceBulma.StaticTable do
             :for={{item, index} <- Enum.with_index(@data)}
             class={row_class_fun(@row_class).(item, index)}
           >
-            <td :for={col <- @cols}>
+            <td :for={col <- @cols, col.show == true}>
               <span><#slot {col} generator_value={item} /></span>
             </td>
           </tr>
