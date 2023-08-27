@@ -42,6 +42,9 @@ defmodule SurfaceBulma.Button do
   @doc "Rounded style"
   prop rounded, :boolean
 
+  @doc "Light style"
+  prop light, :boolean
+
   @doc "Hovered style"
   prop hovered, :boolean
 
@@ -113,6 +116,7 @@ defmodule SurfaceBulma.Button do
         "is-outlined": @outlined,
         "is-inverted": @inverted,
         "is-rounded": @rounded,
+        "is-light": @light,
         "is-hovered": @hovered,
         "is-focused": @focused,
         "is-active": @active,
