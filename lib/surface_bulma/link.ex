@@ -24,11 +24,11 @@ defmodule SurfaceBulma.Link do
     ~F"""
     {#case {@patch, @navigate}}
       {#match {patch, _} when is_binary(patch)}
-        <LivePatch {...props} {=@class} opts={Keyword.merge(opts, @context_opts || [])}>
+        <LivePatch to={patch} {...props} {=@class} opts={Keyword.merge(opts, @context_opts || [])}>
           <#slot />
         </LivePatch>
       {#match {_, redirect} when is_binary(redirect)}
-        <LiveRedirect {...props} {=@class} opts={Keyword.merge(opts, @context_opts || [])}>
+        <LiveRedirect to={redirect} {...props} {=@class} opts={Keyword.merge(opts, @context_opts || [])}>
           <#slot />
         </LiveRedirect>
       {#match _}
