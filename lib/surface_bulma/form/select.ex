@@ -43,9 +43,11 @@ defmodule SurfaceBulma.Form.Select do
     ~F"""
     <InputWrapper
       :let={form: form}
-      field={@field}
-      expanded={@expanded}
-      icon_left={@icon_left}
+      {=@label}
+      {=@field}
+      {=@expanded}
+      {=@icon_left}
+      {=@field_class}
       has_addons={has_addons?(assigns)}
       disable_icons_if_addon
     >
