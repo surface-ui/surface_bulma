@@ -9,9 +9,10 @@ defmodule Surface.Components.TableTest do
   defmodule View do
     use Surface.LiveView
 
-    alias SurfaceBulma.Table
+    alias SurfaceBulma.{Button, Table}
     alias SurfaceBulma.Table.Column
 
+    data residents_hidden, :boolean, default: false
     data props, :map,
       default: %{
         data: [
@@ -25,6 +26,7 @@ defmodule Surface.Components.TableTest do
 
     def render(assigns) do
       ~F"""
+      <Button click="toggle-residents">Toggle residents column</Button>
       <Table id="foo" data={person <- @props.data} {...@props}>
         <Column label="Id" sort_by="id">
           {person.id}
@@ -35,11 +37,16 @@ defmodule Surface.Components.TableTest do
         <Column label="Street" sort_by={[:address, :street]}>
           {person.address.street}
         </Column>
-        <Column label="Residents" sort_by={{[:address, :residents, 0], &Kernel.>=/2}}>
+        <Column label="Residents" show={@residents_hidden != true} sort_by={{[:address, :residents, 0], &Kernel.>=/2}}>
           {person.address.residents |> Enum.join(", ")}
         </Column>
       </Table>
       """
+    end
+
+    @impl true
+    def handle_event("toggle-residents", _,socket ) do
+    	{:noreply, assign(socket, :residents_hidden, socket.assigns.residents_hidden != true)}
     end
   end
 
@@ -179,6 +186,14 @@ defmodule Surface.Components.TableTest do
       assert view
              |> element("table tr:nth-child(1) td:nth-child(2)")
              |> render() =~ "Jane"
+    end
+
+    test "hiding columns works", %{view: view} do
+      view
+      |> element("button")
+      |> render_click()
+
+      refute render(view) =~ "Residents"
     end
   end
 
