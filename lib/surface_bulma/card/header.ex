@@ -1,22 +1,22 @@
 defmodule SurfaceBulma.Card.Header do
-  use Surface.Component
+  use Surface.Component, slot: "header"
 
   @moduledoc """
   A horizontal bar with a shadow
   """
 
+  use SurfaceBulma.ClassProp
+
   @doc "A left-aligned bold text"
-  slot(title)
+  slot title
 
   @doc "A container for an icon"
-  slot(icon)
+  slot icon
 
   def render(assigns) do
     ~F"""
-    <header class="card-header">
-      <p :if={slot_assigned?(:title)} class="card-header-title">
-        <#slot {@title} />
-      </p>
+    <header class={classes(assigns, "card-header")}>
+      <#slot {@title} :if={slot_assigned?(:title)} />
 
       <span :if={slot_assigned?(:icon)} class="card-header-icon">
         <#slot {@icon} />

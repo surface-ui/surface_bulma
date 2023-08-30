@@ -13,32 +13,32 @@ defmodule SurfaceBulma.Card do
   prop attrs, :map, default: %{}
 
   @doc "Multi-purpose container for any other element"
-  slot(default, required: true)
+  slot default, required: true
 
   @doc "A horizontal bar with a shadow"
-  slot(header)
+  slot header
 
   @doc "A full-width container for a responsive image"
-  slot(image)
+  slot image
 
   @doc "A horizontal list of controls"
-  slot(footer)
+  slot footer
 
   def render(assigns) do
     ~F"""
     <div class={classes(assigns, "card")} {...@attrs}>
-      <div :if={slot_assigned?(:header)} class="card-header">
+      {#if slot_assigned?(:header)}
         <#slot {@header} />
-      </div>
+      {/if}
       <div :if={slot_assigned?(:image)} class="card-image">
         <#slot {@image} />
       </div>
       <div class="card-content">
         <#slot />
       </div>
-      <div :if={slot_assigned?(:footer)} class="card-footer">
+      <footer :if={slot_assigned?(:footer)} class="card-footer">
         <#slot {@footer} />
-      </div>
+      </footer>
     </div>
     """
   end
