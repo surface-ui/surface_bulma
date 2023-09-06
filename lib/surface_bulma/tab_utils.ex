@@ -41,7 +41,7 @@ defmodule SurfaceBulma.TabUtils do
       @moduledoc unquote(moduledoc)
       use Surface.LiveComponent
       alias SurfaceBulma.TabsRow
-      import SurfaceBulma.Component
+      import SurfaceUtils
 
       data active_tab_index, :integer
 
