@@ -74,7 +74,7 @@ defmodule SurfaceBulma.MixProject do
 
   defp package() do
     [
-      files: ["lib", "mix.exs", "README*", "priv"],
+      files: ["config", "lib", "mix.exs", "README*", "priv"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
     ]
