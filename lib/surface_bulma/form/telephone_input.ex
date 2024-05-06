@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Form.TelephoneInput do
   prop minlength, :integer
 
   def render(assigns) do
-    input_classes = input_classes(assigns)
+    assigns = assign(assigns, :input_classes, input_classes(assigns))
 
     ~F"""
     <InputWrapper
@@ -32,7 +32,7 @@ defmodule SurfaceBulma.Form.TelephoneInput do
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <TelephoneInput
         {...included_props(assigns, TelephoneInput)}
-        class={input_classes}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

@@ -22,27 +22,35 @@ defmodule SurfaceBulma.Form.DateTimeSelect do
   @doc "Separators between the different selects"
   prop separators, :keyword, default: [year: "/", month: "/", day: "/", hour: ":"]
 
-  def render(assigns) do
-    props = included_props(assigns, DateTimeSelect)
-    span_style = if assigns[:size] != "small", do: "vertical-align: text-top;", else: ""
+  @doc false
+  data props, :map
+  @doc false
+  data span_style, :string
 
-    builder = fn b ->
-      ~F"""
-      {#for {item, index} <- Enum.with_index(~w/year month day hour minute/a)}
-        <div class={
-          "select",
-          "is-#{@size}": @size,
-          "is-#{@color}": @color,
-          "is-fullwidth": @expanded
-        }>
-          {html_escape(b.(item, style: "border: none;", class: (index != 0 && "pl-3") || nil))}
-        </div>
-        {#if @separators[item]}
-          <span class={"control", "has-text-weight-medium", text_size(@size)} style={span_style}>{@separators[item]}</span>
-        {/if}
-      {/for}
-      """
-    end
+  def render(assigns) do
+    assigns =
+      assign(assigns, :props, included_props(assigns, DateTimeSelect))
+      |> assign(
+        :span_style,
+        if(assigns[:size] != "small", do: "vertical-align: text-top;", else: "")
+      )
+      |> assign(:builder, fn b ->
+        ~F"""
+        {#for {item, index} <- Enum.with_index(~w/year month day hour minute/a)}
+          <div class={
+            "select",
+            "is-#{@size}": @size,
+            "is-#{@color}": @color,
+            "is-fullwidth": @expanded
+          }>
+            {html_escape(b.(item, style: "border: none;", class: (index != 0 && "pl-3") || nil))}
+          </div>
+          {#if @separators[item]}
+            <span class={"control", "has-text-weight-medium", text_size(@size)} style={@span_style}>{@separators[item]}</span>
+          {/if}
+        {/for}
+        """
+      end)
 
     ~F"""
     <InputWrapper
@@ -59,10 +67,10 @@ defmodule SurfaceBulma.Form.DateTimeSelect do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <DateTimeSelect
-        {...props}
+        {...@props}
         form={@form || form}
         opts={@opts}
-        builder={builder}
+        builder={@builder}
         year={@year || []}
         month={@month || [class: "pl-3"]}
         day={@day || [class: "pl-3"]}

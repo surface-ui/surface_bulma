@@ -15,7 +15,7 @@ defmodule SurfaceBulma.Form.EmailInput do
   prop minlength, :integer
 
   def render(assigns) do
-    input_classes = input_classes(assigns)
+    assigns = assign(assigns, :input_classes, input_classes(assigns))
 
     ~F"""
     <InputWrapper
@@ -33,7 +33,7 @@ defmodule SurfaceBulma.Form.EmailInput do
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <EmailInput
         {...included_props(assigns, EmailInput)}
-        class={input_classes}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

@@ -19,7 +19,7 @@ defmodule SurfaceBulma.Form.SearchInput do
   prop button_props, :map, default: %{}
 
   def render(assigns) do
-    input_classes = input_classes(assigns)
+    assigns = assign(assigns, :input_classes, input_classes(assigns))
 
     ~F"""
     <InputWrapper
@@ -37,7 +37,7 @@ defmodule SurfaceBulma.Form.SearchInput do
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <SearchInput
         {...included_props(assigns, SearchInput)}
-        class={input_classes}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

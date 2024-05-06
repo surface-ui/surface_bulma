@@ -97,16 +97,20 @@ defmodule SurfaceBulma.Form.InputWrapper do
   end
 
   def render_common_text_input_fields(assigns) do
-    if form = get_form(assigns) do
-      field =
+    assigns =
+      assign(assigns, :form, get_form(assigns))
+      |> assign(
+        :field,
         if is_binary(assigns.field) do
           String.to_atom(assigns.field)
         else
           assigns.field
         end
+      )
 
-      ~F"""
-      <ErrorTag class="help is-danger" field={field} form={form} />
+    ~F"""
+    {#if @form}
+      <ErrorTag class="help is-danger" field={@field} form={@form} />
       <FA
         :if={display_error_icon?(assigns)}
         color="danger"
@@ -119,9 +123,7 @@ defmodule SurfaceBulma.Form.InputWrapper do
         icon="check"
         container_class={["is-small", "is-right"]}
       />
-      """
-    else
-      nil
-    end
+    {/if}
+    """
   end
 end

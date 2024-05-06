@@ -29,16 +29,23 @@ defmodule SurfaceBulma.Form.Select do
   @doc "Multiple Select"
   prop multiple, :boolean
 
-  def render(assigns) do
-    props =
-      included_props(assigns, Select)
-      |> Map.update(:class, [], fn
-        nil ->
-          get_config(Select, :default_class)
+  @doc false
+  data props, :map
 
-        value ->
-          value
-      end)
+  def render(assigns) do
+    assigns =
+      assign(
+        assigns,
+        :props,
+        included_props(assigns, Select)
+        |> Map.update(:class, [], fn
+          nil ->
+            get_config(Select, :default_class)
+
+          value ->
+            value
+        end)
+      )
 
     ~F"""
     <InputWrapper
@@ -61,14 +68,14 @@ defmodule SurfaceBulma.Form.Select do
       }>
         {#if @multiple}
           <MultipleSelect
-            {...props}
+            {...@props}
             form={@form || form}
             opts={[disabled: @disabled] ++ @opts}
             class={["is-fullwidth": @expanded, rounded: @rounded] ++ (@class || [])}
           />
         {#else}
           <Select
-            {...props}
+            {...@props}
             form={@form || form}
             opts={[disabled: @disabled] ++ @opts}
             class={[

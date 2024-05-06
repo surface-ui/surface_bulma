@@ -18,8 +18,9 @@ defmodule SurfaceBulma.Form.PasswordInput do
   prop minlength, :integer
 
   def render(assigns) do
-    input_classes = input_classes(assigns)
-    props = included_props(assigns, PasswordInput)
+    assigns =
+      assign(assigns, :input_classes, input_classes(assigns))
+      |> assign(:props, included_props(assigns, PasswordInput))
 
     ~F"""
     <InputWrapper
@@ -35,8 +36,8 @@ defmodule SurfaceBulma.Form.PasswordInput do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <PasswordInput
-        {...props}
-        class={input_classes}
+        {...@props}
+        class={@input_classes}
         value={@value}
         form={@form || form}
         opts={[

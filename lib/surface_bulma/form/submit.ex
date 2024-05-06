@@ -12,14 +12,17 @@ defmodule SurfaceBulma.Form.Submit do
   prop expanded, :boolean
   prop field_class, :css_class, default: []
 
+  @doc false
+  data props, :map
+
   @impl true
   def render(assigns) do
-    props = included_props(assigns, Button)
+    assigns = assign(assigns, :props, included_props(assigns, Button))
 
     ~F"""
     <InputWrapper field_class={@field_class}>
       <Button
-        {...props}
+        {...@props}
         class={[
           button: @class == [],
           "is-#{@color}": @color,

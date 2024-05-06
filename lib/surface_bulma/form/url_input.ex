@@ -10,7 +10,7 @@ defmodule SurfaceBulma.Form.UrlInput do
   include(UrlInput)
 
   def render(assigns) do
-    input_classes = input_classes(assigns)
+    assigns = assign(assigns, :input_classes, input_classes(assigns))
 
     ~F"""
     <SurfaceBulma.Form.InputWrapper
@@ -27,7 +27,7 @@ defmodule SurfaceBulma.Form.UrlInput do
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <UrlInput
         {...included_props(assigns, UrlInput)}
-        class={input_classes}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

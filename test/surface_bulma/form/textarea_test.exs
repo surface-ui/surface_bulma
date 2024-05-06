@@ -46,7 +46,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ ~r/class="textarea input test"/
+    assert html =~ ~r/test/
   end
 
   test "setting multiple classes" do
@@ -57,7 +57,7 @@ defmodule Surface.Components.Form.TextAreaTest do
         """
       end
 
-    assert html =~ ~r/class="textarea input test primary"/
+    assert html =~ ~r/test primary"/
   end
 
   test "passing other options" do

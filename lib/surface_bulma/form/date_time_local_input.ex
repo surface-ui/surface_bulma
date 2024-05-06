@@ -22,8 +22,9 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
   prop step, :integer, default: 60
 
   def render(assigns) do
-    props = included_props(assigns, DateTimeLocalInput)
-    input_classes = input_classes(assigns)
+    assigns =
+      assign(assigns, :input_classes, input_classes(assigns))
+      |> assign(:props, included_props(assigns, DateTimeLocalInput))
 
     ~F"""
     <InputWrapper
@@ -39,8 +40,8 @@ defmodule SurfaceBulma.Form.DateTimeLocalInput do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <DateTimeLocalInput
-        {...props}
-        class={input_classes}
+        {...@props}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

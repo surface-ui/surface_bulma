@@ -19,31 +19,39 @@ defmodule SurfaceBulma.Form.TimeSelect do
   @doc "Will show rounded dropdown, ignored for multiple select"
   prop rounded, :boolean
 
-  def render(assigns) do
-    props = included_props(assigns, TimeSelect)
-    span_style = if assigns[:size] != "small", do: "vertical-align: text-top;", else: ""
+  @doc false
+  data props, :map
 
-    builder = fn b ->
-      ~F"""
-      <div class={
-        "select",
-        "is-#{@size}": @size,
-        "is-#{@color}": @color,
-        "is-fullwidth": @expanded
-      }>
-        {html_escape(b.(:hour, style: "border: none;"))}
-      </div>
-      <span class={"control", "has-text-weight-medium", text_size(@size)} style={span_style}>:</span>
-      <div class={
-        "select",
-        "is-#{@size}": @size,
-        "is-#{@color}": @color,
-        "is-fullwidth": @expanded
-      }>
-        {html_escape(b.(:minute, style: "border: none;"))}
-      </div>
-      """
-    end
+  data span_style, :string
+
+  def render(assigns) do
+    assigns =
+      assign(assigns, :props, included_props(assigns, TimeSelect))
+      |> assign(
+        :span_style,
+        if(assigns[:size] != "small", do: "vertical-align: text-top;", else: "")
+      )
+      |> assign(:builder, fn b ->
+        ~F"""
+        <div class={
+          "select",
+          "is-#{@size}": @size,
+          "is-#{@color}": @color,
+          "is-fullwidth": @expanded
+        }>
+          {html_escape(b.(:hour, style: "border: none;"))}
+        </div>
+        <span class={"control", "has-text-weight-medium", text_size(@size)} style={@span_style}>:</span>
+        <div class={
+          "select",
+          "is-#{@size}": @size,
+          "is-#{@color}": @color,
+          "is-fullwidth": @expanded
+        }>
+          {html_escape(b.(:minute, style: "border: none;"))}
+        </div>
+        """
+      end)
 
     ~F"""
     <InputWrapper
@@ -60,12 +68,12 @@ defmodule SurfaceBulma.Form.TimeSelect do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <TimeSelect
-        {...props}
+        {...@props}
         form={@form || form}
         hour={@hour || []}
         minute={@minute || [class: "pl-3"]}
         opts={@opts}
-        builder={builder}
+        {=@builder}
       />
       <:right_addon>{render_right_addon(assigns)}</:right_addon>
     </InputWrapper>

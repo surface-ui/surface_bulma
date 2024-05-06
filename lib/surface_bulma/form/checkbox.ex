@@ -10,7 +10,7 @@ defmodule SurfaceBulma.Form.Checkbox do
   @doc "Disable selection"
   prop disabled, :boolean, default: false
 
-  @doc "Extra classes for the label"  
+  @doc "Extra classes for the label"
   prop label_class, :css_class, default: nil
 
   @doc "Extra classes for the field"

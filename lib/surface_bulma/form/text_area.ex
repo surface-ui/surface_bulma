@@ -14,8 +14,11 @@ defmodule SurfaceBulma.Form.TextArea do
   @doc "Placeholder value"
   prop placeholder, :string, default: nil
 
+  @doc false
+  data input_classes, :list
+
   def render(assigns) do
-    input_classes = input_classes(assigns)
+    assigns = assign(assigns, :input_classes, input_classes(assigns, ["textarea"]))
 
     ~F"""
     <InputWrapper
@@ -29,7 +32,7 @@ defmodule SurfaceBulma.Form.TextArea do
     >
       <TextArea
         {...included_props(assigns, TextArea)}
-        class={["textarea"] ++ input_classes}
+        class={@input_classes}
         form={@form || form}
         field={@field}
         opts={[placeholder: @placeholder, rows: @rows] ++

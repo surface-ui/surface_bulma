@@ -39,8 +39,11 @@ defmodule SurfaceBulma.Form.FileInput do
 
   use SurfaceBulma.ColorProp
 
+  @doc false
+  data props, :map
+
   def render(assigns) do
-    props = included_props(assigns, FileInput)
+    assigns = assign(assigns, :props, included_props(assigns, FileInput))
 
     ~F"""
     <InputWrapper
@@ -63,7 +66,7 @@ defmodule SurfaceBulma.Form.FileInput do
       }>
         <label class="file-label">
           <FileInput
-            {...props}
+            {...@props}
             class="file-input"
             form={@form}
             field={@field}

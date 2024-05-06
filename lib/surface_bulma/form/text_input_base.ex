@@ -11,6 +11,11 @@ defmodule SurfaceBulma.Form.TextInputBase do
 
       @doc "Placeholder value"
       prop placeholder, :string, default: nil
+      @doc false
+      data input_classes, :list
+
+      @doc false
+      data props, :map
     end
   end
 end

@@ -14,8 +14,9 @@ defmodule SurfaceBulma.Form.RangeInput do
   include(RangeInput)
 
   def render(assigns) do
-    props = included_props(assigns, RangeInput)
-    input_classes = input_classes(assigns, "slider")
+    assigns =
+      assign(assigns, :input_classes, input_classes(assigns, "slider"))
+      |> assign(:props, included_props(assigns, RangeInput))
 
     ~F"""
     <InputWrapper
@@ -31,8 +32,8 @@ defmodule SurfaceBulma.Form.RangeInput do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <RangeInput
-        {...props}
-        class={input_classes}
+        {...@props}
+        class={@input_classes}
         field={@field}
         form={@form || form}
         value={@value}

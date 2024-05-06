@@ -17,8 +17,9 @@ defmodule SurfaceBulma.Form.DateInput do
   prop min, :integer
 
   def render(assigns) do
-    props = included_props(assigns, DateInput)
-    input_classes = input_classes(assigns)
+    assigns =
+      assign(assigns, :props, included_props(assigns, DateInput))
+      |> assign(:input_classes, input_classes(assigns))
 
     ~F"""
     <InputWrapper
@@ -34,8 +35,8 @@ defmodule SurfaceBulma.Form.DateInput do
     >
       <:left_addon>{render_left_addon(assigns)}</:left_addon>
       <DateInput
-        {...props}
-        class={input_classes}
+        {...@props}
+        class={@input_classes}
         form={@form || form}
         field={@field}
         value={@value}
