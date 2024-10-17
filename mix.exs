@@ -57,11 +57,12 @@ defmodule SurfaceBulma.MixProject do
       {:surface_catalogue, "~> 0.6.0", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.3", only: [:dev]},
       {:surface_font_awesome, "~> 0.4.2"},
-      {:surface_utils, "~> 0.1.0"},
+      {:surface_utils, "~> 0.2.0"},
       {:credo, "~> 1.5.6", only: :dev},
-      {:surface, ">= 0.10.0"},
+      {:surface, "~> 0.12.0"},
+      {:surface_form_helpers, "~> 0.2.0"},
       {:phoenix_ecto, "~> 4.0", only: [:test, :dev]},
-      {:ecto, "~> 3.4.2", only: [:test, :dev]},
+      {:ecto, "~> 3.12.2", only: [:test, :dev]},
       {:ex_fixer, "~> 1.0.0", only: [:test, :dev]}
     ]
   end
