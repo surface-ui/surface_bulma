@@ -3,6 +3,8 @@ defmodule SurfaceBulma.Form.Submit do
   A submit button to use in a Form.
   """
   use SurfaceBulma.Component
+  import SurfaceBulma, only: [classes: 2]
+
   alias SurfaceBulma.Form.InputWrapper
   alias SurfaceBulma.Button
 
@@ -23,7 +25,7 @@ defmodule SurfaceBulma.Form.Submit do
     <InputWrapper field_class={@field_class}>
       <Button
         {...@props}
-        class={[
+        class={classes(assigns,
           button: @class == [],
           "is-#{@color}": @color,
           "is-#{@size}": @size,
@@ -37,7 +39,7 @@ defmodule SurfaceBulma.Form.Submit do
           "is-selected": @selected,
           "is-link": @link,
           "is-static": @static
-        ] ++ (@class || [])}
+        )}
         opts={@opts}
       >
         <slot />
