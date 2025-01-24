@@ -47,13 +47,11 @@ defmodule SurfaceBulma.Dropdown do
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <Context
-            put={SurfaceBulma.Link, context_class: "dropdown-item"}
-            put={SurfaceBulma.Item, context_class: "dropdown-item"}
-            put={SurfaceBulma.Divider, context_class: "dropdown-divider"}
-          >
-            <#slot />
-          </Context>
+          <#slot
+            context_put={SurfaceBulma.Link, context_class: "dropdown-item"}
+            context_put={SurfaceBulma.Item, context_class: "dropdown-item"}
+            context_put={SurfaceBulma.Divider, context_class: "dropdown-divider"}
+          />
         </div>
       </div>
     </div>

@@ -30,36 +30,45 @@ defmodule SurfaceBulma.Panel do
   def render(assigns) do
     ~F"""
     <nav class={"panel", "is-#{@color}": @color}>
-      <Context
-        put={SurfaceBulma.Link, context_class: "panel-block"}
-        put={SurfaceBulma.Item, context_class: "panel-block"}
-        put={SurfaceBulma.Button, is_addon: true}
-      >
-        <p class="panel-heading">
-          <#slot {@title} />
-        </p>
-        {#if slot_assigned?(:header)}
-          {#for item <- @header}
-            <#slot {item} />
-          {/for}
-        {/if}
-        <TabsRow
-          :if={slot_assigned?(:tabs)}
-          tabs={@tabs}
-          class={@tabs_class}
-          {...included_props(assigns, TabsRow)}
-          inside_panel
-          {=@active_tab_index}
-          target={@myself}
+      <p class="panel-heading">
+        <#slot
+          {@title}
+          context_put={SurfaceBulma.Link, context_class: "panel-block"}
+          context_put={SurfaceBulma.Item, context_class: "panel-block"}
+          context_put={SurfaceBulma.Button, is_addon: true}
         />
-        {#if slot_assigned?(:tabs)}
-          {#for {tab, index} <- Enum.with_index(@tabs)}
-            {#if tab.visible && @active_tab_index == index}
-              <#slot {tab} />
-            {/if}
-          {/for}
-        {/if}
-      </Context>
+      </p>
+      {#if slot_assigned?(:header)}
+        {#for item <- @header}
+          <#slot
+            {item}
+            context_put={SurfaceBulma.Link, context_class: "panel-block"}
+            context_put={SurfaceBulma.Item, context_class: "panel-block"}
+            context_put={SurfaceBulma.Button, is_addon: true}
+          />
+        {/for}
+      {/if}
+      <TabsRow
+        :if={slot_assigned?(:tabs)}
+        tabs={@tabs}
+        class={@tabs_class}
+        {...included_props(assigns, TabsRow)}
+        inside_panel
+        {=@active_tab_index}
+        target={@myself}
+      />
+      {#if slot_assigned?(:tabs)}
+        {#for {tab, index} <- Enum.with_index(@tabs)}
+          {#if tab.visible && @active_tab_index == index}
+            <#slot
+              {tab}
+              context_put={SurfaceBulma.Link, context_class: "panel-block"}
+              context_put={SurfaceBulma.Item, context_class: "panel-block"}
+              context_put={SurfaceBulma.Button, is_addon: true}
+            />
+          {/if}
+        {/for}
+      {/if}
     </nav>
     """
   end

@@ -13,36 +13,45 @@ defmodule SurfaceBulma.Navbar do
 
   def render(assigns) do
     ~F"""
-    <Context
-      put={SurfaceBulma.Item, context_class: "navbar-item"}
-      put={SurfaceBulma.Link, context_class: "navbar-item"}
-      put={SurfaceBulma.Divider, context_class: "navbar-divider"}
-    >
-      <nav class={"navbar", "is-#{@color}": @color} role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <#slot {@brand} />
-          <a
-            role="button"
-            :on-click="toggle-menu"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </a>
+    <nav class={"navbar", "is-#{@color}": @color} role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <#slot
+          {@brand}
+          context_put={SurfaceBulma.Item, context_class: "navbar-item"}
+          context_put={SurfaceBulma.Link, context_class: "navbar-item"}
+          context_put={SurfaceBulma.Divider, context_class: "navbar-divider"}
+        />
+        <a
+          role="button"
+          :on-click="toggle-menu"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </a>
+      </div>
+      <div class={"navbar-menu", "is-active": @menu_visible}>
+        <div class="navbar-start">
+          <#slot
+            {@nav_start}
+            context_put={SurfaceBulma.Item, context_class: "navbar-item"}
+            context_put={SurfaceBulma.Link, context_class: "navbar-item"}
+            context_put={SurfaceBulma.Divider, context_class: "navbar-divider"}
+          />
         </div>
-        <div class={"navbar-menu", "is-active": @menu_visible}>
-          <div class="navbar-start">
-            <#slot {@nav_start} />
-          </div>
-          <div class="navbar-end">
-            <#slot {@nav_end} />
-          </div>
+        <div class="navbar-end">
+          <#slot
+            {@nav_end}
+            context_put={SurfaceBulma.Item, context_class: "navbar-item"}
+            context_put={SurfaceBulma.Link, context_class: "navbar-item"}
+            context_put={SurfaceBulma.Divider, context_class: "navbar-divider"}
+          />
         </div>
-      </nav>
-    </Context>
+      </div>
+    </nav>
     """
   end
 

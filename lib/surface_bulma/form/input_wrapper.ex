@@ -74,21 +74,21 @@ defmodule SurfaceBulma.Form.InputWrapper do
 
   def render_left_addon(assigns) do
     ~F"""
-    <Context :if={slot_assigned?(:left_addon)} put={SurfaceBulma.Form, is_addon: true}>
+    {#if slot_assigned?(:left_addon)}
       {#for item <- @left_addon}
-        <#slot {item} />
+        <#slot {item} context_put={SurfaceBulma.Form, is_addon: true} />
       {/for}
-    </Context>
+    {/if}
     """
   end
 
   def render_right_addon(assigns) do
     ~F"""
-    <Context :if={slot_assigned?(:right_addon)} put={SurfaceBulma.Form, is_addon: true}>
+    {#if slot_assigned?(:right_addon)}
       {#for item <- @right_addon}
-        <#slot {item} />
+        <#slot {item} context_put={SurfaceBulma.Form, is_addon: true} />
       {/for}
-    </Context>
+    {/if}
     """
   end
 

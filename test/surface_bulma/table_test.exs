@@ -13,6 +13,7 @@ defmodule Surface.Components.TableTest do
     alias SurfaceBulma.Table.Column
 
     data residents_hidden, :boolean, default: false
+
     data props, :map,
       default: %{
         data: [
@@ -37,7 +38,11 @@ defmodule Surface.Components.TableTest do
         <Column label="Street" sort_by={[:address, :street]}>
           {person.address.street}
         </Column>
-        <Column label="Residents" show={@residents_hidden != true} sort_by={{[:address, :residents, 0], &Kernel.>=/2}}>
+        <Column
+          label="Residents"
+          show={@residents_hidden != true}
+          sort_by={{[:address, :residents, 0], &Kernel.>=/2}}
+        >
           {person.address.residents |> Enum.join(", ")}
         </Column>
       </Table>
@@ -45,8 +50,8 @@ defmodule Surface.Components.TableTest do
     end
 
     @impl true
-    def handle_event("toggle-residents", _,socket ) do
-    	{:noreply, assign(socket, :residents_hidden, socket.assigns.residents_hidden != true)}
+    def handle_event("toggle-residents", _, socket) do
+      {:noreply, assign(socket, :residents_hidden, socket.assigns.residents_hidden != true)}
     end
   end
 

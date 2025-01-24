@@ -9,14 +9,12 @@ defmodule SurfaceBulma.Navbar.Dropdown do
 
   def render(assigns) do
     ~F"""
-    <Context put={SurfaceBulma.Link, context_class: "navbar-item"}>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <div class={"navbar-link", "is-arrowless": @arrowless?}><#slot {@label} /></div>
-        <div class="navbar-dropdown">
-          <#slot />
-        </div>
+    <div class="navbar-item has-dropdown is-hoverable">
+      <div class={"navbar-link", "is-arrowless": @arrowless?}><#slot {@label} /></div>
+      <div class="navbar-dropdown">
+        <#slot context_put={SurfaceBulma.Link, context_class: "navbar-item"} />
       </div>
-    </Context>
+    </div>
     """
   end
 end
