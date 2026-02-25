@@ -31,16 +31,22 @@ defmodule SurfaceBulma.Collapsible do
   end
 
   def render(assigns) do
+    assigns =
+      assign(assigns, :classes, classes(assigns, ["card", "is-shadowless": !assigns.shadow]))
+      |> assign_new(:on_click, fn ->
+        JS.toggle(to: "##{assigns.id} .card-content")
+        |> JS.toggle_class("hidden", to: "##{assigns.id} .angle-down")
+        |> JS.toggle_class("hidden", to: "##{assigns.id} .angle-up")
+      end)
+
     ~F"""
-    <div id={@id} class={classes(assigns, ["card", "is-shadowless": !@shadow])}>
+    <div id={@id} class={@classes}>
       <div class={"card-header", @header_class}>
         <div class="card-header-title">
           <#slot {@header} />
         </div>
         <div class="card-header-icon">
-          <div :on-click={JS.toggle(to: "##{@id} .card-content")
-          |> JS.toggle(to: "##{@id} .angle-down")
-          |> JS.toggle(to: "##{@id} .angle-up")}>
+          <div :on-click={@on_click}>
             <span class={"angle-down", hidden: !@collapsed}><FA icon="angle-down" /></span>
             <span class={"angle-up", hidden: @collapsed}><FA icon="angle-up" /></span>
           </div>

@@ -25,8 +25,10 @@ defmodule SurfaceBulma.Card do
   slot footer
 
   def render(assigns) do
+    assigns = assign(assigns, :classes, classes(assigns, "card"))
+
     ~F"""
-    <div class={classes(assigns, "card")} {...@attrs}>
+    <div class={@classes} {...@attrs}>
       {#if slot_assigned?(:header)}
         <#slot {@header} />
       {/if}
